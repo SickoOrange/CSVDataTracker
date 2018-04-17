@@ -1,7 +1,7 @@
 package dls.loader;
 
 import com.google.common.collect.ImmutableList;
-import dls.controller.ChainPath;
+import dls.model.ChainPath;
 import dls.model.Connection;
 import dls.model.PortKey;
 import java.util.Collection;
@@ -74,19 +74,12 @@ public class ChainPathLoader {
       int sourceAfiId,
       int destinationAfiId, LinkedList<Integer> interIds) {
 
-    if (isDestinationAfiId(inputId, destinationAfiId)) {
+    if (inputId == destinationAfiId) {
       return Optional
           .of(new ChainPath(sourceAfiId, destinationAfiId, ImmutableList.copyOf(interIds)));
     }
-
     return Optional.empty();
   }
 
-  private boolean isDestinationAfiId(int inputId, int destinationAfiId) {
-    return inputId == destinationAfiId;
-//        connections.stream()
-//            .anyMatch(connection -> connection.getOut().getAfiId() == destinationAfiId);
-
-  }
 
 }

@@ -1,4 +1,4 @@
-package dls.controller;
+package dls.model;
 
 import java.util.List;
 
@@ -10,12 +10,12 @@ public class ChainPath {
 
   private int sourceId;
   private int destinationId;
-  private List<Integer> interModules;
+  private List<Integer> interIds;
 
-  public ChainPath(int sourceId, int destinationId, List<Integer> interModules) {
+  public ChainPath(int sourceId, int destinationId, List<Integer> interIds) {
     this.sourceId = sourceId;
     this.destinationId = destinationId;
-    this.interModules = interModules;
+    this.interIds = interIds;
   }
 
   public int getSourceId() {
@@ -34,11 +34,11 @@ public class ChainPath {
     this.destinationId = destinationId;
   }
 
-  public List<Integer> getInterModules() {
-    return interModules;
+  public List<Integer> getInterIds() {
+    return interIds;
   }
 
-  public void setInterModules(List<Integer> interModules) {
-    this.interModules = interModules;
+  public void setInterIds(List<Integer> interIds) {
+    this.interIds = interIds;
   }
 }

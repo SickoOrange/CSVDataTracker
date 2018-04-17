@@ -2,7 +2,6 @@ package dls.loader;
 
 import com.google.common.collect.ImmutableMap;
 import com.opencsv.bean.CsvToBeanFilter;
-import dls.controller.ChainPath;
 import dls.model.AbstractTrend;
 import dls.model.AnalogTrend;
 import dls.model.BinaryTrend;

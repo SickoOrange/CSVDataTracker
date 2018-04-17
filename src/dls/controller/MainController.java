@@ -1,18 +1,14 @@
 package dls.controller;
 
-import com.google.common.collect.ImmutableList;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import dls.loader.CSVLoader;
+import dls.loader.ChainPathLoader;
+import dls.model.ChainPath;
 import dls.model.Connection;
-import dls.model.PortKey;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
@@ -29,10 +25,13 @@ public class MainController implements Initializable {
   private JFXTextField sourceText;
 
   @FXML
+  private JFXTextArea chainResultTA;
+
+  @FXML
   private JFXTextField destinationText;
-  private CSVLoader csvLoader;
 
   private List<Connection> connections;
+  private ChainPathLoader chainPathLoader;
 
 
   @FXML
@@ -41,20 +40,30 @@ public class MainController implements Initializable {
     int sourceAfiId = Integer.parseInt(sourceText.getText());
     int destinationAfiId = Integer.parseInt(destinationText.getText());
 
-    System.out.println("start to find chain path");
+    List<ChainPath> chainPaths = chainPathLoader
+        .loadChainPaths(sourceAfiId, destinationAfiId, connections);
 
+    StringBuffer buffer = new StringBuffer();
+    chainPaths.forEach(chainPath -> {
+      buffer.append("Chain Info: ").append(chainPath.getDestinationId()).append(" -> ");
+      chainPath.getInterIds().forEach(id -> buffer.append(id).append(" -> "));
+      buffer.append(chainPath.getSourceId()).append("\r\n");
+    });
+
+    chainResultTA.setText(buffer.toString());
   }
-
 
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    csvLoader = new CSVLoader();
+    CSVLoader csvLoader = new CSVLoader();
     try {
       connections = csvLoader.loadConnections().collect(Collectors.toList());
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    chainPathLoader = new ChainPathLoader();
 
   }
 }

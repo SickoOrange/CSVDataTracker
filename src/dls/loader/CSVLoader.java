@@ -6,6 +6,7 @@ import dls.model.AbstractTrend;
 import dls.model.AnalogTrend;
 import dls.model.BinaryTrend;
 import dls.model.Connection;
+import dls.model.Port;
 import dls.parser.DlsCsvParser;
 import org.apache.log4j.Logger;
 
@@ -37,14 +38,25 @@ public class CSVLoader {
     return loadConnections(null);
   }
 
-  public Stream<Connection> loadConnections(CsvToBeanFilter filter) throws IOException {
-    String connectionCSVPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\Connections.csv";
+  private Stream<Connection> loadConnections(CsvToBeanFilter filter) throws IOException {
+    String connectionCsvPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\Connections.csv";
     //String connectionCSVPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\Connections.csv";
-    Reader connReader = new FileReader(connectionCSVPath);
+    Reader connReader = new FileReader(connectionCsvPath);
     DlsCsvParser parser = getDlsCsvParser();
     return Utils.iteratorAsStream(parser.loadConnections(connReader, filter));
   }
 
+
+  public Stream<Port> loadPorts() throws IOException {
+    return loadPorts(null);
+  }
+
+  public Stream<Port> loadPorts(CsvToBeanFilter filter) throws IOException {
+    String PortCsvPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\Ports.csv";
+    Reader connReader = new FileReader(PortCsvPath);
+    DlsCsvParser parser = getDlsCsvParser();
+    return Utils.iteratorAsStream(parser.loadPorts(connReader, filter));
+  }
 
 
   private DlsCsvParser getDlsCsvParser() {

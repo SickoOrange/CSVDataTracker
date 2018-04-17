@@ -6,6 +6,7 @@ import dls.loader.CSVLoader;
 import dls.loader.ChainPathLoader;
 import dls.model.ChainPath;
 import dls.model.Connection;
+import dls.model.Port;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -32,6 +33,8 @@ public class MainController implements Initializable {
 
   private List<Connection> connections;
   private ChainPathLoader chainPathLoader;
+  private List<Port> ports;
+  private CSVLoader csvLoader;
 
 
   @FXML
@@ -39,6 +42,9 @@ public class MainController implements Initializable {
 
     int sourceAfiId = Integer.parseInt(sourceText.getText());
     int destinationAfiId = Integer.parseInt(destinationText.getText());
+    ports = csvLoader.loadPorts(line -> Port.extractAfiId(line) == 461659)
+        .collect(Collectors.toList());
+    System.out.println(ports.size() + " ports are be loaded");
 
     List<ChainPath> chainPaths = chainPathLoader
         .loadChainPaths(sourceAfiId, destinationAfiId, connections);
@@ -56,7 +62,7 @@ public class MainController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    CSVLoader csvLoader = new CSVLoader();
+    csvLoader = new CSVLoader();
     try {
       connections = csvLoader.loadConnections().collect(Collectors.toList());
     } catch (IOException e) {

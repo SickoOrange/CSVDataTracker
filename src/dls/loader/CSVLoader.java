@@ -15,37 +15,39 @@ import java.io.Reader;
 import java.util.stream.Stream;
 
 public class CSVLoader {
-    public static final String AFI_CSV = "Afi.csv";
-    public static final String PORTS_CSV = "Ports.csv";
-    public static final String CONNECTIONS_CSV = "Connections.csv";
-    protected static final String ALARM_CSV = "Alarm.csv";
-    protected static final String OPER_ACT_CSV = "OperAct.csv";
-    protected static final String ALARM_TYPE_CSV = "AlarmType.csv";
-    protected static final String ANALOG_TREND_CSV = "AnalogTrend.csv";
-    protected static final String BINARY_TREND_CSV = "BinaryTrend.csv";
-    private static final ImmutableMap<Class<? extends AbstractTrend>, String> TREND_FILE_NAMES =
-            ImmutableMap.of(
-                    AnalogTrend.class, ANALOG_TREND_CSV,
-                    BinaryTrend.class, BINARY_TREND_CSV
-            );
 
-    public static final Logger LOGGER = Logger.getLogger(CSVLoader.class);
+  public static final String AFI_CSV = "Afi.csv";
+  public static final String PORTS_CSV = "Ports.csv";
+  public static final String CONNECTIONS_CSV = "Connections.csv";
+  protected static final String ALARM_CSV = "Alarm.csv";
+  protected static final String OPER_ACT_CSV = "OperAct.csv";
+  protected static final String ALARM_TYPE_CSV = "AlarmType.csv";
+  protected static final String ANALOG_TREND_CSV = "AnalogTrend.csv";
+  protected static final String BINARY_TREND_CSV = "BinaryTrend.csv";
+  private static final ImmutableMap<Class<? extends AbstractTrend>, String> TREND_FILE_NAMES =
+      ImmutableMap.of(
+          AnalogTrend.class, ANALOG_TREND_CSV,
+          BinaryTrend.class, BINARY_TREND_CSV
+      );
 
-
-    public Stream<Connection> loadConnections() throws IOException {
-        return loadConnections(null);
-    }
-
-    public Stream<Connection> loadConnections(CsvToBeanFilter filter) throws IOException {
-        String connectionCSVPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\Connections.csv";
-        Reader connReader = new FileReader(connectionCSVPath);
-        DlsCsvParser parser = getDlsCsvParser();
-        return Utils.iteratorAsStream(parser.loadConnections(connReader, filter));
-    }
+  public static final Logger LOGGER = Logger.getLogger(CSVLoader.class);
 
 
-    private DlsCsvParser getDlsCsvParser() {
-        return new DlsCsvParser();
-    }
+  public Stream<Connection> loadConnections() throws IOException {
+    return loadConnections(null);
+  }
+
+  public Stream<Connection> loadConnections(CsvToBeanFilter filter) throws IOException {
+    String connectionCSVPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\Connections.csv";
+    //String connectionCSVPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\Connections.csv";
+    Reader connReader = new FileReader(connectionCSVPath);
+    DlsCsvParser parser = getDlsCsvParser();
+    return Utils.iteratorAsStream(parser.loadConnections(connReader, filter));
+  }
+
+
+  private DlsCsvParser getDlsCsvParser() {
+    return new DlsCsvParser();
+  }
 
 }

@@ -20,6 +20,7 @@ import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -46,7 +47,6 @@ public class MainController implements Initializable {
 
     private List<Connection> connections;
     private ChainPathLoader chainPathLoader;
-    private List<Port> ports;
     private CSVLoader csvLoader;
 
 
@@ -55,9 +55,6 @@ public class MainController implements Initializable {
 
         int sourceAfiId = Integer.parseInt(sourceText.getText());
         int destinationAfiId = Integer.parseInt(destinationText.getText());
-//    ports = csvLoader.loadPorts(line -> Port.extractAfiId(line) == 461659)
-//        .collect(Collectors.toList());
-//    System.out.println(ports.size() + " ports are be loaded");
 
         List<ChainPath> chainPaths = chainPathLoader
                 .loadChainPaths(sourceAfiId, destinationAfiId, connections);
@@ -70,14 +67,17 @@ public class MainController implements Initializable {
         });
 
         chainResultTA.setText(buffer.toString());
-        Platform.runLater(() -> {
-            visualizationPane.getChildren().clear();
-            SwingNode swingNode = new SwingNode();
-            SwingUtilities.invokeLater(() -> swingNode.setContent(chainPathLoader.chainVisualization(chainPaths.get(0))));
-            visualizationPane.getChildren().add(swingNode);
-        });
+
+        visualization(chainPaths);
 
 
+    }
+
+    private void visualization(List<ChainPath> chainPaths) {
+        visualizationPane.getChildren().clear();
+        SwingNode swingNode = new SwingNode();
+        SwingUtilities.invokeLater(() -> swingNode.setContent(chainPathLoader.chainVisualization(chainPaths)));
+        visualizationPane.getChildren().add(swingNode);
     }
 
 
@@ -91,6 +91,7 @@ public class MainController implements Initializable {
         }
 
         chainPathLoader = new ChainPathLoader();
+        visualization(null);
 
     }
 }

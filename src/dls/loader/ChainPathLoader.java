@@ -9,6 +9,7 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxMorphing;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraph;
+import com.sun.net.httpserver.Filter;
 import dls.model.ChainPath;
 import dls.model.Connection;
 import dls.model.PortKey;
@@ -87,8 +88,13 @@ public class ChainPathLoader {
         return Optional.empty();
     }
 
+    public mxGraphComponent initChainVisualization() {
+        return chainVisualization(null);
+    }
 
-    public mxGraphComponent chainVisualization(ChainPath chainPath) {
+
+    public mxGraphComponent chainVisualization(List<ChainPath> chainPaths) {
+
 
         //create the trace graph
         mxGraph graph = new mxGraph();
@@ -98,32 +104,50 @@ public class ChainPathLoader {
         Object parent = graph.getDefaultParent();
         graph.getModel().beginUpdate();
 
-        int sourceId = chainPath.getSourceId();
-        int destinationId = chainPath.getDestinationId();
-        List<Integer> interIds = chainPath.getInterIds();
+        if (chainPaths == null) {
+            prepareMockChainVisualization(graph, parent);
+        } else {
+            for (int i = 0; i < chainPaths.size(); i++) {
+                prepareChainPath(chainPaths.get(i), graph, parent, i);
+            }
 
-
-        List<Integer> chainsId = new LinkedList<>();
-        chainsId.add(0, sourceId);
-        for (int i = interIds.size() - 1; i >= 0; i--) {
-            chainsId.add(0, interIds.get(i));
-        }
-        chainsId.add(0, destinationId);
-
-        List<Object> chainVertexs = new ArrayList<>();
-        for (int i = 0; i < chainsId.size(); i++) {
-            Object vertex = graph.insertVertex(parent, null, chainsId.get(i), 20 + 120 * i, 20, 80, 30);
-            chainVertexs.add(vertex);
         }
 
-
-        for (int i = 0; i < chainVertexs.size() - 1; i++) {
-            graph.insertEdge(parent, null, null, chainVertexs.get(i), chainVertexs.get(i + 1));
-        }
         graph.getModel().endUpdate();
 
         //autoLayout(graph, graphComponent);
         return graphComponent;
+    }
+
+    private void prepareChainPath(ChainPath chainPath, mxGraph graph, Object parent, int i) {
+        int sourceId = chainPath.getSourceId();
+        int destinationId = chainPath.getDestinationId();
+        List<Integer> interIds = chainPath.getInterIds();
+
+        List<Integer> chainsId = new LinkedList<>();
+        chainsId.add(0, sourceId);
+        for (int j = interIds.size() - 1; j >= 0; j--) {
+            chainsId.add(0, interIds.get(j));
+        }
+        chainsId.add(0, destinationId);
+
+        List<Object> chainVertexs = new ArrayList<>();
+        for (int k = 0; k < chainsId.size(); k++) {
+            Object vertex = graph.insertVertex(parent, null, chainsId.get(k), 20 + 120 * k, 20 + 60 * i, 80, 30);
+            chainVertexs.add(vertex);
+        }
+
+
+        for (int m = 0; m < chainVertexs.size() - 1; m++) {
+            graph.insertEdge(parent, null, null, chainVertexs.get(m), chainVertexs.get(m + 1));
+        }
+    }
+
+    private void prepareMockChainVisualization(mxGraph graph, Object parent) {
+        List<ChainPath> mockIds = ImmutableList.of(new ChainPath(10001, 10005, ImmutableList.of(10002, 10003, 10004)));
+        for (int i = 0; i < mockIds.size(); i++) {
+            prepareChainPath(mockIds.get(i), graph, parent, i);
+        }
     }
 
     private void autoLayout(mxGraph graph, mxGraphComponent graphComponent) {

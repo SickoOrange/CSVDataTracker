@@ -11,6 +11,8 @@ import dls.model.Connection;
 import dls.model.Port;
 import dls.model.PortKey;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
@@ -85,10 +87,6 @@ public class ChainPathLoader {
     return Optional.empty();
   }
 
-  public mxGraphComponent initChainVisualization() {
-    return chainVisualization(null);
-  }
-
 
   public mxGraphComponent chainVisualization(List<ChainPath> chainPaths) {
 
@@ -112,6 +110,8 @@ public class ChainPathLoader {
     graph.getModel().endUpdate();
 
     //autoLayout(graph, graphComponent);
+    graphComponent.setEnabled(false);
+    //graphComponent.getGraph().getSelectionModel().setSingleSelection(true);
     return graphComponent;
   }
 

@@ -29,6 +29,7 @@ public class Module {
   public static final int NODE_COLUMN_INDEX = 1;
   public static final int AFI_TYPE_COLUMN_INDEX = 2;
   public static final int SYMBOL_COLUMN_INDEX = 3;
+  public static final int NAME_COLUMN_INDEX = 4;
 
   @CsvBindByPosition(position = AFI_TYPE_COLUMN_INDEX)
   private int afiTypeId;
@@ -38,6 +39,9 @@ public class Module {
   private int id; // afi
   @CsvBindByPosition(position = SYMBOL_COLUMN_INDEX)
   private String symbol;
+
+  @CsvBindByPosition(position = NAME_COLUMN_INDEX)
+  private String name;
 
   private List<Port> inPorts;
   private List<Port> outPorts;
@@ -68,6 +72,13 @@ public class Module {
    */
   public static String extractSymbol(String[] line) {
     return line[SYMBOL_COLUMN_INDEX];
+  }
+
+  /**
+   * Extracts name (module name) from a split CSV line.
+   */
+  public static String extractName(String[] line) {
+    return line[NAME_COLUMN_INDEX];
   }
 
   /**
@@ -135,9 +146,17 @@ public class Module {
     return this;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public Module setName(String name) {
+    this.name = name;
+    return this;
+  }
+
   /**
    * getter for node
-   * @return
    */
   public int getNode() {
     return node;
@@ -202,7 +221,7 @@ public class Module {
   /**
    * Finds a single port of this module by its id
    */
-  public Optional<Port> findPortById(int portId){
+  public Optional<Port> findPortById(int portId) {
     return Stream.concat(getInPorts().stream(), getOutPorts().stream())
         .filter(p -> p.getId() == portId).findAny();
   }
@@ -210,7 +229,7 @@ public class Module {
   /**
    * Finds all ports of this module that match given ids. Any ids not found are ignored
    */
-  public Set<Port> findPortsByIds(Integer ... portId){
+  public Set<Port> findPortsByIds(Integer... portId) {
     Set<Integer> portIds = Arrays.stream(portId).collect(Collectors.toSet());
     return Stream.concat(getInPorts().stream(), getOutPorts().stream())
         .filter(p -> portIds.contains(p.getId())).collect(Collectors.toSet());
@@ -224,11 +243,13 @@ public class Module {
    * @return fluent interface
    */
   public Module addPort(Port p) {
-    if (p.getDirection() == null){
-      throw new IllegalArgumentException(String.format("Port %d must have a direction to be added to module %d", p.getId(), getId()));
+    if (p.getDirection() == null) {
+      throw new IllegalArgumentException(String
+          .format("Port %d must have a direction to be added to module %d", p.getId(), getId()));
     }
-    if (findPortById(p.getId()).isPresent()){
-      throw new IllegalArgumentException(String.format("Module %d already has a port with id %d", getId(), p.getId()));
+    if (findPortById(p.getId()).isPresent()) {
+      throw new IllegalArgumentException(
+          String.format("Module %d already has a port with id %d", getId(), p.getId()));
     }
     switch (p.getDirection()) {
       case I:
@@ -262,7 +283,8 @@ public class Module {
     return afiTypeId == module.afiTypeId &&
         node == module.node &&
         id == module.id &&
-        Objects.equals(symbol, module.symbol);
+        Objects.equals(symbol, module.symbol) &&
+        Objects.equals(name, module.name);
   }
 
   /**
@@ -271,7 +293,7 @@ public class Module {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(afiTypeId, node, id, symbol);
+    return Objects.hash(afiTypeId, node, id, symbol, name);
   }
 
   /**
@@ -285,6 +307,7 @@ public class Module {
         ", node=" + node +
         ", id=" + id +
         ", symbol='" + symbol + '\'' +
+        ", name='" + name + '\'' +
         '}';
   }
 }

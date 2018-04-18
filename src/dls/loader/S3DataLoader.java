@@ -194,7 +194,7 @@
 //     * @param filter A validation filter for the CSV-format
 //     * @return An id-indexed {@link Map} of {@link Module}s
 //     */
-//    public Map<Integer, Module> getModulesByIdFromS3(CsvToBeanFilter filter) throws IOException {
+//    public Map<Integer, Module> loadModules(CsvToBeanFilter filter) throws IOException {
 //        S3Reader modulesReader = new S3Reader(s3Client, bucket,
 //                getEngFileKey(params, S3DataLoader.AFI_CSV));
 //        return Utils.iteratorAsStream(getDlsCsvParser().loadModules(modulesReader, filter))
@@ -362,7 +362,7 @@
 //                                        Function<Map<Integer, Module>, CsvToBeanFilter> portFilterCreator,
 //                                        Stream<Connection> connectionStream) throws IOException {
 //        LOGGER.info("Loading complete plant network. This may take a while.");
-//        Map<Integer, Module> modulesById = getModulesByIdFromS3(moduleFilter);
+//        Map<Integer, Module> modulesById = loadModules(moduleFilter);
 //        LOGGER.info("Loaded modules: " + modulesById.size());
 //
 //        CsvToBeanFilter portFilter = portFilterCreator.apply(modulesById);
@@ -418,7 +418,7 @@
 //            readableConnectionsStream = connectionStream;
 //        } else {
 //            Set<Connection> allConnections = connectionStream.collect(Collectors.toSet());
-//            Map<Integer, Module> modulesById = getModulesByIdFromS3(line ->
+//            Map<Integer, Module> modulesById = loadModules(line ->
 //                    portIdsByModuleTypeIds.keySet().contains(Module.extractAfiType(line)));
 //
 //            additionalPortKeysToLoad = allConnections.stream()
@@ -474,7 +474,7 @@
 //    public Network extendNetwork(Network network, Set<Port> danglingInputPorts) throws IOException {
 //        Set<PortKey> portKeys = network.getMissingPortKeys(danglingInputPorts);
 //        Set<Integer> moduleIds = portKeys.stream().map(PortKey::getAfiId).collect(Collectors.toSet());
-//        Map<Integer, Module> newModules = getModulesByIdFromS3(
+//        Map<Integer, Module> newModules = loadModules(
 //                line -> moduleIds.contains(Module.extractId(line)));
 //        Stream<Port> newPorts = streamPortsFromS3(
 //                line -> portKeys.contains(new PortKey(Port.extractAfiId(line), Port.extractId(line))),

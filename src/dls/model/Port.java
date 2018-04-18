@@ -42,6 +42,8 @@ public class Port {
   public static final int CONNPORT_COLUMN_INDEX = 24;
   public static final int UNIQUENAME_COLUMN_INDEX = 25;
 
+  public static final int SYMBOL_COLUMN_INDEX = 5;
+
   @CsvBindByPosition(position = ID_COLUMN_INDEX)
   private int id;
   @CsvBindByPosition(position = AFI_COLUMN_INDEX)
@@ -54,6 +56,9 @@ public class Port {
   private String uniqueName;
   @CsvCustomBindByPosition(position = IO_COLUMN_INDEX, converter = CsvStringToPortDirectionConverter.class)
   private PortDirection direction;
+
+  @CsvBindByPosition(position = SYMBOL_COLUMN_INDEX)
+  private String symbol;
 
   @CsvCustomBindByPosition(position = IS_ARCHIVE_COLUMN_INDEX, converter = CsvStringToBooleanConverter.class)
   private boolean isArchive;
@@ -94,12 +99,14 @@ public class Port {
     return toInt(line[AFI_COLUMN_INDEX]);
   }
 
+
   /**
    * Extracts direction from a split CSV line.
    */
   public static PortDirection extractDirection(String[] line) {
     return PortDirection.valueOf(line[IO_COLUMN_INDEX]);
   }
+
 
   public static int extractId(String[] line) {
     return toInt(line[ID_COLUMN_INDEX]);
@@ -167,6 +174,10 @@ public class Port {
 
   public static String extractUniqueName(String[] line) {
     return line[UNIQUENAME_COLUMN_INDEX];
+  }
+
+  public static String extractSymbol(String[] line) {
+    return line[SYMBOL_COLUMN_INDEX];
   }
 
 
@@ -373,6 +384,7 @@ public class Port {
 
   /**
    * Setter for the alarmTypeId of a port
+   *
    * @return Fluent Interface
    */
   public Port setAlarmTypeId(int alarmTypeId) {
@@ -487,6 +499,14 @@ public class Port {
     return this;
   }
 
+  public String getSymbol() {
+    return symbol;
+  }
+
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -506,6 +526,7 @@ public class Port {
         Objects.equals(name, port.name) &&
         Objects.equals(parameter, port.parameter) &&
         Objects.equals(uniqueName, port.uniqueName) &&
+        Objects.equals(symbol, port.symbol) &&
         direction == port.direction &&
         Objects.equals(active, port.active) &&
         Objects.equals(engineeringUnit, port.engineeringUnit);
@@ -514,7 +535,8 @@ public class Port {
   @Override
   public int hashCode() {
     return Objects
-        .hash(id, afiId, name, parameter, uniqueName, direction, isArchive, isAlarm, alarmTypeId,
+        .hash(id, afiId, name, symbol, parameter, uniqueName, direction, isArchive, isAlarm,
+            alarmTypeId,
             active, minValue, maxValue, engineeringUnit);
   }
 
@@ -528,6 +550,7 @@ public class Port {
         "id=" + id +
         ", afiId=" + afiId +
         ", name='" + name + '\'' +
+        ", symbol='" + symbol + '\'' +
         ", parameter='" + parameter + '\'' +
         ", uniqueName='" + uniqueName + '\'' +
         ", direction=" + direction +

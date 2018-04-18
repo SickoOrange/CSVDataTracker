@@ -238,7 +238,12 @@ public class MainController implements Initializable {
         .getChildren();
     Optional<TreeItem<TreeTableViewModule>> treeItem = children.stream()
         .filter(child -> child.getValue().afiId.isEqualTo(afiid).get()).findAny();
-    treeItem.ifPresent(treeTableViewModuleTreeItem -> moduleTreeTableView.getSelectionModel()
-        .select(children.indexOf(treeTableViewModuleTreeItem)));
+    treeItem.ifPresent(treeTableViewModuleTreeItem -> {
+      moduleTreeTableView.getSelectionModel()
+          .clearAndSelect(moduleTreeTableView.getRow(treeTableViewModuleTreeItem));
+      moduleTreeTableView.scrollTo(moduleTreeTableView.getRow(treeTableViewModuleTreeItem));
+    });
+
+
   }
 }

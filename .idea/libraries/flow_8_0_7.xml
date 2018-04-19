@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="flow-8.0.7">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/flow-8.0.7.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

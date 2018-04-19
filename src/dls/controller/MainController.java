@@ -1,21 +1,27 @@
 package dls.controller;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.mxgraph.swing.mxGraphComponent;
+import dls.Main;
 import dls.loader.CSVLoader;
-import dls.loader.ChainPathLoader;
+import dls.model.Port;
+import dls.service.ChainPathLoader;
 import dls.model.ChainPath;
 import dls.model.Connection;
 import dls.model.Module;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import dls.service.OnChainPathVertexClickListener;
 import java.io.IOException;
 import java.net.URL;
+import java.security.PrivateKey;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +29,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javafx.beans.property.SimpleIntegerProperty;
@@ -37,27 +44,41 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.StackPane;
 
 import javax.swing.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
-public class MainController implements Initializable {
+public class MainController implements Initializable, OnChainPathVertexClickListener {
+
+  public static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger
+      .getLogger(Main.class);
 
   @FXML
   private Button loadConnection;
 
   @FXML
-  private JFXTextField sourceText;
+  private JFXTextField alertText;
 
 
   @FXML
-  private JFXTextField destinationText;
+  private JFXTextField sourceText;
 
   @FXML
   private StackPane visualizationPane;
+
+  @FXML
+  private JFXRadioButton radio_1;
+
+  @FXML
+  private ToggleGroup toggleGroup;
+
+  @FXML
+  private JFXRadioButton radio_2;
 
 
   //read only table view
@@ -83,20 +104,44 @@ public class MainController implements Initializable {
 
 
   @FXML
-  void loadConnection(ActionEvent event) throws IOException {
+  void loadConnection(ActionEvent event) {
 
-    int sourceAfiId = Integer.parseInt(sourceText.getText());
-    int destinationAfiId = Integer.parseInt(destinationText.getText());
+    String alertInfo = alertText.getText();
+    String sourceInfo = this.sourceText.getText();
 
     Task<List<ChainPath>> searchChainPaths = new Task<List<ChainPath>>() {
       @Override
-      protected List<ChainPath> call() {
+      protected List<ChainPath> call() throws IOException {
+
+        int alertAfi = 0;
+        int sourceAfi = 0;
+        if (radio_1.isSelected()) {
+          alertAfi = Integer.parseInt(alertInfo);
+          sourceAfi = Integer.parseInt(sourceInfo);
+        }
+
+        if (radio_2.isSelected()) {
+
+          //convert port unique name to afiid, if necessary
+          List<String> notParsableList = Lists.newArrayList();
+          notParsableList.add(alertInfo);
+          notParsableList.add(sourceInfo);
+          Map<String, Integer> result = Maps.transformValues(chainPathLoader
+              .findPortsFromPortUniqueNames(csvLoader, notParsableList), Port::getAfiId);
+
+          alertAfi = result.get(alertInfo);
+          sourceAfi = result.get(sourceInfo);
+        }
+
         return chainPathLoader
-            .loadChainPaths(sourceAfiId, destinationAfiId, connections);
+            .loadChainPaths(alertAfi, sourceAfi, connections);
       }
     };
+
     searchChainPaths.setOnSucceeded(e -> {
+      //data visualization
       visualization(searchChainPaths.getValue());
+      //query module info
       QueryModuleTask queryModuleTask = new QueryModuleTask(searchChainPaths.getValue(), csvLoader);
       queryModuleTask.setOnSucceeded(e1 -> {
         System.out.println("loading module finish");
@@ -139,16 +184,6 @@ public class MainController implements Initializable {
     visualizationPane.getChildren().clear();
     SwingNode swingNode = new SwingNode();
     mxGraphComponent gComponent = chainPathLoader.chainVisualization(chainPaths);
-    gComponent.getGraphControl().addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        Object cell = gComponent.getCellAt(e.getX(), e.getY());
-        String selectedAfiid = gComponent.getGraph().convertValueToString(cell);
-        if (StringUtils.isNumeric(selectedAfiid)) {
-          updateSelectedIndexInTable(moduleTreeTableView, Integer.parseInt(selectedAfiid));
-        }
-      }
-    });
     SwingUtilities
         .invokeLater(() -> swingNode.setContent(gComponent));
     visualizationPane.getChildren().add(swingNode);
@@ -157,6 +192,7 @@ public class MainController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    // TODO: 19.04.2018 load connection with asyn task
     csvLoader = new CSVLoader();
     try {
       connections = csvLoader.loadConnections().collect(Collectors.toList());
@@ -165,7 +201,17 @@ public class MainController implements Initializable {
     }
 
     chainPathLoader = new ChainPathLoader();
+    chainPathLoader.setOnVertexClickListener(this);
+
     visualization(null);
+
+  }
+
+  @Override
+  public void onChainPathVertexClick(String vertexString) {
+    if (StringUtils.isNumeric(vertexString)) {
+      updateSelectedIndexInTable(moduleTreeTableView, Integer.parseInt(vertexString));
+    }
 
   }
 

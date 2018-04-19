@@ -1,6 +1,5 @@
 package dls.controller;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.jfoenix.controls.JFXRadioButton;
@@ -12,16 +11,14 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.mxgraph.swing.mxGraphComponent;
 import dls.Main;
 import dls.loader.CSVLoader;
-import dls.model.Port;
-import dls.service.ChainPathLoader;
 import dls.model.ChainPath;
 import dls.model.Connection;
 import dls.model.Module;
-
+import dls.model.Port;
+import dls.service.ChainPathLoader;
 import dls.service.OnChainPathVertexClickListener;
 import java.io.IOException;
 import java.net.URL;
-import java.security.PrivateKey;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +26,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -48,10 +43,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.StackPane;
-
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
 public class MainController implements Initializable, OnChainPathVertexClickListener {
 
@@ -201,7 +194,7 @@ public class MainController implements Initializable, OnChainPathVertexClickList
     }
 
     chainPathLoader = new ChainPathLoader();
-    chainPathLoader.setOnVertexClickListener(this);
+    chainPathLoader.setOnChainPathVertexClickListener(this);
 
     visualization(null);
 

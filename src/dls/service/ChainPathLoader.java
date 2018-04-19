@@ -1,4 +1,4 @@
-package dls.loader;
+package dls.service;
 
 import com.google.common.collect.ImmutableList;
 import com.mxgraph.layout.*;
@@ -6,6 +6,7 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxMorphing;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraph;
+import dls.loader.CSVLoader;
 import dls.model.ChainPath;
 import dls.model.Connection;
 import dls.model.Port;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 /**
  * User: Ya Yin
@@ -25,6 +27,8 @@ import java.util.stream.Collectors;
 public class ChainPathLoader {
 
   private static final int MAX_DEPTH = 7;
+
+  private OnChainPathVertexClickListener onChainPathVertexClickListener;
 
 
   public List<ChainPath> loadChainPaths(int sourceAfiId, int destinationAfiId,
@@ -111,7 +115,13 @@ public class ChainPathLoader {
 
     //autoLayout(graph, graphComponent);
     graphComponent.setEnabled(false);
-    //graphComponent.getGraph().getSelectionModel().setSingleSelection(true);
+    graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        Object cell = graphComponent.getCellAt(e.getX(), e.getY());
+        onChainPathVertexClickListener.onChainPathVertexClick(graph.convertValueToString(cell));
+      }
+    });
     return graphComponent;
   }
 
@@ -190,5 +200,10 @@ public class ChainPathLoader {
       List<String> names) throws IOException {
     return csvLoader.loadPorts(line -> names.contains(Port.extractUniqueName(line)))
         .collect(Collectors.toMap(Port::getUniqueName, Function.identity()));
+  }
+
+  public void setOnChainPathVertexClickListener(
+      OnChainPathVertexClickListener onChainPathVertexClickListener) {
+    this.onChainPathVertexClickListener = onChainPathVertexClickListener;
   }
 }

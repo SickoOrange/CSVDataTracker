@@ -8,6 +8,8 @@ import com.dls.aa.model.Module;
 import com.dls.aa.model.Port;
 import com.dls.aa.service.ChainPathLoader;
 import com.dls.aa.service.OnChainPathVertexClickListener;
+import com.dls.aa.tableview.AfiTableViewModule;
+import com.dls.aa.tableview.TableViewFactory;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.jfoenix.controls.*;
@@ -40,6 +42,7 @@ import java.util.stream.Collectors;
 
 import static com.dls.aa.WizardController.CP_LOADER;
 import static com.dls.aa.WizardController.LOADER;
+import static com.dls.aa.tableview.TableViewFactory.setupAfiTableCellValueFactory;
 
 
 @ViewController("/fxml/ui/chain_visualization_layout.fxml")
@@ -74,17 +77,17 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
 
     //read only table view
     @FXML
-    private JFXTreeTableView<TreeTableViewModule> moduleTreeTableView;
+    private JFXTreeTableView<AfiTableViewModule> moduleTreeTableView;
     @FXML
-    private JFXTreeTableColumn<TreeTableViewModule, Integer> afiidColumn;
+    private JFXTreeTableColumn<AfiTableViewModule, Integer> afiidColumn;
     @FXML
-    private JFXTreeTableColumn<TreeTableViewModule, Integer> nodeidColumn;
+    private JFXTreeTableColumn<AfiTableViewModule, Integer> nodeidColumn;
     @FXML
-    private JFXTreeTableColumn<TreeTableViewModule, Integer> afitypeidColumn;
+    private JFXTreeTableColumn<AfiTableViewModule, Integer> afitypeidColumn;
     @FXML
-    private JFXTreeTableColumn<TreeTableViewModule, String> symbolColumn;
+    private JFXTreeTableColumn<AfiTableViewModule, String> symbolColumn;
     @FXML
-    private JFXTreeTableColumn<TreeTableViewModule, String> nameColumn;
+    private JFXTreeTableColumn<AfiTableViewModule, String> nameColumn;
 
 
     private List<Connection> connections;
@@ -156,16 +159,13 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
 
     private void setUpReadOnlyTableView(Map<Integer, Module> modules) {
 
-        setupCellValueFactory(afiidColumn, m -> m.afiId.asObject());
-        setupCellValueFactory(nodeidColumn, p -> p.nodeId.asObject());
-        setupCellValueFactory(afitypeidColumn, p -> p.afiTypeId.asObject());
-        setupCellValueFactory(symbolColumn, TreeTableViewModule::symbolProperty);
-        setupCellValueFactory(nameColumn, TreeTableViewModule::nameProperty);
+        setupAfiTableCellValueFactory(afiidColumn, m -> m.afiId.asObject());
+        setupAfiTableCellValueFactory(nodeidColumn, p -> p.nodeId.asObject());
+        setupAfiTableCellValueFactory(afitypeidColumn, p -> p.afiTypeId.asObject());
+        setupAfiTableCellValueFactory(symbolColumn, AfiTableViewModule::symbolProperty);
+        setupAfiTableCellValueFactory(nameColumn, AfiTableViewModule::nameProperty);
 
-        ObservableList<TreeTableViewModule> entities = FXCollections.observableArrayList();
-        modules.values().forEach(module -> entities
-                .add(new TreeTableViewModule(module.getId(), module.getNode(), module.getAfiTypeId(),
-                        module.getSymbol(), module.getName())));
+        ObservableList<AfiTableViewModule> entities = TableViewFactory.collectAfiEntities().apply(modules);
 
         moduleTreeTableView
                 .setRoot(new RecursiveTreeItem<>(entities, RecursiveTreeObject::getChildren));
@@ -223,52 +223,24 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
         }
     }
 
-    // data class
-    final class TreeTableViewModule extends RecursiveTreeObject<TreeTableViewModule> {
 
-        final SimpleIntegerProperty afiId;
-        final SimpleIntegerProperty nodeId;
-        final SimpleIntegerProperty afiTypeId;
+//    private <T> void setupCellValueFactory(JFXTreeTableColumn<AfiTableViewModule, T> column,
+//                                           Function<AfiTableViewModule, ObservableValue<T>> mapper) {
+//        column.setCellValueFactory((TreeTableColumn.CellDataFeatures<AfiTableViewModule, T> param) -> {
+//            if (column.validateValue(param)) {
+//                return mapper.apply(param.getValue().getValue());
+//            } else {
+//                return column.getComputedValue(param);
+//            }
+//        });
+//    }
 
-        final StringProperty symbol;
-        final StringProperty name;
-
-        TreeTableViewModule(int afiId,
-                            int nodeId, int afiTypeId,
-                            String symbol, String name) {
-            this.afiId = new SimpleIntegerProperty(afiId);
-            this.nodeId = new SimpleIntegerProperty(nodeId);
-            this.afiTypeId = new SimpleIntegerProperty(afiTypeId);
-            this.symbol = new SimpleStringProperty(symbol);
-            this.name = new SimpleStringProperty(name);
-        }
-
-        StringProperty nameProperty() {
-            return name;
-        }
-
-        StringProperty symbolProperty() {
-            return symbol;
-        }
-    }
-
-    private <T> void setupCellValueFactory(JFXTreeTableColumn<TreeTableViewModule, T> column,
-                                           Function<TreeTableViewModule, ObservableValue<T>> mapper) {
-        column.setCellValueFactory((TreeTableColumn.CellDataFeatures<TreeTableViewModule, T> param) -> {
-            if (column.validateValue(param)) {
-                return mapper.apply(param.getValue().getValue());
-            } else {
-                return column.getComputedValue(param);
-            }
-        });
-    }
-
-    private void updateSelectedIndexInTable(JFXTreeTableView<TreeTableViewModule> moduleTreeTableView,
+    private void updateSelectedIndexInTable(JFXTreeTableView<AfiTableViewModule> moduleTreeTableView,
                                             int afiid) {
 
-        ObservableList<TreeItem<TreeTableViewModule>> children = moduleTreeTableView.getRoot()
+        ObservableList<TreeItem<AfiTableViewModule>> children = moduleTreeTableView.getRoot()
                 .getChildren();
-        Optional<TreeItem<TreeTableViewModule>> treeItem = children.stream()
+        Optional<TreeItem<AfiTableViewModule>> treeItem = children.stream()
                 .filter(child -> child.getValue().afiId.isEqualTo(afiid).get()).findAny();
         treeItem.ifPresent(treeTableViewModuleTreeItem -> {
             moduleTreeTableView.getSelectionModel()

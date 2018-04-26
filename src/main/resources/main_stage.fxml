@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -25,6 +27,11 @@
             <Font size="14.0" />
           </font>
         </JFXButton>
+            <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="22.0" layoutY="748.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../icons8_Settings_50px.png" />
+               </image>
+            </ImageView>
       </children>
     </AnchorPane>
   </left>

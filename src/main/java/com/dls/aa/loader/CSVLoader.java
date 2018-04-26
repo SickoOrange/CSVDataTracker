@@ -36,6 +36,13 @@ public class CSVLoader {
   public static final Logger LOGGER = Logger.getLogger(CSVLoader.class);
 
 
+// TODO: 26.04.2018 module info+ module bean
+//  public loadOriginalModuleInfo(CsvToBeanFilter filter) throws IOException
+
+
+
+
+
   /**
    * Load modules from AFI.csv and provide them as a {@link Map} of id-indexed {@link Module} instances.
    *
@@ -54,7 +61,7 @@ public class CSVLoader {
     return loadConnections(null);
   }
 
-  private Stream<Connection> loadConnections(CsvToBeanFilter filter) throws IOException {
+  public Stream<Connection> loadConnections(CsvToBeanFilter filter) throws IOException {
     String connectionCsvPath =
         "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\" + CONNECTIONS_CSV;
     //String connectionCsvPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\Connections.csv";

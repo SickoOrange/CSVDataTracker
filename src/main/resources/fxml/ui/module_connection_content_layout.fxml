@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="730.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+
+                <JFXTextField fx:id="searchModuleIdAfiTypeIdButton" layoutX="18.0" layoutY="95.0" prefHeight="25.0" prefWidth="161.0" promptText="Search module type id  ..." />
+      <JFXTextField fx:id="searchModuleNameButton" layoutX="203.0" layoutY="95.0" prefHeight="25.0" prefWidth="180.0" promptText="Search module  name ..." />
+    <JFXTreeTableView fx:id="moduleTreeTableView" layoutX="17.0" layoutY="140.0" prefHeight="219.0" prefWidth="1040.0">
+      <columns>
+        <JFXTreeTableColumn fx:id="module_afiidColumn" minWidth="100.0" text="TypeId" />
+        <JFXTreeTableColumn fx:id="module_nameColumn" minWidth="100" text="Name" />
+        <JFXTreeTableColumn fx:id="module_portColumn" minWidth="100" text="Port" />
+        <JFXTreeTableColumn fx:id="module_portNameColumn" minWidth="100" text="Port Name" />
+            <JFXTreeTableColumn fx:id="module_typeColumn" minWidth="100" resizable="false" text="Type" />
+            <JFXTreeTableColumn fx:id="module_isAlarmColumn" minWidth="100" text="isAlarm" />
+            <JFXTreeTableColumn fx:id="module_alarmColumn" minWidth="100" prefWidth="50.0" text="Alarm" />
+            <JFXTreeTableColumn fx:id="module_descColumn" minWidth="100" prefWidth="120.0" text="Description" />
+      </columns>
+    </JFXTreeTableView>
+      <JFXTreeTableView fx:id="connectionTreeTableView" layoutX="19.0" layoutY="458.0" prefHeight="234.0" prefWidth="1040.0">
+         <columns>
+            <JFXTreeTableColumn fx:id="connection_afiid1Column" minWidth="100" prefWidth="100" resizable="false" text="afiid1" />
+            <JFXTreeTableColumn fx:id="connection_portid1Column" minWidth="100" resizable="false" text="portid1" />
+            <JFXTreeTableColumn fx:id="connection_portName1Column" minWidth="100" resizable="false" text="portname1" />
+            <JFXTreeTableColumn fx:id="connection_type1Column" minWidth="100" resizable="false" text="type1" />
+            <JFXTreeTableColumn fx:id="connection_afiid2Column" minWidth="100" resizable="true" text="afiid2" />
+            <JFXTreeTableColumn fx:id="connection_portid2Column" minWidth="100" resizable="false" text="portid2" />
+            <JFXTreeTableColumn fx:id="connection_portName2Column" minWidth="100" resizable="false" text="portname2" />
+            <JFXTreeTableColumn fx:id="connection_type2Column" minWidth="100" resizable="false" text="type2" />
+         </columns>
+      </JFXTreeTableView>
+      <JFXTextField fx:id="searchConnectionAfiid1Button" layoutX="19.0" layoutY="409.0" prefHeight="25.0" prefWidth="146.0" promptText="Search afiid1..." />
+      <JFXTextField fx:id="searchConnectionAfiid2Button" layoutX="220.0" layoutY="409.0" prefHeight="25.0" prefWidth="146.0" promptText="Search afiid2..." />
+  </children>
+</AnchorPane>

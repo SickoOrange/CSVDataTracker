@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+  <HBox layoutX="43.0" layoutY="5.0" prefHeight="146.0" prefWidth="380.0">
+    <children>
+      <VBox prefHeight="155.0" prefWidth="312.0" spacing="20.0">
+        <children>
+          <JFXTextField fx:id="alertText" labelFloat="true" prefHeight="25.0" prefWidth="595.0" promptText="Alert Info">
+            <VBox.margin>
+              <Insets top="20.0" />
+            </VBox.margin>
+          </JFXTextField>
+          <JFXTextField fx:id="sourceText" labelFloat="true" prefHeight="25.0" prefWidth="170.0" promptText="Source Info" />
+          <HBox prefHeight="47.0" prefWidth="182.0" spacing="10.0">
+            <children>
+              <JFXRadioButton fx:id="radio_1" prefHeight="17.0" prefWidth="96.0" selected="true" styleClass="custom-jfx-radio-button" text="Afi Id">
+                <toggleGroup>
+                  <ToggleGroup fx:id="toggleGroup" />
+                </toggleGroup>
+              </JFXRadioButton>
+              <JFXRadioButton fx:id="radio_2" selected="false" styleClass="custom-jfx-radio-button" text="Port Name" toggleGroup="$toggleGroup" />
+            </children>
+            <padding>
+              <Insets left="10.0" right="10.0" />
+            </padding>
+          </HBox>
+        </children>
+        <padding>
+          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+      </VBox>
+    </children>
+  </HBox>
+  <StackPane fx:id="visualizationPane" layoutX="14.0" layoutY="155.0" prefHeight="165.0" prefWidth="1040.0" />
+  <JFXButton fx:id="loadConnection" layoutX="388.0" layoutY="62.0" prefHeight="33.0" prefWidth="70.0" style="-fx-background-color: #4CAF50;" text="Start" textFill="WHITE" />
+  <JFXTreeTableView fx:id="moduleTreeTableView" layoutX="14.0" layoutY="328.0" prefHeight="392.0" prefWidth="1040.0">
+    <columns>
+      <JFXTreeTableColumn fx:id="afiidColumn" minWidth="133" prefWidth="133" resizable="false" text="afi" />
+      <JFXTreeTableColumn fx:id="nodeidColumn" minWidth="133" resizable="false" text="nodeid" />
+      <JFXTreeTableColumn fx:id="afitypeidColumn" minWidth="133" resizable="false" text="afitypeid" />
+      <JFXTreeTableColumn fx:id="symbolColumn" minWidth="133" resizable="false" text="symbol" />
+      <JFXTreeTableColumn fx:id="nameColumn" minWidth="200" resizable="true" text="module name" />
+    </columns>
+  </JFXTreeTableView>
+  </children>
+</AnchorPane>

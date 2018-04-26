@@ -9,6 +9,7 @@ import com.dls.aa.service.ChainPathLoader;
 import com.dls.aa.service.OnChainPathVertexClickListener;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -17,13 +18,14 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.mxgraph.swing.mxGraphComponent;
 import io.datafx.controller.ViewController;
+import io.datafx.controller.flow.action.ActionMethod;
+import io.datafx.controller.flow.action.ActionTrigger;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -35,26 +37,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingNode;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.StackPane;
+import javax.annotation.PostConstruct;
 import javax.swing.SwingUtilities;
 import org.apache.commons.lang3.StringUtils;
 
 
-@ViewController("/ChainVisualization.fxml")
-public class ChainVisualizationController implements Initializable, OnChainPathVertexClickListener {
+@ViewController("/fxml/ui/chain_visualization_layout.fxml")
+public class ChainVisualizationController implements OnChainPathVertexClickListener {
 
   public static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger
       .getLogger(ChainVisualizationController.class);
 
   @FXML
-  private Button loadConnection;
+  @ActionTrigger("loadConnection")
+  private JFXButton loadConnection;
 
   @FXML
   private JFXTextField alertText;
@@ -98,8 +99,9 @@ public class ChainVisualizationController implements Initializable, OnChainPathV
   private Map<Integer, Module> modules;
 
 
-  @FXML
-  void loadConnection(ActionEvent event) {
+  @ActionMethod("loadConnection")
+  public void loadConnection() {
+    System.out.println("hello world");
 
     String alertInfo = alertText.getText();
     String sourceInfo = this.sourceText.getText();
@@ -126,6 +128,10 @@ public class ChainVisualizationController implements Initializable, OnChainPathV
 
           alertAfi = result.get(alertInfo);
           sourceAfi = result.get(sourceInfo);
+        }
+
+        if (Objects.isNull(connections)) {
+          connections = csvLoader.loadConnections().collect(Collectors.toList());
         }
 
         return chainPathLoader
@@ -185,20 +191,23 @@ public class ChainVisualizationController implements Initializable, OnChainPathV
   }
 
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    // TODO: 19.04.2018 load connection with asyn task
+  @PostConstruct
+  public void init() {
     csvLoader = new CSVLoader();
-    try {
-      connections = csvLoader.loadConnections().collect(Collectors.toList());
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
     chainPathLoader = new ChainPathLoader();
     chainPathLoader.setOnChainPathVertexClickListener(this);
-
-    visualization(null);
+//    if (Objects.isNull(connections)) {
+//      new Thread(() -> {
+//        try {
+//          connections = csvLoader.loadConnections().collect(Collectors.toList());
+//        } catch (IOException e) {
+//          e.printStackTrace();
+//        }
+//        Platform.runLater(() -> {
+//          visualization(null);
+//        });
+//      }).start();
+//    }
 
   }
 

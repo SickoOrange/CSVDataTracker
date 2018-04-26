@@ -114,6 +114,13 @@ public class InfoSearchController {
             }
         });
 
+
+        searchModuleNameButton.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+
+            }
+        });
+
         searchConnectionAfiid2Button.setOnKeyPressed(event -> {
             int afiid2 = Integer.parseInt(searchConnectionAfiid2Button.getText());
             try {

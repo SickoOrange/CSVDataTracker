@@ -33,7 +33,7 @@ import javafx.scene.input.KeyCode;
 
 import javax.annotation.PostConstruct;
 
-@ViewController("/fxml/ui/module_connection_content_layout.fxml")
+@ViewController("/fxml/ui/afi_connection_content_layout.fxml")
 public class InfoSearchController {
 
     @FXML

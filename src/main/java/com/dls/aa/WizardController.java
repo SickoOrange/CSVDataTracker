@@ -4,8 +4,6 @@ package com.dls.aa;/*
  * Digital Lifecycle Service (DLS)
  */
 
-import static io.datafx.controller.flow.container.ContainerAnimations.FADE;
-import static io.datafx.controller.flow.container.ContainerAnimations.SWIPE_RIGHT;
 import static io.datafx.controller.flow.container.ContainerAnimations.ZOOM_OUT;
 
 import com.dls.aa.controller.ChainVisualizationController;
@@ -44,8 +42,8 @@ public class WizardController {
     private JFXButton naviToChainVisualization;
 
     @FXML
-    @ActionTrigger("infoButton")
-    private JFXButton infoButton;
+    @ActionTrigger("naviToAfiAndConnection")
+    private JFXButton naviToAfiAndConnection;
 
     @FXML
     private JFXButton t2;
@@ -66,7 +64,7 @@ public class WizardController {
         context.register("ContentPane", centerContainer);
 
         bindNodeToController(naviToChainVisualization, ChainVisualizationController.class, innerFlow);
-        bindNodeToController(infoButton, InfoSearchController.class, innerFlow);
+        bindNodeToController(naviToAfiAndConnection, InfoSearchController.class, innerFlow);
         Duration containerAnimationDuration = Duration.millis(450);
         centerContainer.getChildren()
                 .add(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration,
@@ -96,12 +94,12 @@ public class WizardController {
         })).start();
     }
 
-    @ActionMethod("infoButton")
-    public void onInfoButtonClick() {
+    @ActionMethod("naviToAfiAndConnection")
+    public void onNaviToAfiAndConnectionClick() {
         System.out.println("hello");
         new Thread(() -> Platform.runLater(() -> {
             try {
-                flowHandler.handle("infoButton");
+                flowHandler.handle("naviToAfiAndConnection");
             } catch (VetoException | FlowException e) {
                 e.printStackTrace();
             }

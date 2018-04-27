@@ -1,5 +1,6 @@
 package com.dls.aa;
 
+import com.dls.aa.controller.WizardController;
 import com.jfoenix.controls.JFXDecorator;
 import com.jfoenix.svg.SVGGlyph;
 import io.datafx.controller.flow.Flow;

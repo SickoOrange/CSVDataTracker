@@ -1,7 +1,7 @@
 package com.dls.aa.controller;
 
-import static com.dls.aa.WizardController.CP_LOADER;
-import static com.dls.aa.WizardController.LOADER;
+import static com.dls.aa.controller.WizardController.CP_LOADER;
+import static com.dls.aa.controller.WizardController.LOADER;
 import static com.dls.aa.tableview.TableViewFactory.setupTableCellValueFactory;
 
 import com.dls.aa.LoaderServiceContainer;

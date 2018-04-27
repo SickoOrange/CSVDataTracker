@@ -1,4 +1,4 @@
-package com.dls.aa;/*
+package com.dls.aa.controller;/*
  * Copyright (c) Siemens AG 2017 ALL RIGHTS RESERVED.
  *
  * Digital Lifecycle Service (DLS)
@@ -6,9 +6,12 @@ package com.dls.aa;/*
 
 import static io.datafx.controller.flow.container.ContainerAnimations.ZOOM_OUT;
 
+import com.dls.aa.ExtendedAnimatedFlowContainer;
+import com.dls.aa.LoaderServiceContainer;
 import com.dls.aa.controller.ChainVisualizationController;
 import com.dls.aa.controller.DefautContentController;
-import com.dls.aa.controller.InfoSearchController;
+import com.dls.aa.controller.AfiAndConnectionController;
+import com.dls.aa.controller.PortController;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.service.ChainPathLoader;
 import com.jfoenix.controls.JFXButton;
@@ -46,10 +49,12 @@ public class WizardController {
     private JFXButton naviToAfiAndConnection;
 
     @FXML
-    private JFXButton t2;
+    @ActionTrigger("naviToPort")
+    private JFXButton naviToPort;
 
     @FXML
     private StackPane centerContainer;
+
     private FlowHandler flowHandler;
 
 
@@ -64,7 +69,8 @@ public class WizardController {
         context.register("ContentPane", centerContainer);
 
         bindNodeToController(naviToChainVisualization, ChainVisualizationController.class, innerFlow);
-        bindNodeToController(naviToAfiAndConnection, InfoSearchController.class, innerFlow);
+        bindNodeToController(naviToAfiAndConnection, AfiAndConnectionController.class, innerFlow);
+        bindNodeToController(naviToPort, PortController.class, innerFlow);
         Duration containerAnimationDuration = Duration.millis(450);
         centerContainer.getChildren()
                 .add(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration,
@@ -96,10 +102,20 @@ public class WizardController {
 
     @ActionMethod("naviToAfiAndConnection")
     public void onNaviToAfiAndConnectionClick() {
-        System.out.println("hello");
         new Thread(() -> Platform.runLater(() -> {
             try {
                 flowHandler.handle("naviToAfiAndConnection");
+            } catch (VetoException | FlowException e) {
+                e.printStackTrace();
+            }
+        })).start();
+    }
+
+    @ActionMethod("naviToPort")
+    public void onNaviToPortClick() {
+        new Thread(() -> Platform.runLater(() -> {
+            try {
+                flowHandler.handle("naviToPort");
             } catch (VetoException | FlowException e) {
                 e.printStackTrace();
             }

@@ -6,11 +6,12 @@ package com.dls.aa.controller;/*
 
 import static com.dls.aa.tableview.TableViewFactory.setupTableCellValueFactory;
 
+import com.dls.aa.AsyncTaskContainer;
 import com.dls.aa.LoaderServiceContainer;
-import com.dls.aa.WizardController;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.AfiType;
 import com.dls.aa.model.Connection;
+import com.dls.aa.model.Port;
 import com.dls.aa.tableview.AfiTypeTableViewModel;
 import com.dls.aa.tableview.ConnectionTableViewModel;
 import com.dls.aa.tableview.TableViewFactory;
@@ -22,11 +23,11 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import io.datafx.controller.ViewController;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
@@ -34,7 +35,7 @@ import javafx.scene.input.KeyCode;
 import javax.annotation.PostConstruct;
 
 @ViewController("/fxml/ui/afi_connection_content_layout.fxml")
-public class InfoSearchController {
+public class AfiAndConnectionController {
 
     @FXML
     private JFXTreeTableView<ConnectionTableViewModel> connectionTable;
@@ -85,6 +86,12 @@ public class InfoSearchController {
     private JFXTreeTableColumn<AfiTypeTableViewModel, String> column18;
 
     @FXML
+    private JFXTreeTableView<?> portTable;
+
+    @FXML
+    private JFXTextField searchPortNameButton;
+
+    @FXML
     private JFXTextField searchModuleIdAfiTypeIdButton;
 
     @FXML
@@ -105,31 +112,60 @@ public class InfoSearchController {
     public void init() {
         servicesContains = LoaderServiceContainer.getInstance().getServicesContains();
         csvLoader = (CSVLoader) servicesContains.get(WizardController.LOADER);
+
+        searchPortNameButton.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                String portName = searchPortNameButton.getText();
+                AsyncTaskContainer<String, List<Port>> collectPortsWithPortName = new AsyncTaskContainer<>(portName, name -> {
+                    try {
+                        return csvLoader.loadPorts(line -> Port.extractUniqueName(line).equals(name))
+                                .collect(Collectors.toList());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return Collections.emptyList();
+                    }
+                });
+                collectPortsWithPortName.setOnSucceeded(e -> {
+                    List<Port> value = collectPortsWithPortName.getValue();
+                    System.out.println(value.size());
+                    // TODO: 28.04.2018 set up table view
+                });
+                new Thread(collectPortsWithPortName).start();
+            }
+        });
+
         searchModuleIdAfiTypeIdButton.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 int typeId = Integer.parseInt(searchModuleIdAfiTypeIdButton.getText());
-                try {
-                    List<AfiType> afiTypes = csvLoader
-                            .loadAfiType(line -> AfiType.extractTypeId(line) == typeId).collect(Collectors.toList());
-                    System.out.println(afiTypes.size());
-                    loadAfiTypesToTableView(afiTypes);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+                AsyncTaskContainer<Integer, List<AfiType>> collectModulesByAfiTypeId = new AsyncTaskContainer<>(typeId, id -> {
+                    try {
+                        return csvLoader
+                                .loadAfiType(line -> AfiType.extractTypeId(line) == id).collect(Collectors.toList());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return Collections.emptyList();
+                    }
+                });
+                collectModulesByAfiTypeId.setOnSucceeded(e -> loadAfiTypesToTableView(collectModulesByAfiTypeId.getValue()));
+                new Thread(collectModulesByAfiTypeId).start();
+
             }
         });
-//
         searchModuleNameButton.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 String moduleName = searchModuleNameButton.getText();
-                try {
-                    List<AfiType> afiTypes = csvLoader
-                            .loadAfiType(line -> AfiType.extractName(line).equals(moduleName)).collect(Collectors.toList());
-                    System.out.println(afiTypes.size());
-                    loadAfiTypesToTableView(afiTypes);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                AsyncTaskContainer<String, List<AfiType>> collectModulesByName = new AsyncTaskContainer<>(moduleName, name -> {
+                    try {
+                        return csvLoader
+                                .loadAfiType(line -> AfiType.extractName(line).equals(name)).collect(Collectors.toList());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return Collections.emptyList();
+                    }
+                });
+                collectModulesByName.setOnSucceeded(e -> loadAfiTypesToTableView(collectModulesByName.getValue()));
+                new Thread(collectModulesByName).start();
             }
         });
 
@@ -137,15 +173,21 @@ public class InfoSearchController {
 
             if (event.getCode() == KeyCode.ENTER) {
                 int afiid2 = Integer.parseInt(searchConnectionAfiid2Button.getText());
-                try {
-                    List<Connection> connections = csvLoader
-                            .loadConnections(line -> Connection.extractAfi2(line) == afiid2)
-                            .collect(Collectors.toList());
-                    Platform.runLater(() -> loadConnectionsToTableView(connections));
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                AsyncTaskContainer<Integer, List<Connection>> collectConnectionsById = new AsyncTaskContainer<>(afiid2, id -> {
+                    try {
+                        return csvLoader
+                                .loadConnections(line -> Connection.extractAfi2(line) == afiid2)
+                                .collect(Collectors.toList());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return Collections.emptyList();
+                    }
+                });
+                collectConnectionsById.setOnSucceeded(e -> loadConnectionsToTableView(collectConnectionsById.getValue()));
+                new Thread(collectConnectionsById).start();
+
+
             }
 
         });
@@ -153,18 +195,22 @@ public class InfoSearchController {
         searchConnectionAfiid1Button.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 int afiid1 = Integer.parseInt(searchConnectionAfiid1Button.getText());
-                try {
-                    List<Connection> connections = csvLoader
-                            .loadConnections(line -> Connection.extractAfi1(line) == afiid1)
-                            .collect(Collectors.toList());
-                    loadConnectionsToTableView(connections);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                AsyncTaskContainer<Integer, List<Connection>> collectConnectionsById = new AsyncTaskContainer<>(afiid1, id -> {
+                    try {
+                        return csvLoader
+                                .loadConnections(line -> Connection.extractAfi1(line) == afiid1)
+                                .collect(Collectors.toList());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return Collections.emptyList();
+                    }
+                });
+                collectConnectionsById.setOnSucceeded(e -> loadConnectionsToTableView(collectConnectionsById.getValue()));
+                new Thread(collectConnectionsById).start();
             }
-
         });
     }
+
 
     private void loadAfiTypesToTableView(List<AfiType> afiTypes) {
         setupTableCellValueFactory(column11, afiType -> afiType.typeid.asObject());

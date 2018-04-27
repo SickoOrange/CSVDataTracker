@@ -4,11 +4,12 @@ package com.dls.aa.tableview;/*
  * Digital Lifecycle Service (DLS)
  */
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class AfiTypeTableViewModel {
+public class AfiTypeTableViewModel extends RecursiveTreeObject<AfiTypeTableViewModel> {
 
   public final SimpleIntegerProperty typeid;
   public final StringProperty name;

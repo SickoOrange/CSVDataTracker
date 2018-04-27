@@ -35,13 +35,13 @@
       prefWidth="1040.0">
       <columns>
         <JFXTreeTableColumn fx:id="column11" prefWidth="75.0" text="type id"/>
-        <JFXTreeTableColumn fx:id="column21" prefWidth="75.0" text="name"/>
-        <JFXTreeTableColumn fx:id="column31" prefWidth="75.0" text="port"/>
-        <JFXTreeTableColumn fx:id="column41" prefWidth="75.0" text="port name"/>
-        <JFXTreeTableColumn fx:id="column51" prefWidth="75.0" text="type"/>
-        <JFXTreeTableColumn fx:id="column61" prefWidth="75.0" text="isAlarm"/>
-        <JFXTreeTableColumn fx:id="column71" prefWidth="75.0" text="alarm"/>
-        <JFXTreeTableColumn fx:id="column81" prefWidth="75.0" text="description"/>
+        <JFXTreeTableColumn fx:id="column12" prefWidth="75.0" text="name"/>
+        <JFXTreeTableColumn fx:id="column13" prefWidth="75.0" text="port"/>
+        <JFXTreeTableColumn fx:id="column14" prefWidth="75.0" text="port name"/>
+        <JFXTreeTableColumn fx:id="column15" prefWidth="75.0" text="type"/>
+        <JFXTreeTableColumn fx:id="column16" prefWidth="75.0" text="isAlarm"/>
+        <JFXTreeTableColumn fx:id="column17" prefWidth="75.0" text="alarm"/>
+        <JFXTreeTableColumn fx:id="column18" prefWidth="140.0" text="description"/>
       </columns>
     </JFXTreeTableView>
   </children>

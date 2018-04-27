@@ -27,6 +27,7 @@ import com.mxgraph.swing.mxGraphComponent;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.action.ActionMethod;
 import io.datafx.controller.flow.action.ActionTrigger;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -35,6 +36,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingNode;
@@ -42,8 +44,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.StackPane;
+
 import javax.annotation.PostConstruct;
 import javax.swing.SwingUtilities;
+
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -134,7 +138,6 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
                     connections = csvLoader.loadConnections(null).collect(Collectors.toList());
 
                 }
-                System.out.println("ss"+connections.size());
                 return chainPathLoader
                         .loadChainPaths(alertAfi, sourceAfi, connections);
             }
@@ -144,15 +147,28 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
             //data visualization
             visualization(searchChainPaths.getValue());
             //query module info
-            QueryModuleTask queryModuleTask = new QueryModuleTask(searchChainPaths.getValue(), csvLoader);
-            queryModuleTask.setOnSucceeded(e1 -> {
-                System.out.println("loading module finish");
-                modules = queryModuleTask.getValue();
-                System.out.println(modules);
-                //init table
+//            QueryModuleTask queryModuleTask = new QueryModuleTask(searchChainPaths.getValue(), csvLoader);
+//            queryModuleTask.setOnSucceeded(e1 -> {
+//                System.out.println("loading module finish");
+//                modules = queryModuleTask.getValue();
+//                System.out.println(modules);
+//                //init table
+//                setUpReadOnlyTableView(modules);
+//            });
+//            new Thread(queryModuleTask).start();
+
+            Set<Integer> relevantIds = searchChainPaths.getValue().stream()
+                    .map(ChainPath::toList)
+                    .flatMap(Collection::stream)
+                    .distinct()
+                    .collect(Collectors.toSet());
+            try {
+                Map<Integer, Module> modules = csvLoader
+                        .loadModules(line -> relevantIds.contains(Module.extractId(line)));
                 setUpReadOnlyTableView(modules);
-            });
-            new Thread(queryModuleTask).start();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
 
         });
         new Thread(searchChainPaths).start();
@@ -161,7 +177,7 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
     }
 
     private void setUpReadOnlyTableView(Map<Integer, Module> modules) {
-
+        System.out.println("start set up tableview ");
         setupTableCellValueFactory(afiidColumn, m -> m.afiId.asObject());
         setupTableCellValueFactory(nodeidColumn, p -> p.nodeId.asObject());
         setupTableCellValueFactory(afitypeidColumn, p -> p.afiTypeId.asObject());
@@ -169,6 +185,7 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
         setupTableCellValueFactory(nameColumn, AfiTableViewModule::nameProperty);
 
         ObservableList<AfiTableViewModule> entities = TableViewFactory.collectAfiEntities().apply(modules);
+        System.out.println(entities.size());
 
         moduleTreeTableView
                 .setRoot(new RecursiveTreeItem<>(entities, RecursiveTreeObject::getChildren));
@@ -215,6 +232,7 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
                     .flatMap(Collection::stream)
                     .distinct()
                     .collect(Collectors.toSet());
+
 
             this.csvLoader = csvLoader;
         }

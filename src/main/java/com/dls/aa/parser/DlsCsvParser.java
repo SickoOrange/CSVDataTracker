@@ -6,12 +6,25 @@
 
 package com.dls.aa.parser;
 
+import static com.dls.aa.model.AfiType.extractAlarm;
+import static com.dls.aa.model.AfiType.extractDescription;
+import static com.dls.aa.model.AfiType.extractIsAlarm;
+import static com.dls.aa.model.AfiType.extractName;
+import static com.dls.aa.model.AfiType.extractPort;
+import static com.dls.aa.model.AfiType.extractPortName;
+import static com.dls.aa.model.AfiType.extractType;
+import static com.dls.aa.model.AfiType.extractTypeId;
+import static com.dls.aa.model.Connection.extactPortName1;
+import static com.dls.aa.model.Connection.extactPortName2;
+import static com.dls.aa.model.Connection.extactPortType1;
+import static com.dls.aa.model.Connection.extactPortType2;
 import static com.google.common.base.Strings.emptyToNull;
 import static org.apache.commons.collections4.IteratorUtils.filteredIterator;
 import static org.apache.commons.collections4.IteratorUtils.transformedIterator;
 import static org.apache.commons.lang3.math.NumberUtils.toInt;
 
 import com.dls.aa.model.AbstractTrend;
+import com.dls.aa.model.AfiType;
 import com.dls.aa.model.Alarm;
 import com.dls.aa.model.AlarmType;
 import com.dls.aa.model.Connection;
@@ -63,6 +76,11 @@ public class DlsCsvParser {
     m.setNode(Module.extractNode(input));
     return m;
   }
+
+  public Iterator<AfiType> loadAfiType(Reader afiTypeReader, CsvToBeanFilter filter) {
+    return objectsIterator(afiTypeReader, filter, DlsCsvParser::lineToAfiType)
+  }
+
 
   /**
    * Reads a Port CSV from AmazonS3 and filters it according to the filter, then returns it as an
@@ -125,7 +143,18 @@ public class DlsCsvParser {
     return new Connection(new PortKey(toInt(line[Connection.AFI1_COLUMN_INDEX]),
         toInt(line[Connection.PORT1_COLUMN_INDEX])),
         new PortKey(toInt(line[Connection.AFI2_COLUMN_INDEX]),
-            toInt(line[Connection.PORT2_COLUMN_INDEX])));
+            toInt(line[Connection.PORT2_COLUMN_INDEX])),
+        extactPortName1(line),
+        extactPortName2(line),
+        extactPortType1(line),
+        extactPortType2(line)
+    );
+  }
+
+  private static AfiType lineToAfiType(String[] line) {
+    return new AfiType(extractTypeId(line), extractName(line), extractPort(line),
+        extractPortName(line), extractType(line), extractIsAlarm(line), extractAlarm(line),
+        extractDescription(line));
   }
 
   /**
@@ -200,4 +229,6 @@ public class DlsCsvParser {
     ICSVParser parser = new SimpleSplittingCsvParser(SEPARATOR);
     return new CSVReaderBuilder(reader).withCSVParser(parser).withSkipLines(1).build();
   }
+
+
 }

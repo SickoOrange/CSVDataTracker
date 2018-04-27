@@ -19,11 +19,23 @@ public class Connection {
   public static final int PORT1_COLUMN_INDEX = 1;
   public static final int AFI2_COLUMN_INDEX = 4;
   public static final int PORT2_COLUMN_INDEX = 5;
+
+  public static final int PORT_NAME1_COLUMN_INDEX = 2;
+  public static final int PORT_NAME2_COLUMN_INDEX = 6;
+  public static final int PORT_TYPE1_COLUMN_INDEX = 3;
+  public static final int PORT_TYPE2_COLUMN_INDEX = 7;
+
+
   private PortKey out;
   private PortKey in;
 
   private Port outPort;
   private Port inPort;
+
+  private String portName1;
+  private String portName2;
+  private String portType1;
+  private String getPortType2;
 
   /**
    * Constructor Sets the <code>{@link PortKey}</code> out and the <code>{@link PortKey}</code> in
@@ -31,11 +43,16 @@ public class Connection {
    * @param out out port of a connection
    * @param in in port of a connection
    */
-  public Connection(PortKey out, PortKey in) {
+  public Connection(PortKey out, PortKey in, String portName1, String portName2, String portType1,
+      String getPortType2) {
     assert out != null;
     assert in != null;
     this.out = out;
     this.in = in;
+    this.portName1 = portName1;
+    this.portName2 = portName2;
+    this.portType1 = portType1;
+    this.getPortType2 = getPortType2;
   }
 
   /**
@@ -76,6 +93,49 @@ public class Connection {
    */
   public static int extractAfi1(String[] line) {
     return toInt(line[AFI1_COLUMN_INDEX]);
+  }
+
+
+  public static String extactPortName1(String[] line) {
+
+    return line[PORT_NAME1_COLUMN_INDEX];
+  }
+
+  public static String extactPortName2(String[] line) {
+    if (line.length <= PORT_NAME2_COLUMN_INDEX) {
+      return "";
+    }
+    return line[PORT_NAME2_COLUMN_INDEX];
+  }
+
+  public static String extactPortType1(String[] line) {
+    if (line.length <= PORT_TYPE1_COLUMN_INDEX) {
+      return "";
+    }
+    return line[PORT_TYPE1_COLUMN_INDEX];
+  }
+
+  public static String extactPortType2(String[] line) {
+    if (line.length <= PORT_TYPE2_COLUMN_INDEX) {
+      return "";
+    }
+    return line[PORT_TYPE2_COLUMN_INDEX];
+  }
+
+  public String getPortName1() {
+    return portName1;
+  }
+
+  public String getPortName2() {
+    return portName2;
+  }
+
+  public String getPortType1() {
+    return portType1;
+  }
+
+  public String getPortType2() {
+    return getPortType2;
   }
 
   /**
@@ -174,6 +234,10 @@ public class Connection {
         ", in=" + in +
         ", outPort=" + outPort +
         ", inPort=" + inPort +
+        ", portName1='" + portName1 + '\'' +
+        ", portName2='" + portName2 + '\'' +
+        ", portType1='" + portType1 + '\'' +
+        ", getPortType2='" + getPortType2 + '\'' +
         '}';
   }
 }

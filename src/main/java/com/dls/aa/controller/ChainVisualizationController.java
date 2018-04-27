@@ -1,5 +1,9 @@
 package com.dls.aa.controller;
 
+import static com.dls.aa.WizardController.CP_LOADER;
+import static com.dls.aa.WizardController.LOADER;
+import static com.dls.aa.tableview.TableViewFactory.setupTableCellValueFactory;
+
 import com.dls.aa.LoaderServiceContainer;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.ChainPath;
@@ -12,37 +16,35 @@ import com.dls.aa.tableview.AfiTableViewModule;
 import com.dls.aa.tableview.TableViewFactory;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.mxgraph.swing.mxGraphComponent;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.action.ActionMethod;
 import io.datafx.controller.flow.action.ActionTrigger;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.StackPane;
-import org.apache.commons.lang3.StringUtils;
-
 import javax.annotation.PostConstruct;
-import javax.swing.*;
-import java.io.IOException;
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import static com.dls.aa.WizardController.CP_LOADER;
-import static com.dls.aa.WizardController.LOADER;
-import static com.dls.aa.tableview.TableViewFactory.setupAfiTableCellValueFactory;
+import javax.swing.SwingUtilities;
+import org.apache.commons.lang3.StringUtils;
 
 
 @ViewController("/fxml/ui/chain_visualization_layout.fxml")
@@ -99,7 +101,7 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
 
     @ActionMethod("loadConnection")
     public void loadConnection() {
-        System.out.println("hello world");
+        System.out.println("load connection for alert and source afi id");
 
         String alertInfo = alertText.getText();
         String sourceInfo = this.sourceText.getText();
@@ -129,9 +131,10 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
                 }
 
                 if (Objects.isNull(connections)) {
-                    connections = csvLoader.loadConnections().collect(Collectors.toList());
-                }
+                    connections = csvLoader.loadConnections(null).collect(Collectors.toList());
 
+                }
+                System.out.println("ss"+connections.size());
                 return chainPathLoader
                         .loadChainPaths(alertAfi, sourceAfi, connections);
             }
@@ -159,11 +162,11 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
 
     private void setUpReadOnlyTableView(Map<Integer, Module> modules) {
 
-        setupAfiTableCellValueFactory(afiidColumn, m -> m.afiId.asObject());
-        setupAfiTableCellValueFactory(nodeidColumn, p -> p.nodeId.asObject());
-        setupAfiTableCellValueFactory(afitypeidColumn, p -> p.afiTypeId.asObject());
-        setupAfiTableCellValueFactory(symbolColumn, AfiTableViewModule::symbolProperty);
-        setupAfiTableCellValueFactory(nameColumn, AfiTableViewModule::nameProperty);
+        setupTableCellValueFactory(afiidColumn, m -> m.afiId.asObject());
+        setupTableCellValueFactory(nodeidColumn, p -> p.nodeId.asObject());
+        setupTableCellValueFactory(afitypeidColumn, p -> p.afiTypeId.asObject());
+        setupTableCellValueFactory(symbolColumn, AfiTableViewModule::symbolProperty);
+        setupTableCellValueFactory(nameColumn, AfiTableViewModule::nameProperty);
 
         ObservableList<AfiTableViewModule> entities = TableViewFactory.collectAfiEntities().apply(modules);
 

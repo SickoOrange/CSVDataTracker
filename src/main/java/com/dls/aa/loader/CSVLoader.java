@@ -1,6 +1,7 @@
 package com.dls.aa.loader;
 
 import com.dls.aa.model.AbstractTrend;
+import com.dls.aa.model.AfiType;
 import com.dls.aa.model.AnalogTrend;
 import com.dls.aa.model.BinaryTrend;
 import com.dls.aa.model.Connection;
@@ -20,6 +21,7 @@ import org.apache.log4j.Logger;
 public class CSVLoader {
 
   public static final String AFI_CSV = "Afi.csv";
+  public static final String AFI_TYPE_CSV = "AfiType.csv";
   public static final String PORTS_CSV = "Ports.csv";
   public static final String CONNECTIONS_CSV = "Connections.csv";
   protected static final String ALARM_CSV = "Alarm.csv";
@@ -36,11 +38,12 @@ public class CSVLoader {
   public static final Logger LOGGER = Logger.getLogger(CSVLoader.class);
 
 
-// TODO: 26.04.2018 module info+ module bean
-//  public loadOriginalModuleInfo(CsvToBeanFilter filter) throws IOException
-
-
-
+  // TODO: 26.04.2018 module info+ module bean
+  public Stream<AfiType> loadAfiType(CsvToBeanFilter filter) throws IOException {
+    String afiTypeCsvPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\" + AFI_TYPE_CSV;
+    Reader afiTypeReader = new FileReader(afiTypeCsvPath);
+    return Utils.iteratorAsStream(getDlsCsvParser().loadAfiType(afiTypeReader, filter));
+  }
 
 
   /**

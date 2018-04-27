@@ -1,66 +1,57 @@
 package com.dls.aa.tableview;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-public class ConnectionTableViewModel {
+public class ConnectionTableViewModel extends RecursiveTreeObject<ConnectionTableViewModel> {
 
-    public final SimpleIntegerProperty afiid1;
-    public final SimpleIntegerProperty afiid2;
-    public final SimpleIntegerProperty portid1;
-    public final SimpleIntegerProperty portid2;
-    public final SimpleStringProperty portName1;
-    public final SimpleStringProperty portName2;
-    public final SimpleStringProperty type1;
-    public final SimpleStringProperty type2;
+  public final SimpleIntegerProperty afiid1;
+  public final SimpleIntegerProperty afiid2;
+  public final SimpleIntegerProperty portid1;
+  public final SimpleIntegerProperty portid2;
 
-    public ConnectionTableViewModel(SimpleIntegerProperty afiid1,
-                                    SimpleIntegerProperty afiid2,
-                                    SimpleIntegerProperty portid1,
-                                    SimpleIntegerProperty portid2,
-                                    SimpleStringProperty portName1,
-                                    SimpleStringProperty portName2,
-                                    SimpleStringProperty type1,
-                                    SimpleStringProperty type2) {
-        this.afiid1 = afiid1;
-        this.afiid2 = afiid2;
-        this.portid1 = portid1;
-        this.portid2 = portid2;
-        this.portName1 = portName1;
-        this.portName2 = portName2;
-        this.type1 = type1;
-        this.type2 = type2;
-    }
+  private final StringProperty portName1;
+  private final StringProperty portName2;
+  private final StringProperty type1;
+  private final StringProperty type2;
 
-    public String getPortName1() {
-        return portName1.get();
-    }
+  ConnectionTableViewModel(int afiid1,
+      int afiid2,
+      int portid1,
+      int portid2,
+      String portName1,
+      String portName2,
+      String type1,
+      String type2) {
+    this.afiid1 = new SimpleIntegerProperty(afiid1);
+    this.afiid2 = new SimpleIntegerProperty(afiid2);
+    this.portid1 = new SimpleIntegerProperty(portid1);
+    this.portid2 = new SimpleIntegerProperty(portid2);
+    this.portName1 = new SimpleStringProperty(portName1);
+    this.portName2 = new SimpleStringProperty(portName2);
+    this.type1 = new SimpleStringProperty(type1);
+    this.type2 = new SimpleStringProperty(type2);
+  }
 
-    public SimpleStringProperty portName1Property() {
-        return portName1;
-    }
 
-    public String getPortName2() {
-        return portName2.get();
-    }
+  public StringProperty portName1Property() {
+    return portName1;
+  }
 
-    public SimpleStringProperty portName2Property() {
-        return portName2;
-    }
 
-    public String getType1() {
-        return type1.get();
-    }
+  public StringProperty portName2Property() {
+    return portName2;
+  }
 
-    public SimpleStringProperty type1Property() {
-        return type1;
-    }
 
-    public String getType2() {
-        return type2.get();
-    }
+  public StringProperty type1Property() {
+    return type1;
+  }
 
-    public SimpleStringProperty type2Property() {
-        return type2;
-    }
+
+  public StringProperty type2Property() {
+    return type2;
+  }
 }

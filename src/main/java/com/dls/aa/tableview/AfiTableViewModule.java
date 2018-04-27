@@ -10,12 +10,12 @@ public class AfiTableViewModule extends RecursiveTreeObject<AfiTableViewModule> 
     public final SimpleIntegerProperty nodeId;
     public final SimpleIntegerProperty afiTypeId;
 
-    final StringProperty symbol;
-    final StringProperty name;
+    private final StringProperty symbol;
+    private final StringProperty name;
 
-    public AfiTableViewModule(int afiId,
-                              int nodeId, int afiTypeId,
-                              String symbol, String name) {
+    AfiTableViewModule(int afiId,
+        int nodeId, int afiTypeId,
+        String symbol, String name) {
         this.afiId = new SimpleIntegerProperty(afiId);
         this.nodeId = new SimpleIntegerProperty(nodeId);
         this.afiTypeId = new SimpleIntegerProperty(afiTypeId);

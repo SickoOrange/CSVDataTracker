@@ -3,6 +3,7 @@ package com.dls.aa.tableview;
 import com.dls.aa.model.AfiType;
 import com.dls.aa.model.Connection;
 import com.dls.aa.model.Module;
+import com.dls.aa.model.Port;
 import com.jfoenix.controls.JFXTreeTableColumn;
 
 import java.util.Collections;
@@ -63,6 +64,19 @@ public class TableViewFactory {
                 .map(afiType -> new AfiTypeTableViewModel(afiType.getTypeid(), afiType.getName(), afiType.getPort(),
                         afiType.getPortname(), afiType.getType(),
                         Boolean.toString(afiType.isAlarm()), afiType.getAlarm(), afiType.getDescription()))
+                .collect(Collectors.collectingAndThen(toList(), FXCollections::observableArrayList));
+    }
+
+    public static Function<List<Port>, ObservableList<PortTableViewModel>> collectPortEntities() {
+        return ports -> ports.stream()
+                .map(port -> new PortTableViewModel(port.getId(),
+                        port.getAfiId(), port.getName(),
+                        port.getSymbol(),
+                        port.getParameter(),
+                        port.getUniqueName(),
+                        port.getDirection().name(),
+                        Boolean.toString(port.isArchive()),
+                        Boolean.toString(port.isAlarm())))
                 .collect(Collectors.collectingAndThen(toList(), FXCollections::observableArrayList));
     }
 }

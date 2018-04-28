@@ -3,41 +3,57 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableColumn?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="775.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
+    <children>
 
-    <JFXTextField fx:id="searchModuleIdAfiTypeIdButton" layoutX="18.0" layoutY="156.0" prefHeight="25.0" prefWidth="161.0" promptText="Search module type id  ..." />
-    <JFXTextField fx:id="searchModuleNameButton" layoutX="203.0" layoutY="156.0" prefHeight="25.0" prefWidth="180.0" promptText="Search module  name ..." />
-    <JFXTextField fx:id="searchConnectionAfiid1Button" layoutX="17.0" layoutY="465.0" prefHeight="25.0" prefWidth="146.0" promptText="Search afiid1..." />
-    <JFXTextField fx:id="searchConnectionAfiid2Button" layoutX="213.0" layoutY="465.0" prefHeight="25.0" prefWidth="146.0" promptText="Search afiid2..." />
-    <JFXTreeTableView fx:id="connectionTable" layoutX="17.0" layoutY="498.0" prefHeight="263.0" prefWidth="1040.0">
-      <columns>
-        <JFXTreeTableColumn fx:id="column1" prefWidth="75.0" text="afiid 1" />
-        <JFXTreeTableColumn fx:id="column2" prefWidth="75.0" text="portid 1" />
-        <JFXTreeTableColumn fx:id="column3" prefWidth="75.0" text="portname 1" />
-        <JFXTreeTableColumn fx:id="column4" prefWidth="75.0" text="type 1" />
+        <JFXTextField fx:id="searchModuleIdAfiTypeIdButton" layoutX="18.0" layoutY="175.0" prefHeight="25.0" prefWidth="161.0" promptText="search afitype id ..." />
+        <JFXTextField fx:id="searchModuleNameButton" layoutX="203.0" layoutY="175.0" prefHeight="25.0" prefWidth="180.0" promptText="Search module  name ..." />
+        <JFXTextField fx:id="searchConnectionAfiid1Button" layoutX="17.0" layoutY="475.0" prefHeight="25.0" prefWidth="146.0" promptText="connection afiid1..." />
+        <JFXTextField fx:id="searchConnectionAfiid2Button" layoutX="213.0" layoutY="475.0" prefHeight="25.0" prefWidth="146.0" promptText="connection afiid2..." />
+        <JFXTreeTableView fx:id="connectionTable" layoutX="17.0" layoutY="510.0" prefHeight="263.0" prefWidth="1040.0">
+            <columns>
+                <JFXTreeTableColumn fx:id="column1" prefWidth="75.0" text="afiid 1" />
+                <JFXTreeTableColumn fx:id="column2" prefWidth="75.0" text="portid 1" />
+                <JFXTreeTableColumn fx:id="column3" prefWidth="75.0" text="portname 1" />
+                <JFXTreeTableColumn fx:id="column4" prefWidth="75.0" text="type 1" />
 
-        <JFXTreeTableColumn fx:id="column5" prefWidth="75.0" text="afiid 2" />
-        <JFXTreeTableColumn fx:id="column6" prefWidth="75.0" text="portid 2" />
-        <JFXTreeTableColumn fx:id="column7" prefWidth="75.0" text="portname 2" />
-        <JFXTreeTableColumn fx:id="column8" prefWidth="75.0" text="type 2" />
-      </columns>
-    </JFXTreeTableView>
-    <JFXTreeTableView fx:id="afiTypeTable" layoutX="17.0" layoutY="195.0" prefHeight="263.0" prefWidth="1040.0">
-      <columns>
-        <JFXTreeTableColumn fx:id="column11" prefWidth="75.0" text="type id" />
-        <JFXTreeTableColumn fx:id="column12" prefWidth="75.0" text="name" />
-        <JFXTreeTableColumn fx:id="column13" prefWidth="75.0" text="port" />
-        <JFXTreeTableColumn fx:id="column14" prefWidth="75.0" text="port name" />
-        <JFXTreeTableColumn fx:id="column15" prefWidth="75.0" text="type" />
-        <JFXTreeTableColumn fx:id="column16" prefWidth="75.0" text="isAlarm" />
-        <JFXTreeTableColumn fx:id="column17" prefWidth="75.0" text="alarm" />
-        <JFXTreeTableColumn fx:id="column18" prefWidth="140.0" text="description" />
-      </columns>
-    </JFXTreeTableView>
-      <JFXTreeTableView fx:id="PortTable" layoutX="17.0" layoutY="85.0" prefHeight="63.0" prefWidth="1040.0" />
-      <JFXTextField fx:id="searchPortNameButton" layoutX="18.0" layoutY="47.0" prefHeight="25.0" prefWidth="161.0" promptText="Port Name" />
-  </children>
+                <JFXTreeTableColumn fx:id="column5" prefWidth="75.0" text="afiid 2" />
+                <JFXTreeTableColumn fx:id="column6" prefWidth="75.0" text="portid 2" />
+                <JFXTreeTableColumn fx:id="column7" prefWidth="75.0" text="portname 2" />
+                <JFXTreeTableColumn fx:id="column8" prefWidth="75.0" text="type 2" />
+            </columns>
+        </JFXTreeTableView>
+        <JFXTreeTableView fx:id="afiTypeTable" layoutX="17.0" layoutY="210.0" prefHeight="263.0" prefWidth="1040.0">
+            <columns>
+                <JFXTreeTableColumn fx:id="column11" prefWidth="75.0" text="type id" />
+                <JFXTreeTableColumn fx:id="column12" prefWidth="100.0" text="name" />
+                <JFXTreeTableColumn fx:id="column13" prefWidth="75.0" text="port" />
+                <JFXTreeTableColumn fx:id="column14" prefWidth="90.0" text="port name" />
+                <JFXTreeTableColumn fx:id="column15" prefWidth="75.0" text="type" />
+                <JFXTreeTableColumn fx:id="column16" prefWidth="75.0" text="isAlarm" />
+                <JFXTreeTableColumn fx:id="column17" prefWidth="75.0" text="alarm" />
+                <JFXTreeTableColumn fx:id="column18" prefWidth="140.0" text="description" />
+            </columns>
+        </JFXTreeTableView>
+        <JFXTreeTableView fx:id="portTableView" layoutX="17.0" layoutY="70.0" prefHeight="100.0" prefWidth="1040.0">
+            <columns>
+                <JFXTreeTableColumn fx:id="column21" prefWidth="75.0" text="id" />
+                <JFXTreeTableColumn fx:id="column22" prefWidth="75.0" text="afiid" />
+                <JFXTreeTableColumn fx:id="column23" prefWidth="75.0" text="name" />
+                <JFXTreeTableColumn fx:id="column24" prefWidth="100.0" text="symbol" />
+                <JFXTreeTableColumn fx:id="column25" prefWidth="75.0" text="parameter" />
+                <JFXTreeTableColumn fx:id="column26" prefWidth="190.0" text="unique name" />
+                <JFXTreeTableColumn fx:id="column27" prefWidth="75.0" text="direction" />
+                <JFXTreeTableColumn fx:id="column28" prefWidth="140.0" text="is archived" />
+                <JFXTreeTableColumn fx:id="column29" prefWidth="140.0" text="is alarm" />
+            </columns>
+        </JFXTreeTableView>
+        <JFXTextField fx:id="searchPortNameButton" layoutX="18.0" layoutY="30.0" prefHeight="25.0" prefWidth="161.0" promptText="Port Name" />
+        <Label alignment="CENTER" layoutX="990.0" layoutY="43.0" prefHeight="25.0" prefWidth="69.0" text="Ports.csv" />
+        <Label alignment="CENTER" layoutX="978.0" layoutY="188.0" prefHeight="25.0" prefWidth="81.0" text="AfiType.csv" />
+        <Label alignment="CENTER" layoutX="962.0" layoutY="485.0" prefHeight="25.0" prefWidth="100.0" text="Connections.csv" />
+    </children>
 </AnchorPane>

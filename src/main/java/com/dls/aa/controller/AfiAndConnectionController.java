@@ -14,6 +14,7 @@ import com.dls.aa.model.Connection;
 import com.dls.aa.model.Port;
 import com.dls.aa.tableview.AfiTypeTableViewModel;
 import com.dls.aa.tableview.ConnectionTableViewModel;
+import com.dls.aa.tableview.PortTableViewModel;
 import com.dls.aa.tableview.TableViewFactory;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -86,7 +87,33 @@ public class AfiAndConnectionController {
     private JFXTreeTableColumn<AfiTypeTableViewModel, String> column18;
 
     @FXML
-    private JFXTreeTableView<?> portTable;
+    private JFXTreeTableView<PortTableViewModel> portTableView;
+
+
+    @FXML
+    private JFXTreeTableColumn<PortTableViewModel, Integer> column21;
+    @FXML
+    private JFXTreeTableColumn<PortTableViewModel, Integer> column22;
+
+    @FXML
+    private JFXTreeTableColumn<PortTableViewModel, String> column23;
+
+    @FXML
+    private JFXTreeTableColumn<PortTableViewModel, String> column24;
+    @FXML
+    private JFXTreeTableColumn<PortTableViewModel, String> column25;
+    @FXML
+    private JFXTreeTableColumn<PortTableViewModel, String> column26;
+
+    @FXML
+    private JFXTreeTableColumn<PortTableViewModel, String> column27;
+
+    @FXML
+    private JFXTreeTableColumn<PortTableViewModel, String> column28;
+
+    @FXML
+    private JFXTreeTableColumn<PortTableViewModel, String> column29;
+
 
     @FXML
     private JFXTextField searchPortNameButton;
@@ -125,11 +152,7 @@ public class AfiAndConnectionController {
                         return Collections.emptyList();
                     }
                 });
-                collectPortsWithPortName.setOnSucceeded(e -> {
-                    List<Port> value = collectPortsWithPortName.getValue();
-                    System.out.println(value.size());
-                    // TODO: 28.04.2018 set up table view
-                });
+                collectPortsWithPortName.setOnSucceeded(e -> loadingPortToTableView(collectPortsWithPortName.getValue()));
                 new Thread(collectPortsWithPortName).start();
             }
         });
@@ -209,6 +232,26 @@ public class AfiAndConnectionController {
                 new Thread(collectConnectionsById).start();
             }
         });
+    }
+
+    private void loadingPortToTableView(List<Port> ports) {
+        setupTableCellValueFactory(column21, p -> p.id.asObject());
+        setupTableCellValueFactory(column22, p -> p.afiid.asObject());
+        setupTableCellValueFactory(column23, PortTableViewModel::nameProperty);
+        setupTableCellValueFactory(column24, PortTableViewModel::symbolProperty);
+        setupTableCellValueFactory(column25, PortTableViewModel::parameterProperty);
+        setupTableCellValueFactory(column26, PortTableViewModel::uniqueNameProperty);
+        setupTableCellValueFactory(column27, PortTableViewModel::directionProperty);
+        setupTableCellValueFactory(column28, PortTableViewModel::isArchiveProperty);
+        setupTableCellValueFactory(column29, PortTableViewModel::isAlarmProperty);
+
+        ObservableList<PortTableViewModel> portEntities = TableViewFactory
+                .collectPortEntities()
+                .apply(ports);
+
+        portTableView.setRoot(new RecursiveTreeItem<>(portEntities,
+                RecursiveTreeObject::getChildren));
+        portTableView.setShowRoot(false);
     }
 
 

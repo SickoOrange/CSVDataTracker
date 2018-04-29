@@ -32,7 +32,7 @@
          </toggleGroup>
 </JFXRadioButton>
 <JFXRadioButton fx:id="radio_2" layoutX="135.0" layoutY="80.0" selected="false" styleClass="custom-jfx-radio-button" text="Port Name" toggleGroup="$toggleGroup" />
-      <Label alignment="CENTER" layoutX="386.0" layoutY="526.0" prefHeight="17.0" prefWidth="227.0" text="Chain Path Visualization">
+      <Label alignment="CENTER" layoutX="424.0" layoutY="522.0" prefHeight="17.0" prefWidth="227.0" text="Chain Path Visualization">
          <font>
             <Font name="Arial" size="14.0" />
          </font>

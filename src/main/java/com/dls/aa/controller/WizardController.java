@@ -8,10 +8,6 @@ import static io.datafx.controller.flow.container.ContainerAnimations.ZOOM_OUT;
 
 import com.dls.aa.ExtendedAnimatedFlowContainer;
 import com.dls.aa.LoaderServiceContainer;
-import com.dls.aa.controller.ChainVisualizationController;
-import com.dls.aa.controller.DefautContentController;
-import com.dls.aa.controller.AfiAndConnectionController;
-import com.dls.aa.controller.PortController;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.service.ChainPathLoader;
 import com.jfoenix.controls.JFXButton;
@@ -70,7 +66,7 @@ public class WizardController {
 
         bindNodeToController(naviToChainVisualization, ChainVisualizationController.class, innerFlow);
         bindNodeToController(naviToAfiAndConnection, AfiAndConnectionController.class, innerFlow);
-        bindNodeToController(naviToPort, PortController.class, innerFlow);
+        bindNodeToController(naviToPort, ModuleStructureController.class, innerFlow);
         Duration containerAnimationDuration = Duration.millis(450);
         centerContainer.getChildren()
                 .add(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration,

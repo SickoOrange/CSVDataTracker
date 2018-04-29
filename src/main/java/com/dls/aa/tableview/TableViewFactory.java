@@ -79,4 +79,6 @@ public class TableViewFactory {
                         Boolean.toString(port.isAlarm())))
                 .collect(Collectors.collectingAndThen(toList(), FXCollections::observableArrayList));
     }
+
+
 }

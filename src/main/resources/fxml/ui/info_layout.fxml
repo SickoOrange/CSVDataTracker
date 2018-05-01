@@ -18,7 +18,7 @@
                       prefWidth="146.0" promptText="connection afiid1..."/>
         <JFXTextField fx:id="searchConnectionAfiid2Button" layoutX="213.0" layoutY="475.0" prefHeight="25.0"
                       prefWidth="146.0" promptText="connection afiid2..."/>
-        <JFXTreeTableView fx:id="connectionTable" layoutX="17.0" layoutY="510.0" prefHeight="263.0" prefWidth="1040.0">
+        <JFXTreeTableView fx:id="connectionTable" layoutX="17.0" layoutY="510.0" prefHeight="263.0" prefWidth="1040.0" AnchorPane.rightAnchor="17" AnchorPane.leftAnchor="17">
             <columns>
                 <JFXTreeTableColumn fx:id="column1" prefWidth="75.0" text="afiid 1"/>
                 <JFXTreeTableColumn fx:id="column2" prefWidth="75.0" text="portid 1"/>
@@ -31,7 +31,7 @@
                 <JFXTreeTableColumn fx:id="column8" prefWidth="75.0" text="type 2"/>
             </columns>
         </JFXTreeTableView>
-        <JFXTreeTableView fx:id="afiTypeTable" layoutX="17.0" layoutY="210.0" prefHeight="263.0" prefWidth="1040.0">
+        <JFXTreeTableView fx:id="afiTypeTable" layoutX="17.0" layoutY="210.0" prefHeight="263.0" prefWidth="1040.0" AnchorPane.rightAnchor="17" AnchorPane.leftAnchor="17">
             <columns>
                 <JFXTreeTableColumn fx:id="column11" prefWidth="75.0" text="type id"/>
                 <JFXTreeTableColumn fx:id="column12" prefWidth="100.0" text="name"/>
@@ -43,7 +43,7 @@
                 <JFXTreeTableColumn fx:id="column18" prefWidth="140.0" text="description"/>
             </columns>
         </JFXTreeTableView>
-        <JFXTreeTableView fx:id="portTableView" layoutX="17.0" layoutY="70.0" prefHeight="100.0" prefWidth="1040.0">
+        <JFXTreeTableView fx:id="portTableView" layoutX="17.0" layoutY="70.0" prefHeight="100.0" prefWidth="1040.0" AnchorPane.rightAnchor="17" AnchorPane.leftAnchor="17">
             <columns>
                 <JFXTreeTableColumn fx:id="column21" prefWidth="75.0" text="id"/>
                 <JFXTreeTableColumn fx:id="column22" prefWidth="75.0" text="afiid"/>

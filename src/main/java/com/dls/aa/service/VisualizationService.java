@@ -1,20 +1,26 @@
 package com.dls.aa.service;
 
+import com.dls.aa.model.Connection;
 import com.google.common.collect.Lists;
-import com.mxgraph.layout.*;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
+import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxMorphing;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraph;
-import sun.reflect.ReflectionFactory;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class VisualizationService {
 
-    public mxGraphComponent netWorkVisualization() {
 
+
+
+    public mxGraphComponent moduleStructureVisualization(List<Connection> conns) {
 
         //create the trace graph
         mxGraph graph = new mxGraph();
@@ -25,33 +31,36 @@ public class VisualizationService {
         graph.getModel().beginUpdate();
 
 
-        Object o1 = graph
-                .insertVertex(parent, null, "o1", 20, 20, 80, 30);
-        Object o2 = graph
-                .insertVertex(parent, null, "o2", 20, 20, 80, 30);
-        Object o3 = graph
-                .insertVertex(parent, null, "o3", 20, 20, 80, 30);
-        Object o4 = graph
-                .insertVertex(parent, null, "o4", 20, 20, 80, 30);
-        Object o5 = graph
-                .insertVertex(parent, null, "o5", 20, 20, 80, 30);
 
-        Object o6 = graph
-                .insertVertex(parent, null, "o6", 20, 20, 80, 30);
 
-        Object o7 = graph
-                .insertVertex(parent, null, "o7", 20, 20, 80, 30);
+        //create vertexs,
+        Map<Integer, Object> vertexsMapping = conns.stream()
+                .map(conn -> Lists.newArrayList(conn.getIn().getAfiId(), conn.getOut().getAfiId()))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet())
+                .stream()
+                .collect(Collectors.toMap(Function.identity(),
+                        id -> graph.insertVertex(parent,
+                                null,
+                                String.valueOf(id),
+                                20,
+                                20,
+                                60,
+                                30)));
 
-        graph.insertEdge(parent, null, null, o1, o2);
-        graph.insertEdge(parent, null, null, o1, o3);
-        graph.insertEdge(parent, null, null, o1, o6);
-        graph.insertEdge(parent, null, null, o1, o7);
-        graph.insertEdge(parent, null, null, o3, o4);
-        graph.insertEdge(parent, null, null, o3, o5);
-        graph.insertEdge(parent, null, null, o2, o3);
+        //create connections
+
+        conns.forEach(conn ->
+                graph.insertEdge(parent,
+                        null,
+                        null,
+                        vertexsMapping.get(conn.getIn().getAfiId()),
+                        vertexsMapping.get(conn.getOut().getAfiId())));
 
 
         graph.getModel().endUpdate();
+
+
 
         //define layout
         mxIGraphLayout layout = new mxHierarchicalLayout(graph);
@@ -75,8 +84,8 @@ public class VisualizationService {
         morphing.startAnimation();
 
 
+
+
         return graphComponent;
     }
-
-
 }

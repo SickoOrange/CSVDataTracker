@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="730.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXTextField fx:id="loadTextField" layoutX="35.0" layoutY="28.0" prefHeight="25.0" prefWidth="237.0" promptText="Port Unique Name..." />
-      <StackPane fx:id="visualizationPane" layoutX="35.0" layoutY="117.0" prefHeight="579.0" prefWidth="965.0" />
+      <StackPane fx:id="visualizationPane" layoutX="20.0" layoutY="66.0" prefHeight="657.0" prefWidth="1035.0" />
       <JFXButton fx:id="startVisualization" layoutX="338.0" layoutY="28.0" prefHeight="25.0" prefWidth="90.0" text="Load" />
    </children>
 </AnchorPane>

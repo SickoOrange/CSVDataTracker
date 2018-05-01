@@ -1,34 +1,37 @@
 package com.dls.aa.controller;
 
 
-import com.dls.aa.LoaderServiceContainer;
+import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.Connection;
 import com.dls.aa.service.VisualizationService;
 import com.google.common.collect.Lists;
 import com.jfoenix.controls.JFXButton;
 import com.mxgraph.swing.mxGraphComponent;
-import io.datafx.controller.ViewController;
-import io.datafx.controller.flow.action.ActionMethod;
-import io.datafx.controller.flow.action.ActionTrigger;
 import javafx.embed.swing.SwingNode;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-import static com.dls.aa.controller.WizardController.LOADER;
+import static com.dls.aa.controller.DashBoardController.LOADER;
 
-@ViewController("/fxml/ui/module_structure_layout.fxml")
-public class ModuleStructureController {
+
+public class ModuleStructureController implements Initializable {
 
 
     @FXML
@@ -37,61 +40,12 @@ public class ModuleStructureController {
     @FXML
     private TextField search_tf;
 
-    @FXML
-    @ActionTrigger("startVisualization")
-    private JFXButton startVisualization;
     private CSVLoader csvLoader;
-
-
-    @FXML
-    @ActionTrigger("hide")
-    private JFXButton hide;
-
-    @FXML
-    @ActionTrigger("show")
-    private JFXButton show;
 
 
     private final static int MAX_DEPTH = 7;
     private List<Connection> connections;
 
-
-    @PostConstruct
-    public void init() {
-        csvLoader = (CSVLoader) LoaderServiceContainer.getInstance().getServicesContains().get(LOADER);
-
-    }
-
-    @ActionMethod("hide")
-    public void hide() {
-        visualizationPane.setVisible(false);
-        System.out.println("hide");
-    }
-
-    @ActionMethod("show")
-    public void show() {
-        System.out.println("show");
-        visualizationPane.setVisible(true);
-    }
-
-
-    @ActionMethod("startVisualization")
-    public void onClick() throws IOException {
-        System.out.println("start visualization");
-        String s = search_tf.getText();
-
-        if (NumberUtils.isParsable(s)) {
-            int afiid2 = NumberUtils.toInt(s);
-            if (Objects.isNull(connections) || connections.isEmpty()) {
-                connections = csvLoader.loadConnections().collect(Collectors.toList());
-            }
-            ArrayList<Connection> conns = Lists.newArrayList();
-            collectConnectionByAfiid(connections, conns, afiid2, 0);
-            moduleStructureVisualization(conns);
-        }
-
-
-    }
 
     private void moduleStructureVisualization(ArrayList<Connection> conns) {
         visualizationPane.getChildren().clear();
@@ -115,4 +69,28 @@ public class ModuleStructureController {
         return 0;
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesContains().get(LOADER);
+        search_tf.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                System.out.println("start to load module structure ");
+                String s = search_tf.getText();
+
+                if (NumberUtils.isParsable(s)) {
+                    int afiid2 = NumberUtils.toInt(s);
+                    if (Objects.isNull(connections) || connections.isEmpty()) {
+                        try {
+                            connections = csvLoader.loadConnections().collect(Collectors.toList());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    ArrayList<Connection> conns = Lists.newArrayList();
+                    collectConnectionByAfiid(connections, conns, afiid2, 0);
+                    moduleStructureVisualization(conns);
+                }
+            }
+        });
+    }
 }

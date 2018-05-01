@@ -7,7 +7,7 @@ package com.dls.aa.controller;/*
 import static com.dls.aa.tableview.TableViewFactory.setupTableCellValueFactory;
 
 import com.dls.aa.AsyncTaskContainer;
-import com.dls.aa.LoaderServiceContainer;
+import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.AfiType;
 import com.dls.aa.model.Connection;
@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
 
 import javax.annotation.PostConstruct;
 
@@ -138,8 +137,8 @@ public class AfiAndConnectionController {
 
     @PostConstruct
     public void init() {
-        servicesContains = LoaderServiceContainer.getInstance().getServicesContains();
-        csvLoader = (CSVLoader) servicesContains.get(WizardController.LOADER);
+        servicesContains = ServiceContainer.getInstance().getServicesContains();
+        csvLoader = (CSVLoader) servicesContains.get(DashBoardController.LOADER);
 
         searchPortNameButton.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {

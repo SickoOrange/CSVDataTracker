@@ -42,6 +42,16 @@ public class ModuleStructureController {
     private JFXButton startVisualization;
     private CSVLoader csvLoader;
 
+
+    @FXML
+    @ActionTrigger("hide")
+    private JFXButton hide;
+
+    @FXML
+    @ActionTrigger("show")
+    private JFXButton show;
+
+
     private final static int MAX_DEPTH = 7;
     private List<Connection> connections;
 
@@ -51,6 +61,19 @@ public class ModuleStructureController {
         csvLoader = (CSVLoader) LoaderServiceContainer.getInstance().getServicesContains().get(LOADER);
 
     }
+
+    @ActionMethod("hide")
+    public void hide() {
+        visualizationPane.setVisible(false);
+        System.out.println("hide");
+    }
+
+    @ActionMethod("show")
+    public void show() {
+        System.out.println("show");
+        visualizationPane.setVisible(true);
+    }
+
 
     @ActionMethod("startVisualization")
     public void onClick() throws IOException {

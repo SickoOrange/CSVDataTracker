@@ -29,13 +29,15 @@
 
 .lblIcon {
     -fx-background-color: #F1F5F8;
+    -fx-background-radius: 100px;
 }
 
 .lblIcon:hover {
     -fx-background-color: #F1F5F8;
-    -fx-background-radius: 0px;
+    -fx-background-radius: 100px;
     -fx-border-color: #E33461;
     -fx-border-radius: 0px;
+    -fx-border-insets: 0px,0px,10px,0px;
     -fx-border-width: 0px 0px 2px 0px;
 }
 

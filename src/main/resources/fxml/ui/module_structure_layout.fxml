@@ -26,5 +26,7 @@
             <TextField fx:id="search_tf" prefHeight="25.0" prefWidth="220.0" promptText="Search...    (afiid)" style="-fx-background-color: transparent;" />
          </children>
       </HBox>
+      <JFXButton fx:id="hide" layoutX="427.0" layoutY="52.0" text="hide" />
+      <JFXButton fx:id="show" layoutX="517.0" layoutY="52.0" text="show" />
    </children>
 </AnchorPane>

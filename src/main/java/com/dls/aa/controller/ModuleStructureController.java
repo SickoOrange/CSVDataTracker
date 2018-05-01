@@ -1,6 +1,7 @@
 package com.dls.aa.controller;
 
 
+import com.dls.aa.Main;
 import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.Connection;
@@ -8,6 +9,7 @@ import com.dls.aa.service.VisualizationService;
 import com.google.common.collect.Lists;
 import com.jfoenix.controls.JFXButton;
 import com.mxgraph.swing.mxGraphComponent;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

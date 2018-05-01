@@ -8,6 +8,7 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxMorphing;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraph;
+import com.mxgraph.view.mxStylesheet;
 
 import java.util.Collection;
 import java.util.List;
@@ -46,6 +47,7 @@ public class VisualizationService {
                 return false;
             }
         };
+
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
 
 

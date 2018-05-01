@@ -91,7 +91,7 @@
                         <Insets left="10.0" top="10.0" />
                     </VBox.margin>
                 </JFXButton>
-                <Label prefHeight="35.0" prefWidth="180.0" text="Visualization" textFill="#98a0a6">
+                <Label prefHeight="35.0" prefWidth="180.0" text="Visualization Analisys" textFill="#98a0a6">
                     <VBox.margin>
                         <Insets left="12.0" top="20.0" />
                     </VBox.margin>
@@ -110,7 +110,7 @@
                         <Insets left="10.0" top="10.0" />
                     </VBox.margin>
                 </JFXButton>
-                <JFXButton fx:id="chainPathBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onChainPathBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Chain Path" textFill="#98a0a6">
+                <JFXButton fx:id="chainPathBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onChainPathBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Chain Path Analysis" textFill="#98a0a6">
                     <graphic>
                         <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                     </graphic>
@@ -121,7 +121,7 @@
                         <Insets left="10.0" top="10.0" />
                     </VBox.margin>
                 </JFXButton>
-            <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Trens Analysis" textFill="#98a0a6">
+            <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="BinaryTrends Analysis" textFill="#98a0a6">
                <graphic>
                   <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                </graphic>

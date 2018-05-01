@@ -24,19 +24,21 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import io.datafx.controller.ViewController;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
 
 import javax.annotation.PostConstruct;
 
-@ViewController("/fxml/ui/afi_connection_content_layout.fxml")
-public class AfiAndConnectionController {
+public class InfoController implements Initializable {
 
     @FXML
     private JFXTreeTableView<ConnectionTableViewModel> connectionTable;
@@ -135,8 +137,8 @@ public class AfiAndConnectionController {
 
     private CSVLoader csvLoader;
 
-    @PostConstruct
-    public void init() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         servicesContains = ServiceContainer.getInstance().getServicesContains();
         csvLoader = (CSVLoader) servicesContains.get(DashBoardController.LOADER);
 
@@ -234,6 +236,7 @@ public class AfiAndConnectionController {
         });
     }
 
+
     private void loadingPortToTableView(List<Port> ports) {
         setupTableCellValueFactory(column21, p -> p.id.asObject());
         setupTableCellValueFactory(column22, p -> p.afiid.asObject());
@@ -298,6 +301,7 @@ public class AfiAndConnectionController {
         connectionTable.setShowRoot(false);
 
     }
+
 
 
 }

@@ -23,10 +23,12 @@ public class Main extends Application {
     private ViewFlowContext flowContext;
 
     public static final Logger LOGGER = Logger.getLogger(Main.class);
+    public static Stage stage;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        Main.stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("/main_stage.fxml"));
         primaryStage.setTitle("DLS Visualization");
         Scene scene = new Scene(root);

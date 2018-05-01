@@ -15,28 +15,28 @@ import org.apache.log4j.Logger;
 
 public class Main extends Application {
 
-  @FXMLViewFlowContext
-  private ViewFlowContext flowContext;
+    @FXMLViewFlowContext
+    private ViewFlowContext flowContext;
 
-  public static final Logger LOGGER = Logger.getLogger(Main.class);
+    public static final Logger LOGGER = Logger.getLogger(Main.class);
 
-  @Override
-  public void start(Stage primaryStage) throws Exception {
-    Flow flow = new Flow(WizardController.class);
-    DefaultFlowContainer container = new DefaultFlowContainer();
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Flow flow = new Flow(WizardController.class);
+        DefaultFlowContainer container = new DefaultFlowContainer();
 
-    flowContext = new ViewFlowContext();
-    flowContext.register("Stage", primaryStage);
-    flow.createHandler(flowContext).start(container);
+        flowContext = new ViewFlowContext();
+        flowContext.register("Stage", primaryStage);
+        flow.createHandler(flowContext).start(container);
 
-    JFXDecorator decorator = new JFXDecorator(primaryStage, container.getView());
-    decorator.setText("hello world");
-    decorator.setCustomMaximize(true);
-    decorator.setGraphic(new SVGGlyph(""));
+        JFXDecorator decorator = new JFXDecorator(primaryStage, container.getView());
+        decorator.setText("hello world");
+        decorator.setCustomMaximize(true);
+        decorator.setGraphic(new SVGGlyph(""));
 
-    primaryStage.setTitle("DLS CSV Visualization");
-    double width = 1280;
-    double height = 800;
+        primaryStage.setTitle("DLS CSV Visualization");
+        double width = 1280;
+        double height = 800;
 //    try {
 //      Rectangle2D bounds = Screen.getScreens().get(0).getBounds();
 //      width = bounds.getWidth() / 2.5;
@@ -44,18 +44,20 @@ public class Main extends Application {
 //    } catch (Exception e) {
 //    }
 
-    Scene scene = new Scene(decorator, width, height);
-    final ObservableList<String> stylesheets = scene.getStylesheets();
-    stylesheets.addAll(Main.class.getResource("/css/jfoenix-fonts.css").toExternalForm(),
-                       Main.class.getResource("/css/jfoenix-design.css").toExternalForm(),
-                       Main.class.getResource("/css/jfoenix-main-demo.css").toExternalForm());
-    primaryStage.setScene(scene);
-    primaryStage.show();
+        Scene scene = new Scene(decorator, width, height);
+        final ObservableList<String> stylesheets = scene.getStylesheets();
+//    stylesheets.addAll(Main.class.getResource("/css/jfoenix-fonts.css").toExternalForm(),
+//                       Main.class.getResource("/css/jfoenix-design.css").toExternalForm(),
+//                       Main.class.getResource("/css/jfoenix-main-demo.css").toExternalForm());
+        stylesheets.addAll(Main.class.getResource("/css/stylesheet.css").toExternalForm());
 
-  }
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+    }
 
 
-  public static void main(String[] args) {
-    launch(args);
-  }
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

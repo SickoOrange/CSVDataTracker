@@ -37,16 +37,16 @@ public class WizardController {
     private ViewFlowContext context;
 
     @FXML
-    @ActionTrigger("naviToChainVisualization")
-    private JFXButton naviToChainVisualization;
+    @ActionTrigger("chainPathBtn")
+    private JFXButton chainPathBtn;
 
     @FXML
     @ActionTrigger("naviToAfiAndConnection")
     private JFXButton naviToAfiAndConnection;
 
     @FXML
-    @ActionTrigger("naviToPort")
-    private JFXButton naviToPort;
+    @ActionTrigger("moduleStructureBtn")
+    private JFXButton moduleStructureBtn;
 
     @FXML
     private StackPane centerContainer;
@@ -64,9 +64,9 @@ public class WizardController {
         context.register("ContentFlow", innerFlow);
         context.register("ContentPane", centerContainer);
 
-        bindNodeToController(naviToChainVisualization, ChainVisualizationController.class, innerFlow);
+        bindNodeToController(chainPathBtn, ChainVisualizationController.class, innerFlow);
         bindNodeToController(naviToAfiAndConnection, AfiAndConnectionController.class, innerFlow);
-        bindNodeToController(naviToPort, ModuleStructureController.class, innerFlow);
+        bindNodeToController(moduleStructureBtn, ModuleStructureController.class, innerFlow);
         Duration containerAnimationDuration = Duration.millis(450);
         centerContainer.getChildren()
                 .add(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration,
@@ -85,11 +85,11 @@ public class WizardController {
         flow.withGlobalLink(node.getId(), controllerClass);
     }
 
-    @ActionMethod("naviToChainVisualization")
+    @ActionMethod("chainPathBtn")
     public void onNaviToChainVisualizationClick() {
         new Thread(() -> Platform.runLater(() -> {
             try {
-                flowHandler.handle("naviToChainVisualization");
+                flowHandler.handle("chainPathBtn");
             } catch (VetoException | FlowException e) {
                 e.printStackTrace();
             }
@@ -107,11 +107,11 @@ public class WizardController {
         })).start();
     }
 
-    @ActionMethod("naviToPort")
+    @ActionMethod("moduleStructureBtn")
     public void onNaviToPortClick() {
         new Thread(() -> Platform.runLater(() -> {
             try {
-                flowHandler.handle("naviToPort");
+                flowHandler.handle("moduleStructureBtn");
             } catch (VetoException | FlowException e) {
                 e.printStackTrace();
             }

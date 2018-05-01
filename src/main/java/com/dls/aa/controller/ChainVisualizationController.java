@@ -41,6 +41,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.StackPane;
@@ -62,11 +63,11 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
     private JFXButton loadConnection;
 
     @FXML
-    private JFXTextField alertText;
+    private TextField search_alert;
 
 
     @FXML
-    private JFXTextField sourceText;
+    private TextField search_source;
 
     @FXML
     private StackPane visualizationPane;
@@ -107,8 +108,8 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
     public void loadConnection() {
         System.out.println("load connection for alert and source afi id");
 
-        String alertInfo = alertText.getText();
-        String sourceInfo = this.sourceText.getText();
+        String alertInfo = search_alert.getText();
+        String sourceInfo = this.search_source.getText();
 
         Task<List<ChainPath>> searchChainPaths = new Task<List<ChainPath>>() {
             @Override

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="800.0" prefWidth="180.0" styleClass="parent" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+    <effect>
+        <DropShadow color="#ddd8d8" />
+    </effect>
+    <children>
+        <FontAwesomeIconView glyphName="INSTAGRAM" glyphStyle="-fx-fill:#98A0A6;" layoutX="14.0" layoutY="70.0" size="2em" />
+        <Label layoutX="35.0" layoutY="50.0" text=" DLS Visualization" textFill="#98a0a6">
+            <font>
+                <Font name="Century Gothic" size="18.0" />
+            </font>
+        </Label>
+
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="80.0" layoutY="738.0" prefHeight="40.0" prefWidth="40.0" styleClass="lblIcon">
+            <graphic>
+                <FontAwesomeIconView glyphName="GEAR" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+            </graphic>
+        </Label>
+        <VBox alignment="CENTER_LEFT" layoutY="90.0" prefHeight="400.0" prefWidth="180.0">
+            <children>
+            <Label prefHeight="35.0" prefWidth="180.0" text="Module CSV" textFill="#98a0a6">
+               <VBox.margin>
+                  <Insets left="12.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </Label>
+                <JFXButton fx:id="naviToAfiAndConnection" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="170.0" ripplerFill="#ff788a" styleClass="buttons" text="Feed" textFill="#98a0a6">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="HOME" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                    </graphic>
+                    <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Century Gothic" size="14.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton alignment="BASELINE_LEFT" layoutX="20.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="170.0" ripplerFill="#ff788a" styleClass="buttons" text="Afi Type" textFill="#98a0a6">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                    </graphic>
+                    <font>
+                        <Font name="Century Gothic" size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                    </VBox.margin>
+                </JFXButton>
+            <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="170.0" ripplerFill="#ff788a" styleClass="buttons" text="Afi" textFill="#98a0a6">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+               </graphic>
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="170.0" ripplerFill="#ff788a" styleClass="buttons" text="Ports" textFill="#98a0a6">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+               </graphic>
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="170.0" ripplerFill="#ff788a" styleClass="buttons" text="Connections" textFill="#98a0a6">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+               </graphic>
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXButton>
+            <Label prefHeight="35.0" prefWidth="180.0" text="Visualization" textFill="#98a0a6">
+               <VBox.margin>
+                  <Insets left="12.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="chainPathBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="170.0" ripplerFill="#ff788a" styleClass="buttons" text="Chain Path" textFill="#98a0a6">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+               </graphic>
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="moduleStructureBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="170.0" ripplerFill="#ff788a" styleClass="buttons" text="Module Structure" textFill="#98a0a6">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+               </graphic>
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXButton>
+            </children>
+        </VBox>
+    </children>
+
+
+</Pane>

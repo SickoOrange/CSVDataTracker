@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
 <AnchorPane prefHeight="730.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXTextField fx:id="loadTextField" layoutX="35.0" layoutY="28.0" prefHeight="25.0" prefWidth="237.0" promptText="Port Unique Name..." />
-      <StackPane fx:id="visualizationPane" layoutX="20.0" layoutY="66.0" prefHeight="657.0" prefWidth="1035.0" />
-      <JFXButton fx:id="startVisualization" layoutX="338.0" layoutY="28.0" prefHeight="25.0" prefWidth="90.0" text="Load" />
+      <StackPane fx:id="visualizationPane" layoutX="19.0" layoutY="90.0" prefHeight="657.0" prefWidth="1035.0" />
+      <JFXButton fx:id="startVisualization" layoutX="288.0" layoutY="52.0" prefHeight="25.0" prefWidth="90.0" text="Load" />
+      <HBox alignment="CENTER_LEFT" layoutX="19.0" layoutY="47.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+         <effect>
+            <DropShadow color="#eee2e2" />
+         </effect>
+         <children>
+            <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </FontAwesomeIconView>
+            <TextField fx:id="search_tf" prefHeight="25.0" prefWidth="220.0" promptText="Search...    (afiid)" style="-fx-background-color: transparent;" />
+         </children>
+      </HBox>
+      <JFXButton fx:id="hide" layoutX="427.0" layoutY="52.0" text="hide" />
+      <JFXButton fx:id="show" layoutX="517.0" layoutY="52.0" text="show" />
    </children>
 </AnchorPane>

@@ -7,23 +7,22 @@ import com.dls.aa.model.Connection;
 import com.dls.aa.service.VisualizationService;
 import com.google.common.collect.Lists;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import com.mxgraph.swing.mxGraphComponent;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.action.ActionMethod;
 import io.datafx.controller.flow.action.ActionTrigger;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
-
-import java.awt.*;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.dls.aa.controller.WizardController.LOADER;
@@ -36,12 +35,22 @@ public class ModuleStructureController {
     private StackPane visualizationPane;
 
     @FXML
-    private JFXTextField loadTextField;
+    private TextField search_tf;
 
     @FXML
     @ActionTrigger("startVisualization")
     private JFXButton startVisualization;
     private CSVLoader csvLoader;
+
+
+    @FXML
+    @ActionTrigger("hide")
+    private JFXButton hide;
+
+    @FXML
+    @ActionTrigger("show")
+    private JFXButton show;
+
 
     private final static int MAX_DEPTH = 7;
     private List<Connection> connections;
@@ -53,10 +62,23 @@ public class ModuleStructureController {
 
     }
 
+    @ActionMethod("hide")
+    public void hide() {
+        visualizationPane.setVisible(false);
+        System.out.println("hide");
+    }
+
+    @ActionMethod("show")
+    public void show() {
+        System.out.println("show");
+        visualizationPane.setVisible(true);
+    }
+
+
     @ActionMethod("startVisualization")
     public void onClick() throws IOException {
         System.out.println("start visualization");
-        String s = loadTextField.getText();
+        String s = search_tf.getText();
 
         if (NumberUtils.isParsable(s)) {
             int afiid2 = NumberUtils.toInt(s);

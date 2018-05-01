@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <effect>
+        <DropShadow color="#eee2e2" />
+    </effect>
+    <children>
+        <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+            <HBox.margin>
+                <Insets left="10.0" />
+            </HBox.margin>
+        </FontAwesomeIconView>
+        <TextField fx:id="search_tf2" prefHeight="25.0" prefWidth="220.0" promptText="Search... " style="-fx-background-color: transparent;" />
+    </children>
+</HBox>

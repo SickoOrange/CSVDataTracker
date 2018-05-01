@@ -1,31 +1,51 @@
 .parent {
-    -fx-background-color: #fff;
+    -fx-background-color: #F1F5F8;
 }
 
 .sidebar {
-    -fx-background-color: rgb(58, 69, 88);
+    -fx-background-color: #ffffff;
 }
 
-.sidebar-user-btn {
+.icons {
+    -fx-fill: #CCD0D3;
+}
+
+.icons:hover {
+    -fx-fill: #98A0A6;
+}
+
+.buttons {
+    -fx-background-color: transparent;
+}
+
+.buttons:hover {
     -fx-background-color: transparent;
     -fx-background-radius: 0px;
-    -fx-text-fill: #b8b1b1;
+    -fx-border-color: #E33461;
+    -fx-border-radius: 0px;
+    -fx-border-style: solid;
+    -fx-border-width: 0px 0px 0px 2px;
 }
 
-.sidebar-btn:hover {
-    -fx-background-color: transparent;
+.lblIcon {
+    -fx-background-color: #F1F5F8;
+}
+
+.lblIcon:hover {
+    -fx-background-color: #F1F5F8;
     -fx-background-radius: 0px;
-    -fx-text-fill: #b8b1b1;
-    -fx-border-color: rgb(22,169,250);
-    -fx-border-width: 0px, 0px, 0px, 3px;
-
+    -fx-border-color: #E33461;
+    -fx-border-radius: 0px;
+    -fx-border-width: 0px 0px 2px 0px;
 }
 
-.hbox:hover{
-    -fx-border-color: rgb(22,169,250);
-    -fx-border-width: 0px, 0px, 0px, 3px;
+.round_lbl {
+    -fx-background-color: #E33461;
+    -fx-background-radius: 100px;
+    -fx-text-fill: #ffffff;
 }
 
-.sidebar-btn-icon {
-    -fx-fill: #b8b1b1;
+.search_tf {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px;
 }

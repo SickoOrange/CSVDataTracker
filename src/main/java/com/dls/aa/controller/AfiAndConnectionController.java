@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
 
 import javax.annotation.PostConstruct;
 

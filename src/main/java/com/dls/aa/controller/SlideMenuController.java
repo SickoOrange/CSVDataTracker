@@ -18,6 +18,12 @@ public class SlideMenuController implements Initializable {
     @FXML
     private JFXButton infoBtn;
 
+    @FXML
+    private JFXButton afiTypeBtn;
+
+    @FXML
+    private JFXButton connectionsBtn;
+
 
     @FXML
     private JFXButton chainPathBtn;
@@ -38,44 +44,37 @@ public class SlideMenuController implements Initializable {
         centerContainerPane.getChildren().add(node);
     }
 
+
+    @FXML
+    void onAfiTypeBtnClick(ActionEvent event) {
+        System.out.println("start AfiType Pane");
+        setNode(getNodeMapping().get(AfiTypeController.class.getSimpleName()));
+    }
+
+
+    @FXML
+    void onConnectionsBtnClick(ActionEvent event) {
+        System.out.println("start connections Pane");
+        setNode(getNodeMapping().get(ConnectionsController.class.getSimpleName()));
+
+    }
+
     @FXML
     void onChainPathBtnClick(ActionEvent event) {
         System.out.println("start chainVisualizationPane");
         setNode(getNodeMapping().get(ChainVisualizationController.class.getSimpleName()));
-//        new Thread(() -> Platform.runLater(() -> {
-//            try {
-//                flowHandler.handle("chainPathBtn");
-//            } catch (VetoException | FlowException e) {
-//                e.printStackTrace();
-//            }
-//        })).start();
     }
 
     @FXML
     void onModuleStructureBtnClick(ActionEvent event) {
         System.out.println("start moduleStructurePane");
         setNode(getNodeMapping().get(ModuleStructureController.class.getSimpleName()));
-
-//        new Thread(() -> Platform.runLater(() -> {
-//            try {
-//                flowHandler.handle("moduleStructureBtn");
-//            } catch (VetoException | FlowException e) {
-//                e.printStackTrace();
-//            }
-//        })).start();
     }
 
     @FXML
     void onInfoBtnClick(ActionEvent event) {
         System.out.println("start infomationPane");
         setNode(getNodeMapping().get(InfoController.class.getSimpleName()));
-//        new Thread(() -> Platform.runLater(() -> {
-//            try {
-//                flowHandler.handle("naviToAfiAndConnection");
-//            } catch (VetoException | FlowException e) {
-//                e.printStackTrace();
-//            }
-//        })).start();
     }
 
     @Override

@@ -37,7 +37,7 @@
     -fx-background-radius: 100px;
     -fx-border-color: #E33461;
     -fx-border-radius: 0px;
-    -fx-border-insets: 0px,0px,10px,0px;
+    -fx-border-insets: 0px, 0px, 10px, 0px;
     -fx-border-width: 0px 0px 2px 0px;
 }
 
@@ -52,6 +52,10 @@
     -fx-background-radius: 20px;
 }
 
+.center_container {
+    -fx-pref-width: 1073px;
+    -fx-pref-height: 800px;
+}
 
 /*******************************************************************************
  *                                                                             *

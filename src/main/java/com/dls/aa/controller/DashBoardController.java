@@ -57,11 +57,17 @@ public class DashBoardController implements Initializable {
                 moduleStructurePane.setId(ModuleStructureController.class.getSimpleName());
                 Node infoPane = FXMLLoader.load(getClass().getResource("/fxml/ui/info_layout.fxml"));
                 moduleStructurePane.setId(InfoController.class.getSimpleName());
+                Node afiTypePane = FXMLLoader.load(getClass().getResource("/fxml/ui/afi_type_layout.fxml"));
+                moduleStructurePane.setId(AfiTypeController.class.getSimpleName());
+                Node connectionsPane = FXMLLoader.load(getClass().getResource("/fxml/ui/connections_layout.fxml"));
+                moduleStructurePane.setId(ConnectionsController.class.getSimpleName());
 
                 ImmutableMap<String, Node> nodeMapping = ImmutableMap.<String, Node>builder()
                         .put(ChainVisualizationController.class.getSimpleName(), chainVisualizationPane)
                         .put(ModuleStructureController.class.getSimpleName(), moduleStructurePane)
                         .put(InfoController.class.getSimpleName(), infoPane)
+                        .put(AfiTypeController.class.getSimpleName(), afiTypePane)
+                        .put(ConnectionsController.class.getSimpleName(), connectionsPane)
                         .build();
                 ServiceContainer.setNodeMapping(nodeMapping);
 

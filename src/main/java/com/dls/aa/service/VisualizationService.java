@@ -18,20 +18,39 @@ import java.util.stream.Collectors;
 public class VisualizationService {
 
 
-
-
     public mxGraphComponent moduleStructureVisualization(List<Connection> conns) {
 
         //create the trace graph
-        mxGraph graph = new mxGraph();
+        mxGraph graph = new mxGraph() {
+
+            @Override
+            public boolean isCellMovable(Object cell) {
+                return isCellsMovable() && !isCellLocked(cell) && getModel().isVertex(getModel().getParent(cell));
+            }
+
+            @Override
+            public boolean isCellConnectable(Object o) {
+                //cell not add new edge
+                return false;
+            }
+
+            @Override
+            public boolean isCellEditable(Object o) {
+                //cell not editable
+                return false;
+            }
+
+            @Override
+            public boolean isCellBendable(Object o) {
+                //edge not bendable
+                return false;
+            }
+        };
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
 
 
         Object parent = graph.getDefaultParent();
         graph.getModel().beginUpdate();
-
-
-
 
         //create vertexs,
         Map<Integer, Object> vertexsMapping = conns.stream()
@@ -61,7 +80,6 @@ public class VisualizationService {
         graph.getModel().endUpdate();
 
 
-
         //define layout
         mxIGraphLayout layout = new mxHierarchicalLayout(graph);
 
@@ -70,6 +88,8 @@ public class VisualizationService {
 
         //execute the layout algorithm
         layout.execute(graph.getDefaultParent());
+        graph.setDropEnabled(true);
+
 
         mxMorphing morphing = new mxMorphing(graphComponent, 20, 1.5, 20);
 
@@ -84,8 +104,7 @@ public class VisualizationService {
         morphing.startAnimation();
 
 
-
-
+//graphComponent.getGraphHandler().setRemoveCellsFromParent(false);
         return graphComponent;
     }
 }

@@ -50,7 +50,7 @@ public class DefautContentController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        hyperLink.setTooltip(new Tooltip("www.google.de"));
+        hyperLink.setTooltip(new Tooltip("https://github.com/SickoOrange/CSVDataTracker/blob/master/AfiType.csv"));
         hyperLink.setOnAction((ActionEvent event) -> {
             Hyperlink h = (Hyperlink) event.getTarget();
             String s = h.getTooltip().getText();
@@ -59,9 +59,7 @@ public class DefautContentController implements Initializable {
         });
 
         sourceDirectoryLabel.setText(SOURCE_PREFIX + ":" + PropertiesService.readPropValue("path"));
-        //  sourceDirectoryLabel.setWrapText(true);
 
-        //sourceDirectoryLabel.setTextAlignment(TextAlignment.JUSTIFY);
 
     }
 }

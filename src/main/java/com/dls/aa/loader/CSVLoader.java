@@ -42,8 +42,8 @@ public class CSVLoader {
 
     // TODO: 26.04.2018 module info+ module bean
     public Stream<AfiType> loadAfiType(CsvToBeanFilter filter) throws IOException {
-        // String afiTypeCsvPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\" + AFI_TYPE_CSV;
-        String afiTypeCsvPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\" + AFI_TYPE_CSV;
+         String afiTypeCsvPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\" + AFI_TYPE_CSV;
+        //String afiTypeCsvPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\" + AFI_TYPE_CSV;
         Reader afiTypeReader = new FileReader(afiTypeCsvPath);
         return Utils.iteratorAsStream(getDlsCsvParser().loadAfiType(afiTypeReader, filter));
     }
@@ -56,8 +56,8 @@ public class CSVLoader {
      * @return An id-indexed {@link Map} of {@link Module}s
      */
     public Map<Integer, Module> loadModules(CsvToBeanFilter filter) throws IOException {
-        // String afiCsvPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\" + AFI_CSV;
-        String afiCsvPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\" + AFI_CSV;
+         String afiCsvPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\" + AFI_CSV;
+        //String afiCsvPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\" + AFI_CSV;
         Reader afiReader = new FileReader(afiCsvPath);
         return Utils.iteratorAsStream(getDlsCsvParser().loadModules(afiReader, filter))
                 .collect(Collectors.toMap(Module::getId, m -> m));
@@ -69,9 +69,9 @@ public class CSVLoader {
     }
 
     public Stream<Connection> loadConnections(CsvToBeanFilter filter) throws IOException {
-        //String connectionCsvPath =
-        // "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\" + CONNECTIONS_CSV;
-        String connectionCsvPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\" + CONNECTIONS_CSV;
+        String connectionCsvPath =
+         "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\" + CONNECTIONS_CSV;
+        //String connectionCsvPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\" + CONNECTIONS_CSV;
         Reader connReader = new FileReader(connectionCsvPath);
         return Utils.iteratorAsStream(getDlsCsvParser().loadConnections(connReader, filter));
     }
@@ -82,8 +82,8 @@ public class CSVLoader {
     }
 
     public Stream<Port> loadPorts(CsvToBeanFilter filter) throws IOException {
-        // String PortCsvPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\" + PORTS_CSV;
-        String PortCsvPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\Ports.csv";
+         String PortCsvPath = "D:\\Project\\DLS\\DLS Dokumentation\\raw\\Producer\\" + PORTS_CSV;
+        //String PortCsvPath = "C:\\Users\\yinya\\Desktop\\ProducerCVS\\Ports.csv";
         Reader connReader = new FileReader(PortCsvPath);
         return Utils.iteratorAsStream(getDlsCsvParser().loadPorts(connReader, filter));
     }

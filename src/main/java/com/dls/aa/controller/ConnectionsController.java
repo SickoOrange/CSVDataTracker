@@ -59,7 +59,7 @@ public class ConnectionsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CSVLoader csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesContains().get(DashBoardController.LOADER);
+        CSVLoader csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesMapping().get(DashBoardController.LOADER);
         searchConnectionAfiid2Button.setOnKeyPressed(event -> {
 
             if (event.getCode() == KeyCode.ENTER) {

@@ -57,6 +57,12 @@
     -fx-pref-height: 800px;
 }
 
+.center_container_top {
+    -fx-pref-width: 1073px;
+    -fx-pref-height: 173px;
+    -fx-background-color:  #EEEEEE;
+}
+
 /*******************************************************************************
  *                                                                             *
  * Scroll Bar			                                                       *

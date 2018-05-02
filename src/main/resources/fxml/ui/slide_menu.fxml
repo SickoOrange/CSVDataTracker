@@ -58,7 +58,7 @@
                         <Insets left="10.0" top="10.0" />
                     </VBox.margin>
                 </JFXButton>
-                <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Afi" textFill="#98a0a6">
+                <JFXButton fx:id="afiBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onAfiBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Afi" textFill="#98a0a6">
                     <graphic>
                         <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                     </graphic>
@@ -69,7 +69,7 @@
                         <Insets left="10.0" top="10.0" />
                     </VBox.margin>
                 </JFXButton>
-                <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Ports" textFill="#98a0a6">
+                <JFXButton fx:id="portsBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onPortsBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Ports" textFill="#98a0a6">
                     <graphic>
                         <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                     </graphic>

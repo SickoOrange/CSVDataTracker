@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="center_container" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dls.aa.controller.PortsController">
+
+  <Pane prefHeight="173.0" prefWidth="1073.0" styleClass="center_container_top" stylesheets="@../../css/stylesheet.css">
+    <children>
+
+      <HBox alignment="CENTER_LEFT" layoutX="26.0" layoutY="61.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+        <effect>
+          <DropShadow color="#eee2e2" />
+        </effect>
+        <children>
+          <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+            <HBox.margin>
+              <Insets left="10.0" />
+            </HBox.margin>
+          </FontAwesomeIconView>
+          <TextField fx:id="uniqueNameTf" prefHeight="25.0" prefWidth="220.0" promptText="unique name" style="-fx-background-color: transparent;" />
+        </children>
+      </HBox>
+
+      <HBox alignment="CENTER_LEFT" layoutX="26.0" layoutY="124.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+        <effect>
+          <DropShadow color="#eee2e2" />
+        </effect>
+        <children>
+          <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+            <HBox.margin>
+              <Insets left="10.0" />
+            </HBox.margin>
+          </FontAwesomeIconView>
+          <TextField fx:id="afiidTf" prefHeight="25.0" prefWidth="220.0" promptText="afi id" style="-fx-background-color: transparent;" />
+        </children>
+      </HBox>
+
+      <Label layoutX="485.0" layoutY="14.0" text="Afi Type.csv" textFill="#98a0a6">
+        <font>
+          <Font name="Century Gothic Bold" size="18.0" />
+        </font>
+      </Label>
+         <HBox alignment="CENTER_LEFT" layoutX="287.0" layoutY="61.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+            <effect>
+               <DropShadow color="#eee2e2" />
+            </effect>
+            <children>
+               <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+                  <HBox.margin>
+                     <Insets left="10.0" />
+                  </HBox.margin>
+               </FontAwesomeIconView>
+               <TextField fx:id="symbolTf" prefHeight="25.0" prefWidth="220.0" promptText="symbol" style="-fx-background-color: transparent;" />
+            </children>
+         </HBox>
+    </children>
+  </Pane>
+
+  <JFXTreeTableView fx:id="portsTableView" layoutX="17.0" layoutY="191.0" prefHeight="595.0" prefWidth="1039.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="20.0">
+    <columns>
+      <JFXTreeTableColumn fx:id="column21" prefWidth="75.0" text="id" />
+      <JFXTreeTableColumn fx:id="column22" prefWidth="75.0" text="afiid" />
+      <JFXTreeTableColumn fx:id="column23" prefWidth="75.0" text="name" />
+      <JFXTreeTableColumn fx:id="column24" prefWidth="100.0" text="symbol" />
+      <JFXTreeTableColumn fx:id="column25" prefWidth="75.0" text="parameter" />
+      <JFXTreeTableColumn fx:id="column26" prefWidth="200.0" text="unique name" />
+      <JFXTreeTableColumn fx:id="column27" prefWidth="75.0" text="direction" />
+      <JFXTreeTableColumn fx:id="column28" prefWidth="70.0" text="is archived" />
+      <JFXTreeTableColumn fx:id="column29" prefWidth="60.0" text="is alarm" />
+      <JFXTreeTableColumn fx:id="column30" prefWidth="90.0" text="alarm type id" />
+      <JFXTreeTableColumn fx:id="column31" prefWidth="60.0" text="abbrev" />
+    </columns>
+  </JFXTreeTableView>
+
+</AnchorPane>

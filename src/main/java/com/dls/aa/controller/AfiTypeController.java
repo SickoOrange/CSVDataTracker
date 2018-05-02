@@ -1,37 +1,36 @@
 package com.dls.aa.controller;
 
+import static com.dls.aa.tableview.TableViewFactory.setupTableCellValueFactory;
+
 import com.dls.aa.AsyncTaskContainer;
 import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.AfiType;
 import com.dls.aa.tableview.AfiTypeTableViewModel;
 import com.dls.aa.tableview.TableViewFactory;
-import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.input.KeyCode;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-
-import static com.dls.aa.tableview.TableViewFactory.setupTableCellValueFactory;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 public class AfiTypeController implements Initializable {
 
     @FXML
-    private JFXTextField searchModuleIdAfiTypeIdButton;
+    private TextField idTf;
 
     @FXML
-    private JFXTextField searchModuleNameButton;
+    private TextField nameTf;
     @FXML
     private JFXTreeTableView<AfiTypeTableViewModel> afiTypeTable;
 
@@ -58,11 +57,11 @@ public class AfiTypeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CSVLoader csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesContains().get(DashBoardController.LOADER);
+        CSVLoader csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesMapping().get(DashBoardController.LOADER);
 
-        searchModuleIdAfiTypeIdButton.setOnKeyPressed(event -> {
+        idTf.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                int typeId = Integer.parseInt(searchModuleIdAfiTypeIdButton.getText());
+                int typeId = Integer.parseInt(idTf.getText());
 
                 AsyncTaskContainer<Integer, List<AfiType>> collectModulesByAfiTypeId = new AsyncTaskContainer<>(typeId, id -> {
                     try {
@@ -78,9 +77,9 @@ public class AfiTypeController implements Initializable {
 
             }
         });
-        searchModuleNameButton.setOnKeyPressed(event -> {
+        nameTf.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                String moduleName = searchModuleNameButton.getText();
+                String moduleName = nameTf.getText();
                 AsyncTaskContainer<String, List<AfiType>> collectModulesByName = new AsyncTaskContainer<>(moduleName, name -> {
                     try {
                         return csvLoader

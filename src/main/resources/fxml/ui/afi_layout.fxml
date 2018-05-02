@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="center_container" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dls.aa.controller.AfiController">
+  <Pane prefHeight="173.0" prefWidth="1073.0" styleClass="center_container_top" stylesheets="@../../css/stylesheet.css">
+    <children>
+
+      <HBox alignment="CENTER_LEFT" layoutX="26.0" layoutY="61.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+        <effect>
+          <DropShadow color="#eee2e2" />
+        </effect>
+        <children>
+          <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+            <HBox.margin>
+              <Insets left="10.0" />
+            </HBox.margin>
+          </FontAwesomeIconView>
+          <TextField fx:id="afiTf" prefHeight="25.0" prefWidth="220.0" promptText="Afi id" style="-fx-background-color: transparent;" />
+        </children>
+      </HBox>
+
+      <HBox alignment="CENTER_LEFT" layoutX="26.0" layoutY="124.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+        <effect>
+          <DropShadow color="#eee2e2" />
+        </effect>
+        <children>
+          <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+            <HBox.margin>
+              <Insets left="10.0" />
+            </HBox.margin>
+          </FontAwesomeIconView>
+          <TextField fx:id="nodeIdTf" prefHeight="25.0" prefWidth="220.0" promptText="Node id" style="-fx-background-color: transparent;" />
+        </children>
+      </HBox>
+
+      <Label layoutX="486.0" layoutY="14.0" text="Afi.csv" textFill="#98a0a6">
+        <font>
+          <Font name="Century Gothic Bold" size="18.0" />
+        </font>
+      </Label>
+         <HBox alignment="CENTER_LEFT" layoutX="308.0" layoutY="61.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+            <effect>
+               <DropShadow color="#eee2e2" />
+            </effect>
+            <children>
+               <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+                  <HBox.margin>
+                     <Insets left="10.0" />
+                  </HBox.margin>
+               </FontAwesomeIconView>
+               <TextField fx:id="afiTypeTf" prefHeight="25.0" prefWidth="220.0" promptText="Afi Type Id" style="-fx-background-color: transparent;" />
+            </children>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" layoutX="308.0" layoutY="124.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+            <effect>
+               <DropShadow color="#eee2e2" />
+            </effect>
+            <children>
+               <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+                  <HBox.margin>
+                     <Insets left="10.0" />
+                  </HBox.margin>
+               </FontAwesomeIconView>
+               <TextField fx:id="symbolTf" prefHeight="25.0" prefWidth="220.0" promptText="symbol" style="-fx-background-color: transparent;" />
+            </children>
+         </HBox>
+    </children>
+  </Pane>
+
+  <JFXTreeTableView fx:id="AfiTableView" layoutX="17.0" layoutY="203.0" prefHeight="574.0" prefWidth="1039.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="203.0">
+    <columns>
+      <JFXTreeTableColumn fx:id="column1" minWidth="133" prefWidth="133" resizable="false" text="afi" />
+      <JFXTreeTableColumn fx:id="column2" minWidth="133" resizable="false" text="nodeid" />
+      <JFXTreeTableColumn fx:id="column3" minWidth="133" resizable="false" text="afitypeid" />
+      <JFXTreeTableColumn fx:id="column4" minWidth="133" resizable="false" text="symbol" />
+      <JFXTreeTableColumn fx:id="column5" minWidth="200" resizable="true" text="module name" />
+    </columns>
+  </JFXTreeTableView>
+</AnchorPane>

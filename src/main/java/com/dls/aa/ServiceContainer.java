@@ -39,7 +39,7 @@ public class ServiceContainer {
         return nodeMapping;
     }
 
-    public HashMap<Object, Object> getServicesContains() {
+    public HashMap<Object, Object> getServicesMapping() {
         return servicesContains;
     }
 

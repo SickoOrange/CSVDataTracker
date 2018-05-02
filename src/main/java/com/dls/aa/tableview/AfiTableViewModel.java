@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class AfiTableViewModule extends RecursiveTreeObject<AfiTableViewModule> {
+public class AfiTableViewModel extends RecursiveTreeObject<AfiTableViewModel> {
     public final SimpleIntegerProperty afiId;
     public final SimpleIntegerProperty nodeId;
     public final SimpleIntegerProperty afiTypeId;
@@ -13,7 +13,7 @@ public class AfiTableViewModule extends RecursiveTreeObject<AfiTableViewModule> 
     private final StringProperty symbol;
     private final StringProperty name;
 
-    AfiTableViewModule(int afiId,
+    AfiTableViewModel(int afiId,
         int nodeId, int afiTypeId,
         String symbol, String name) {
         this.afiId = new SimpleIntegerProperty(afiId);

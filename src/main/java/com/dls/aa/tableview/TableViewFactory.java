@@ -76,7 +76,7 @@ public class TableViewFactory {
             port.getDirection().name(),
             Boolean.toString(port.isArchive()),
             Boolean.toString(port.isAlarm()), port.getAlarmTypeId(),
-            null))
+            port.getAbbrev()))
         .collect(Collectors.collectingAndThen(toList(), FXCollections::observableArrayList));
   }
 

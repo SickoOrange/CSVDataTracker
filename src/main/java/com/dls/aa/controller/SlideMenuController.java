@@ -15,8 +15,6 @@ import static com.dls.aa.ServiceContainer.getNodeMapping;
 
 public class SlideMenuController implements Initializable {
 
-  @FXML
-  private JFXButton infoBtn;
 
   @FXML
   private JFXButton afiTypeBtn;
@@ -89,12 +87,6 @@ public class SlideMenuController implements Initializable {
   void onModuleStructureBtnClick(ActionEvent event) {
     System.out.println("start moduleStructurePane");
     setNode(getNodeMapping().get(ModuleStructureController.class.getSimpleName()));
-  }
-
-  @FXML
-  void onInfoBtnClick(ActionEvent event) {
-    System.out.println("start infomationPane");
-    setNode(getNodeMapping().get(InfoController.class.getSimpleName()));
   }
 
 

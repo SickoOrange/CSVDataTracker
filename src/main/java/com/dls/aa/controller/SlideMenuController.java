@@ -2,14 +2,17 @@ package com.dls.aa.controller;
 
 import com.dls.aa.ServiceContainer;
 import com.jfoenix.controls.JFXButton;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.layout.VBox;
 
 import static com.dls.aa.ServiceContainer.getNodeMapping;
 
@@ -38,6 +41,9 @@ public class SlideMenuController implements Initializable {
 
   @FXML
   private JFXButton moduleStructureBtn;
+
+  @FXML
+  private JFXButton homeBtn;
 
 
   private void setNode(Node node) {
@@ -93,5 +99,11 @@ public class SlideMenuController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
+  }
+
+  @FXML
+  public void onHomeBtnClick(ActionEvent actionEvent) {
+    System.out.println("Home");
+    setNode(getNodeMapping().get(DefautContentController.class.getSimpleName()));
   }
 }

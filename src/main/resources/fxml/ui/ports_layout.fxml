@@ -45,7 +45,7 @@
         </children>
       </HBox>
 
-      <Label layoutX="485.0" layoutY="14.0" text="Afi Type.csv" textFill="#98a0a6">
+      <Label layoutX="485.0" layoutY="14.0" text="Ports.csv" textFill="#98a0a6">
         <font>
           <Font name="Century Gothic Bold" size="18.0" />
         </font>
@@ -66,7 +66,7 @@
     </children>
   </Pane>
 
-  <JFXTreeTableView fx:id="portsTableView" layoutX="17.0" layoutY="191.0" prefHeight="595.0" prefWidth="1039.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="10" AnchorPane.topAnchor="200">
+  <JFXTreeTableView fx:id="portsTableView" layoutX="17.0" layoutY="191.0" prefHeight="595.0" prefWidth="1039.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.bottomAnchor="10" AnchorPane.topAnchor="200">
     <columns>
       <JFXTreeTableColumn fx:id="column21" prefWidth="75.0" text="id" />
       <JFXTreeTableColumn fx:id="column22" prefWidth="75.0" text="afiid" />

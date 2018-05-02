@@ -78,7 +78,7 @@
     </children>
   </Pane>
 
-  <JFXTreeTableView fx:id="AfiTableView" layoutX="17.0" layoutY="203.0" prefHeight="574.0" prefWidth="1039.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="203.0">
+  <JFXTreeTableView fx:id="AfiTableView" layoutX="17.0" layoutY="203.0" prefHeight="574.0" prefWidth="1039.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="200.0">
     <columns>
       <JFXTreeTableColumn fx:id="column1" minWidth="133" prefWidth="133" resizable="false" text="afi" />
       <JFXTreeTableColumn fx:id="column2" minWidth="133" resizable="false" text="nodeid" />

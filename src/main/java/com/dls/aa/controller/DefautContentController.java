@@ -7,22 +7,25 @@ package com.dls.aa.controller;/*
 import com.dls.aa.Main;
 import com.dls.aa.service.PropertiesService;
 import com.jfoenix.controls.JFXButton;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.stage.DirectoryChooser;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.DirectoryChooser;
-
 public class DefautContentController implements Initializable {
 
     @FXML
     private JFXButton sdBtn;
+
+    @FXML
+    private Hyperlink hyperLink;
 
     @FXML
     private Label sourceDirectoryLabel;
@@ -46,8 +49,17 @@ public class DefautContentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        hyperLink.setTooltip(new Tooltip("www.google.de"));
+        hyperLink.setOnAction((ActionEvent event) -> {
+            Hyperlink h = (Hyperlink) event.getTarget();
+            String s = h.getTooltip().getText();
+            Main.hostServices.showDocument(s);
+            event.consume();
+        });
+
         sourceDirectoryLabel.setText(SOURCE_PREFIX + ":" + PropertiesService.readPropValue("path"));
-      //  sourceDirectoryLabel.setWrapText(true);
+        //  sourceDirectoryLabel.setWrapText(true);
 
         //sourceDirectoryLabel.setTextAlignment(TextAlignment.JUSTIFY);
 

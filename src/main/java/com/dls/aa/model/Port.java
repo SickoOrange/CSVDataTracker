@@ -37,6 +37,7 @@ public class Port {
   public static final int IS_ARCHIVE_COLUMN_INDEX = 9;
   public static final int IS_ALARM_COLUMN_INDEX = 10;
   public static final int ALARMTYPE_ID_COLUMN_INDEX = 11;
+  public static final int ABBREV_ID_COLUMN_INDEX = 12;
   public static final int ACTIVE_COLUMN_INDEX = 15;
   public static final int MIN_COLUMN_INDEX = 17;
   public static final int MAX_COLUMN_INDEX = 18;
@@ -84,6 +85,9 @@ public class Port {
   @CsvBindByPosition(position = ENGINEERING_UNIT_COLUMN_INDEX)
   private String engineeringUnit;
 
+  @CsvBindByPosition(position = ABBREV_ID_COLUMN_INDEX)
+  private String abbrev;
+
   private Module module;
   private Set<Port> connectedPorts;
   private boolean connected = false;
@@ -129,6 +133,10 @@ public class Port {
 
   public static String extractActive(String[] line) {
     return line[ACTIVE_COLUMN_INDEX];
+  }
+
+  public static String extractAbbrev(String[] line) {
+    return line[ABBREV_ID_COLUMN_INDEX];
   }
 
   /**
@@ -415,6 +423,15 @@ public class Port {
     return this;
   }
 
+  public String getAbbrev() {
+    return abbrev;
+  }
+
+  public Port setAbbrev(String abbrev) {
+    this.abbrev = abbrev;
+    return this;
+  }
+
   public int getConnAfiId() {
     return connAfiId;
   }
@@ -530,6 +547,7 @@ public class Port {
         Objects.equals(parameter, port.parameter) &&
         Objects.equals(uniqueName, port.uniqueName) &&
         Objects.equals(symbol, port.symbol) &&
+        Objects.equals(abbrev, port.abbrev) &&
         direction == port.direction &&
         Objects.equals(active, port.active) &&
         Objects.equals(engineeringUnit, port.engineeringUnit);
@@ -540,7 +558,7 @@ public class Port {
     return Objects
         .hash(id, afiId, name, symbol, parameter, uniqueName, direction, isArchive, isAlarm,
             alarmTypeId,
-            active, minValue, maxValue, engineeringUnit);
+            active, minValue, maxValue, engineeringUnit, abbrev);
   }
 
   /**
@@ -560,6 +578,7 @@ public class Port {
         ", isArchive=" + isArchive +
         ", isAlarm=" + isAlarm +
         ", alarmTypeId=" + alarmTypeId +
+        ", abbrev=" + abbrev +
         ", active='" + active + '\'' +
         ", minValue=" + minValue +
         ", maxValue=" + maxValue +

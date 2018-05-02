@@ -1,10 +1,10 @@
 package com.dls.aa.controller;
 
-import static com.dls.aa.controller.WizardController.CP_LOADER;
-import static com.dls.aa.controller.WizardController.LOADER;
+import static com.dls.aa.controller.DashBoardController.CP_LOADER;
+import static com.dls.aa.controller.DashBoardController.LOADER;
 import static com.dls.aa.tableview.TableViewFactory.setupTableCellValueFactory;
 
-import com.dls.aa.LoaderServiceContainer;
+import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.ChainPath;
 import com.dls.aa.model.Connection;
@@ -12,55 +12,46 @@ import com.dls.aa.model.Module;
 import com.dls.aa.model.Port;
 import com.dls.aa.service.ChainPathLoader;
 import com.dls.aa.service.OnChainPathVertexClickListener;
-import com.dls.aa.tableview.AfiTableViewModule;
+import com.dls.aa.tableview.AfiTableViewModel;
 import com.dls.aa.tableview.TableViewFactory;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.mxgraph.swing.mxGraphComponent;
-import io.datafx.controller.ViewController;
-import io.datafx.controller.flow.action.ActionMethod;
-import io.datafx.controller.flow.action.ActionTrigger;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.net.URL;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingNode;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.StackPane;
 
-import javax.annotation.PostConstruct;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
 
 
-@ViewController("/fxml/ui/chain_visualization_layout.fxml")
-public class ChainVisualizationController implements OnChainPathVertexClickListener {
+public class ChainVisualizationController implements OnChainPathVertexClickListener, Initializable {
 
     public static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger
             .getLogger(ChainVisualizationController.class);
 
     @FXML
-    @ActionTrigger("loadConnection")
-    private JFXButton loadConnection;
+    private JFXButton loadConnectionBtn;
 
     @FXML
     private TextField search_alert;
@@ -84,17 +75,17 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
 
     //read only table view
     @FXML
-    private JFXTreeTableView<AfiTableViewModule> moduleTreeTableView;
+    private JFXTreeTableView<AfiTableViewModel> moduleTreeTableView;
     @FXML
-    private JFXTreeTableColumn<AfiTableViewModule, Integer> afiidColumn;
+    private JFXTreeTableColumn<AfiTableViewModel, Integer> afiidColumn;
     @FXML
-    private JFXTreeTableColumn<AfiTableViewModule, Integer> nodeidColumn;
+    private JFXTreeTableColumn<AfiTableViewModel, Integer> nodeidColumn;
     @FXML
-    private JFXTreeTableColumn<AfiTableViewModule, Integer> afitypeidColumn;
+    private JFXTreeTableColumn<AfiTableViewModel, Integer> afitypeidColumn;
     @FXML
-    private JFXTreeTableColumn<AfiTableViewModule, String> symbolColumn;
+    private JFXTreeTableColumn<AfiTableViewModel, String> symbolColumn;
     @FXML
-    private JFXTreeTableColumn<AfiTableViewModule, String> nameColumn;
+    private JFXTreeTableColumn<AfiTableViewModel, String> nameColumn;
 
 
     private List<Connection> connections;
@@ -103,11 +94,9 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
 
     private Map<Integer, Module> modules;
 
-
-    @ActionMethod("loadConnection")
-    public void loadConnection() {
+    @FXML
+    void onLoadConnectionBtnClick(ActionEvent event) {
         System.out.println("load connection for alert and source afi id");
-
         String alertInfo = search_alert.getText();
         String sourceInfo = this.search_source.getText();
 
@@ -182,10 +171,10 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
         setupTableCellValueFactory(afiidColumn, m -> m.afiId.asObject());
         setupTableCellValueFactory(nodeidColumn, p -> p.nodeId.asObject());
         setupTableCellValueFactory(afitypeidColumn, p -> p.afiTypeId.asObject());
-        setupTableCellValueFactory(symbolColumn, AfiTableViewModule::symbolProperty);
-        setupTableCellValueFactory(nameColumn, AfiTableViewModule::nameProperty);
+        setupTableCellValueFactory(symbolColumn, AfiTableViewModel::symbolProperty);
+        setupTableCellValueFactory(nameColumn, AfiTableViewModel::nameProperty);
 
-        ObservableList<AfiTableViewModule> entities = TableViewFactory.collectAfiEntities().apply(modules);
+        ObservableList<AfiTableViewModel> entities = TableViewFactory.collectAfiEntities().apply(modules);
         System.out.println(entities.size());
 
         moduleTreeTableView
@@ -207,19 +196,19 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
     }
 
 
-    @PostConstruct
-    public void init() {
-        csvLoader = (CSVLoader) LoaderServiceContainer.getInstance().getServicesContains().get(LOADER);
-        chainPathLoader = (ChainPathLoader) LoaderServiceContainer.getInstance().getServicesContains().get(CP_LOADER);
-        chainPathLoader.setOnChainPathVertexClickListener(this);
-    }
-
     @Override
     public void onChainPathVertexClick(String vertexString) {
         if (StringUtils.isNumeric(vertexString)) {
             updateSelectedIndexInTable(moduleTreeTableView, Integer.parseInt(vertexString));
         }
 
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesMapping().get(LOADER);
+        chainPathLoader = (ChainPathLoader) ServiceContainer.getInstance().getServicesMapping().get(CP_LOADER);
+        chainPathLoader.setOnChainPathVertexClickListener(this);
     }
 
     class QueryModuleTask extends Task<Map<Integer, Module>> {
@@ -245,24 +234,12 @@ public class ChainVisualizationController implements OnChainPathVertexClickListe
         }
     }
 
-
-//    private <T> void setupCellValueFactory(JFXTreeTableColumn<AfiTableViewModule, T> column,
-//                                           Function<AfiTableViewModule, ObservableValue<T>> mapper) {
-//        column.setCellValueFactory((TreeTableColumn.CellDataFeatures<AfiTableViewModule, T> param) -> {
-//            if (column.validateValue(param)) {
-//                return mapper.apply(param.getValue().getValue());
-//            } else {
-//                return column.getComputedValue(param);
-//            }
-//        });
-//    }
-
-    private void updateSelectedIndexInTable(JFXTreeTableView<AfiTableViewModule> moduleTreeTableView,
+    private void updateSelectedIndexInTable(JFXTreeTableView<AfiTableViewModel> moduleTreeTableView,
                                             int afiid) {
 
-        ObservableList<TreeItem<AfiTableViewModule>> children = moduleTreeTableView.getRoot()
+        ObservableList<TreeItem<AfiTableViewModel>> children = moduleTreeTableView.getRoot()
                 .getChildren();
-        Optional<TreeItem<AfiTableViewModule>> treeItem = children.stream()
+        Optional<TreeItem<AfiTableViewModel>> treeItem = children.stream()
                 .filter(child -> child.getValue().afiId.isEqualTo(afiid).get()).findAny();
         treeItem.ifPresent(treeTableViewModuleTreeItem -> {
             moduleTreeTableView.getSelectionModel()

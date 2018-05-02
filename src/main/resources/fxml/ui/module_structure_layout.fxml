@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="730.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="800.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dls.aa.controller.ModuleStructureController">
    <children>
-      <StackPane fx:id="visualizationPane" layoutX="19.0" layoutY="90.0" prefHeight="657.0" prefWidth="1035.0" />
-      <JFXButton fx:id="startVisualization" layoutX="288.0" layoutY="52.0" prefHeight="25.0" prefWidth="90.0" text="Load" />
-      <HBox alignment="CENTER_LEFT" layoutX="19.0" layoutY="47.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+      <StackPane fx:id="visualizationPane" layoutX="19.0" layoutY="90.0" prefHeight="700.0" prefWidth="1035.0" style="-fx-background-color: #CCD0D3;" styleClass="center_container" stylesheets="@../../css/stylesheet.css" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="83" />
+      <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="38.0" prefHeight="35.0" prefWidth="317.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
          <effect>
             <DropShadow color="#eee2e2" />
          </effect>
@@ -23,10 +23,13 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </FontAwesomeIconView>
-            <TextField fx:id="search_tf" prefHeight="25.0" prefWidth="220.0" promptText="Search...    (afiid)" style="-fx-background-color: transparent;" />
+            <TextField fx:id="search_tf" prefHeight="25.0" prefWidth="220.0" promptText="model visualization with afiid" style="-fx-background-color: transparent;" />
          </children>
       </HBox>
-      <JFXButton fx:id="hide" layoutX="427.0" layoutY="52.0" text="hide" />
-      <JFXButton fx:id="show" layoutX="517.0" layoutY="52.0" text="show" />
+       <Label layoutX="362.0" layoutY="46.0" prefHeight="19.0" prefWidth="553.0" text="Please give the afiid of the module you want to visualize！" textFill="#98a0a6">
+           <font>
+               <Font name="Century Gothic Bold" size="15.0" />
+           </font>
+       </Label>
    </children>
 </AnchorPane>

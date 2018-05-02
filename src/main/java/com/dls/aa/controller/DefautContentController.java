@@ -4,9 +4,6 @@ package com.dls.aa.controller;/*
  * Digital Lifecycle Service (DLS)
  */
 
-import io.datafx.controller.ViewController;
-
-@ViewController("/fxml/ui/default_center_content.fxml")
 public class DefautContentController {
 
 }

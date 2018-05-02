@@ -17,12 +17,12 @@
     </Label>
     <Label layoutX="405.0" layoutY="743.0" text="Ya Yin from Evosoft GmbH, Nürnberg 2018" textFill="#98a0a6">
       <font>
-        <Font name="Century Gothic" size="14.0" />
+        <Font name="Century Gothic Bold Italic" size="14.0" />
       </font>
     </Label>
     <Label layoutX="457.0" layoutY="770.0" text="Only internal use allowed" textFill="#98a0a6">
       <font>
-        <Font name="Century Gothic" size="14.0" />
+        <Font name="Century Gothic Bold Italic" size="14.0" />
       </font>
     </Label>
 

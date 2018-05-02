@@ -9,8 +9,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="center_container" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dls.aa.controller.DefautContentController">
   <children>
-    <FontAwesomeIconView glyphName="INSTAGRAM" glyphStyle="-fx-fill:#98A0A6;" layoutX="78.0" layoutY="189.0" size="9em" />
-    <Label layoutX="207.0" layoutY="120.0" text=" DLS Archive Analytics Visualization" textFill="#98a0a6">
+    <FontAwesomeIconView glyphName="INSTAGRAM" glyphStyle="-fx-fill:#98A0A6;" layoutX="70.0" layoutY="114.0" size="9em" />
+    <Label layoutX="199.0" layoutY="45.0" text=" DLS Archive Analytics Visualization" textFill="#98a0a6">
       <font>
         <Font name="Century Gothic" size="48.0" />
       </font>
@@ -27,17 +27,17 @@
     </Label>
 
 
-    <Label layoutX="48.0" layoutY="297.0" prefHeight="23.0" prefWidth="664.0" text="Put all the following archive analytics csv files in the specified directory：" textFill="#98a0a6">
+    <Label layoutX="55.0" layoutY="209.0" prefHeight="23.0" prefWidth="664.0" text="Put all the following archive analytics csv files in the specified directory：" textFill="#98a0a6">
       <font>
         <Font name="Century Gothic Bold" size="18.0" />
       </font>
     </Label>
-    <Label layoutX="454.0" layoutY="229.0" prefHeight="46.0" prefWidth="178.0" text="Guideline" textFill="#98a0a6">
+    <Label layoutX="458.0" layoutY="151.0" prefHeight="46.0" prefWidth="178.0" text="Guideline" textFill="#98a0a6">
       <font>
         <Font name="Century Gothic Bold" size="36.0" />
       </font>
     </Label>
-    <VBox layoutX="48.0" layoutY="333.0" prefHeight="216.0" prefWidth="203.0" spacing="5.0">
+    <VBox layoutX="55.0" layoutY="245.0" prefHeight="216.0" prefWidth="203.0" spacing="5.0">
       <children>
         <Label prefHeight="23.0" prefWidth="664.0" text="Afi.csv" textFill="#98a0a6">
           <font>
@@ -76,20 +76,30 @@
         </Label>
       </children>
     </VBox>
-    <Label layoutX="48.0" layoutY="560.0" prefHeight="23.0" prefWidth="664.0" text="If the files are incomplete, some functions may not work!" textFill="#98a0a6">
+    <Label layoutX="55.0" layoutY="450.0" prefHeight="23.0" prefWidth="664.0" text="If the files are incomplete, some functions may not work!" textFill="#98a0a6">
       <font>
         <Font name="Century Gothic Bold" size="18.0" />
       </font>
     </Label>
-    <JFXButton fx:id="sdBtn" layoutX="435.0" layoutY="631.0" onAction="#onStBtnClick" prefHeight="46.0" prefWidth="203.0" styleClass="round_lbl" stylesheets="@../../css/stylesheet.css" text="Set source directory" textFill="#98a0a6">
+    <JFXButton fx:id="sdBtn" layoutX="435.0" layoutY="539.0" onAction="#onStBtnClick" prefHeight="46.0" prefWidth="203.0" styleClass="round_lbl" stylesheets="@../../css/stylesheet.css" text="Set source directory" textFill="#98a0a6">
       <font>
         <Font name="Century Gothic Bold" size="18.0" />
       </font>
     </JFXButton>
-    <Label fx:id="sourceDirectoryLabel" layoutX="48.0" layoutY="686.0" prefHeight="23.0" prefWidth="664.0" text="Source directory: D:\Project\DLS\DLS Dokumentation\raw\Producer" textFill="#98a0a6">
+    <Label fx:id="sourceDirectoryLabel" layoutX="55.0" layoutY="605.0" prefHeight="33.0" prefWidth="953.0" text="Source directory: D:\Project\DLS\DLS Dokumentation\raw\Producer" textFill="#98a0a6">
       <font>
         <Font name="Century Gothic Bold" size="18.0" />
       </font>
     </Label>
+      <Label layoutX="55.0" layoutY="473.0" prefHeight="23.0" prefWidth="664.0" text="Note that you need to convert AfiTye.xlsx to AfiType.csv yourself! " textFill="#98a0a6">
+         <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="55.0" layoutY="496.0" prefHeight="23.0" prefWidth="664.0" text="Pay attention to the file separator, otherwise the parsing will fail!" textFill="#98a0a6">
+         <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+         </font>
+      </Label>
   </children>
 </AnchorPane>

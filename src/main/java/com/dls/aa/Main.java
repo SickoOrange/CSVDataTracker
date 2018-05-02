@@ -19,7 +19,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Main.stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/main_stage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ui/main_stage.fxml"));
         primaryStage.setTitle("DLS Visualization");
         Scene scene = new Scene(root);
         final ObservableList<String> stylesheets = scene.getStylesheets();

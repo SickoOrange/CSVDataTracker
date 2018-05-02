@@ -51,6 +51,13 @@ public class DashBoardController implements Initializable {
 
       //prepare content
       try {
+
+        Node defaultPane = FXMLLoader
+            .load(getClass().getResource("/fxml/ui/default_center_layout.fxml"));
+        defaultPane.setId(DefautContentController.class.getSimpleName());
+
+        centerContainer.getChildren().add(defaultPane);
+
         Node chainVisualizationPane = FXMLLoader
             .load(getClass().getResource("/fxml/ui/chain_visualization_layout.fxml"));
         chainVisualizationPane.setId(ChainVisualizationController.class.getSimpleName());
@@ -71,6 +78,7 @@ public class DashBoardController implements Initializable {
         moduleStructurePane.setId(PortsController.class.getSimpleName());
 
         ImmutableMap<String, Node> nodeMapping = ImmutableMap.<String, Node>builder()
+            .put(DefautContentController.class.getSimpleName(), defaultPane)
             .put(ChainVisualizationController.class.getSimpleName(), chainVisualizationPane)
             .put(ModuleStructureController.class.getSimpleName(), moduleStructurePane)
             .put(AfiTypeController.class.getSimpleName(), afiTypePane)

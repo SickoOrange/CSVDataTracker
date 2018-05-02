@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="center_container" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dls.aa.controller.DefautContentController">
+  <children>
+    <FontAwesomeIconView glyphName="INSTAGRAM" glyphStyle="-fx-fill:#98A0A6;" layoutX="70.0" layoutY="114.0" size="9em" />
+    <Label layoutX="199.0" layoutY="45.0" text=" DLS Archive Analytics Visualization" textFill="#98a0a6">
+      <font>
+        <Font name="Century Gothic" size="48.0" />
+      </font>
+    </Label>
+    <Label layoutX="405.0" layoutY="743.0" text="Ya Yin from Evosoft GmbH, Nürnberg 2018" textFill="#98a0a6">
+      <font>
+        <Font name="Century Gothic Bold Italic" size="14.0" />
+      </font>
+    </Label>
+    <Label layoutX="457.0" layoutY="770.0" text="Only internal use allowed" textFill="#98a0a6">
+      <font>
+        <Font name="Century Gothic Bold Italic" size="14.0" />
+      </font>
+    </Label>
+
+
+    <Label layoutX="55.0" layoutY="209.0" prefHeight="23.0" prefWidth="664.0" text="Put all the following archive analytics csv files in the specified directory：" textFill="#98a0a6">
+      <font>
+        <Font name="Century Gothic Bold" size="18.0" />
+      </font>
+    </Label>
+    <Label layoutX="458.0" layoutY="151.0" prefHeight="46.0" prefWidth="178.0" text="Guideline" textFill="#98a0a6">
+      <font>
+        <Font name="Century Gothic Bold" size="36.0" />
+      </font>
+    </Label>
+    <VBox layoutX="55.0" layoutY="245.0" prefHeight="216.0" prefWidth="203.0" spacing="5.0">
+      <children>
+        <Label prefHeight="23.0" prefWidth="664.0" text="Afi.csv" textFill="#98a0a6">
+          <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+          </font>
+        </Label>
+        <Label prefHeight="23.0" prefWidth="664.0" text="AfiType.csv" textFill="#98a0a6">
+          <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+          </font>
+        </Label>
+        <Label prefHeight="23.0" prefWidth="664.0" text="Ports.csv" textFill="#98a0a6">
+          <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+          </font>
+        </Label>
+        <Label prefHeight="23.0" prefWidth="664.0" text="Connections.csv" textFill="#98a0a6">
+          <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+          </font>
+        </Label>
+        <Label prefHeight="23.0" prefWidth="664.0" text="Alarm.csv" textFill="#98a0a6">
+          <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+          </font>
+        </Label>
+        <Label prefHeight="23.0" prefWidth="664.0" text="AnalogTrend.csv" textFill="#98a0a6">
+          <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+          </font>
+        </Label>
+        <Label prefHeight="23.0" prefWidth="664.0" text="BinaryTrend.csv" textFill="#98a0a6">
+          <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+          </font>
+        </Label>
+      </children>
+    </VBox>
+    <Label layoutX="55.0" layoutY="450.0" prefHeight="23.0" prefWidth="664.0" text="If the files are incomplete, some functions may not work!" textFill="#98a0a6">
+      <font>
+        <Font name="Century Gothic Bold" size="18.0" />
+      </font>
+    </Label>
+    <JFXButton fx:id="sdBtn" layoutX="435.0" layoutY="539.0" onAction="#onStBtnClick" prefHeight="46.0" prefWidth="203.0" styleClass="round_lbl" stylesheets="@../../css/stylesheet.css" text="Set source directory" textFill="#98a0a6">
+      <font>
+        <Font name="Century Gothic Bold" size="18.0" />
+      </font>
+    </JFXButton>
+    <Label fx:id="sourceDirectoryLabel" layoutX="55.0" layoutY="605.0" prefHeight="33.0" prefWidth="953.0" text="Source directory: D:\Project\DLS\DLS Dokumentation\raw\Producer" textFill="#98a0a6">
+      <font>
+        <Font name="Century Gothic Bold" size="18.0" />
+      </font>
+    </Label>
+      <Label layoutX="55.0" layoutY="473.0" prefHeight="23.0" prefWidth="585.0" text="Note that you need to convert AfiTye.xlsx to AfiType.csv yourself or " textFill="#98a0a6">
+         <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="55.0" layoutY="496.0" prefHeight="23.0" prefWidth="664.0" text="Pay attention to the file separator, otherwise the parsing will fail!" textFill="#98a0a6">
+         <font>
+            <Font name="Century Gothic Bold" size="18.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="hyperLink" layoutX="638.0" layoutY="472.0" text="Download from Github :)" textFill="#98a0a6">
+         <graphic>
+            <FontAwesomeIconView glyphName="DOWNLOAD" size="16" />
+         </graphic>
+         <font>
+            <Font name="Century Gothic Bold" size="14.0" />
+         </font>
+      </Hyperlink>
+  </children>
+</AnchorPane>

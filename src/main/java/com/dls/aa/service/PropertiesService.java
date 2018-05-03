@@ -9,64 +9,56 @@ import java.util.Properties;
 
 public class PropertiesService {
 
-    private static final String propName = "config.properties";
+  private static final String propName = "config.properties";
 
 
-    private static File getResourceFile() {
-        URL resource = PropertiesService.class.getClassLoader().getResource(propName);
+
+
+
+  public static void writeProperties(String key, String value) {
+    Properties prop = new Properties();
+    OutputStream output = null;
+
+    try {
+
+      output = new FileOutputStream(String.valueOf(PropertiesService.class.getResource(propName)));
+
+      // set the properties value
+      prop.setProperty(key, value);
+      // save properties to project root folder
+      prop.store(output, null);
+
+    } catch (IOException io) {
+      io.printStackTrace();
+    } finally {
+      if (output != null) {
         try {
-            return Paths.get(resource.toURI()).toFile();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-    public static void writeProperties(String key, String value) {
-        Properties prop = new Properties();
-        OutputStream output = null;
-
-        try {
-
-            output = new FileOutputStream(Objects.requireNonNull(getResourceFile()).getAbsoluteFile());
-
-            // set the properties value
-            prop.setProperty(key, value);
-            // save properties to project root folder
-            prop.store(output, null);
-
-        } catch (IOException io) {
-            io.printStackTrace();
-        } finally {
-            if (output != null) {
-                try {
-                    output.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-    }
-
-
-    private static Properties getProp() {
-        Properties properties = new Properties();
-        try {
-            properties.load(new FileReader(Objects.requireNonNull(getResourceFile())));
-            return properties;
+          output.close();
         } catch (IOException e) {
-            e.printStackTrace();
+          e.printStackTrace();
         }
-        return null;
+      }
+
     }
+  }
 
 
-    public static String readPropValue(String key) {
-        Properties prop = getProp();
-        return (String) prop.get(key);
+  private static Properties getProp() {
+    Properties properties = new Properties();
+    try {
+      properties.load(PropertiesService.class.getResourceAsStream("/" + propName));
+      return properties;
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return null;
+  }
+
+
+  public static String readPropValue(String key) {
+    Properties prop = getProp();
+    return (String) prop.get(key);
+  }
 
 
 }

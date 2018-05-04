@@ -55,6 +55,7 @@ public class ModuleStructureController implements Initializable {
         .invokeLater(() -> swingNode.setContent(gComponent));
     visualizationPane.getChildren().add(swingNode);
     default_imageview.setVisible(false);
+
   }
 
   private long collectConnectionByAfiid(List<Connection> connections, ArrayList<Connection> conns,
@@ -72,6 +73,7 @@ public class ModuleStructureController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
     csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesMapping().get(LOADER);
     search_tf.setOnKeyPressed(event -> {
       if (event.getCode() == KeyCode.ENTER) {

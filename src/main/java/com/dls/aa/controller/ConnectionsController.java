@@ -7,6 +7,7 @@ import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.Connection;
 import com.dls.aa.tableview.ConnectionTableViewModel;
+import com.dls.aa.tableview.TableUtils;
 import com.dls.aa.tableview.TableViewFactory;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
@@ -126,6 +128,10 @@ public class ConnectionsController implements Initializable {
     connectionTable.setRoot(new RecursiveTreeItem<>(connectionEntities,
         RecursiveTreeObject::getChildren));
     connectionTable.setShowRoot(false);
+
+    connectionTable.getSelectionModel().setCellSelectionEnabled(true);
+    connectionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    TableUtils.installCopyPasteHandler(connectionTable);
 
   }
 }

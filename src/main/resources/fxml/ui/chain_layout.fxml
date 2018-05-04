@@ -56,7 +56,7 @@
              </toggleGroup>
            </JFXRadioButton>
            <JFXRadioButton fx:id="radio_2" layoutX="142.0" layoutY="135.0" selected="false" styleClass="custom-jfx-radio-button" text="Port Name" toggleGroup="$toggleGroup" />
-           <Label layoutX="412.0" layoutY="28.0" text="Chains Path Visualization" textFill="#98a0a6">
+           <Label layoutX="414.0" layoutY="36.0" text="Chains Path Visualization" textFill="#98a0a6">
              <font>
                <Font name="Century Gothic Bold" size="18.0" />
              </font>

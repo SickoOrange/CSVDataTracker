@@ -49,7 +49,7 @@
             </JFXButton>
                 <JFXButton fx:id="afiTypeBtn" alignment="BASELINE_LEFT" layoutX="20.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onAfiTypeBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Afi Type" textFill="#98a0a6">
                     <graphic>
-                        <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                        <FontAwesomeIconView glyphName="DATABASE" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                     </graphic>
                     <font>
                         <Font name="Century Gothic" size="14.0" />
@@ -60,7 +60,7 @@
                 </JFXButton>
                 <JFXButton fx:id="afiBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onAfiBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Afi" textFill="#98a0a6">
                     <graphic>
-                        <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                        <FontAwesomeIconView glyphName="DATABASE" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                     </graphic>
                     <font>
                         <Font name="Century Gothic" size="14.0" />
@@ -71,7 +71,7 @@
                 </JFXButton>
                 <JFXButton fx:id="portsBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onPortsBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Ports" textFill="#98a0a6">
                     <graphic>
-                        <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                        <FontAwesomeIconView glyphName="DATABASE" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                     </graphic>
                     <font>
                         <Font name="Century Gothic" size="14.0" />
@@ -82,7 +82,7 @@
                 </JFXButton>
                 <JFXButton fx:id="connectionsBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onConnectionsBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Connections" textFill="#98a0a6">
                     <graphic>
-                        <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                        <FontAwesomeIconView glyphName="DATABASE" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                     </graphic>
                     <font>
                         <Font name="Century Gothic" size="14.0" />
@@ -101,7 +101,7 @@
                 </Label>
                 <JFXButton fx:id="moduleStructureBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onModuleStructureBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Module Structure" textFill="#98a0a6">
                     <graphic>
-                        <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                        <FontAwesomeIconView glyphName="TELEVISION" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                     </graphic>
                     <font>
                         <Font name="Century Gothic" size="14.0" />
@@ -112,7 +112,7 @@
                 </JFXButton>
                 <JFXButton fx:id="chainPathBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onChainPathBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Chain Path Analysis" textFill="#98a0a6">
                     <graphic>
-                        <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                        <FontAwesomeIconView glyphName="AREA_CHART" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                     </graphic>
                     <font>
                         <Font name="Century Gothic" size="14.0" />
@@ -123,7 +123,7 @@
                 </JFXButton>
             <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="BinaryTrends Analysis" textFill="#98a0a6">
                <graphic>
-                  <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                  <FontAwesomeIconView glyphName="PIE_CHART" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                </graphic>
                <font>
                   <Font name="Century Gothic" size="14.0" />
@@ -142,7 +142,7 @@
             </Label>
             <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Harmst URL" textFill="#98a0a6">
                <graphic>
-                  <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                  <FontAwesomeIconView glyphName="FILES_ALT" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                </graphic>
                <font>
                   <Font name="Century Gothic" size="14.0" />
@@ -153,7 +153,7 @@
             </JFXButton>
             <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Producer Simulation" textFill="#98a0a6">
                <graphic>
-                  <FontAwesomeIconView glyphName="BELL" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
+                  <FontAwesomeIconView glyphName="PLAY_CIRCLE" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                </graphic>
                <font>
                   <Font name="Century Gothic" size="14.0" />

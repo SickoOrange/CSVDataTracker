@@ -23,7 +23,7 @@
                </image>
             </ImageView>
          </children></StackPane>
-      <Pane prefHeight="200.0" prefWidth="758.0" styleClass="center_container_top" stylesheets="@../../css/stylesheet.css">
+      <Pane prefHeight="200.0" prefWidth="758.0" styleClass="center_container_top" stylesheets="@../../css/stylesheet.css" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
          <children>
              <Label layoutX="358.0" layoutY="95.0" prefHeight="19.0" prefWidth="553.0" text="Please give the afiid of the module you want to visualize！" textFill="#98a0a6">
                  <font>

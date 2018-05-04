@@ -5,8 +5,8 @@ import static com.dls.aa.controller.DashBoardController.LOADER;
 
 import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
-import com.dls.aa.model.Connection;
 import com.dls.aa.loader.VisualizationLoader;
+import com.dls.aa.model.Connection;
 import com.google.common.collect.Lists;
 import com.mxgraph.swing.mxGraphComponent;
 import java.io.IOException;
@@ -77,7 +77,6 @@ public class ModuleStructureController implements Initializable {
       if (event.getCode() == KeyCode.ENTER) {
         System.out.println("start to load module structure ");
         String s = search_tf.getText();
-
         if (NumberUtils.isParsable(s)) {
           int afiid2 = NumberUtils.toInt(s);
           if (Objects.isNull(connections) || connections.isEmpty()) {
@@ -90,6 +89,7 @@ public class ModuleStructureController implements Initializable {
           ArrayList<Connection> conns = Lists.newArrayList();
           collectConnectionByAfiid(connections, conns, afiid2, 0);
           moduleStructureVisualization(conns);
+
         }
       }
     });

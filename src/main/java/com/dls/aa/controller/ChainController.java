@@ -14,8 +14,9 @@ import com.dls.aa.model.ChainPath;
 import com.dls.aa.model.Connection;
 import com.dls.aa.model.Module;
 import com.dls.aa.model.Port;
-import com.dls.aa.service.ChainPathLoader;
-import com.dls.aa.service.OnChainPathVertexClickListener;
+import com.dls.aa.loader.ChainPathLoader;
+import com.dls.aa.service.OnGraphClickListener;
+import com.dls.aa.loader.VisualizationLoader;
 import com.dls.aa.tableview.AfiTableViewModel;
 import com.dls.aa.tableview.TableViewFactory;
 import com.google.common.collect.Lists;
@@ -48,8 +49,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.StackPane;
 import javax.swing.SwingUtilities;
+import org.apache.commons.lang3.StringUtils;
 
-public class ChainController implements Initializable, OnChainPathVertexClickListener {
+public class ChainController implements Initializable, OnGraphClickListener {
 
   @FXML
   private JFXButton loadConnectionBtn;
@@ -94,12 +96,15 @@ public class ChainController implements Initializable, OnChainPathVertexClickLis
   private CSVLoader csvLoader;
 
   private Map<Integer, Module> modules;
+  private VisualizationLoader visualizationService;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesMapping().get(LOADER);
-    chainPathLoader = (ChainPathLoader) ServiceContainer.getInstance().getServicesMapping().get(CP_LOADER);
-    chainPathLoader.setOnChainPathVertexClickListener(this);
+    chainPathLoader = (ChainPathLoader) ServiceContainer.getInstance().getServicesMapping()
+        .get(CP_LOADER);
+    visualizationService = new VisualizationLoader();
+    visualizationService.setOnChainPathVertexClickListener(this);
   }
 
   @FXML
@@ -143,7 +148,7 @@ public class ChainController implements Initializable, OnChainPathVertexClickLis
 
     searchChainPaths.setOnSucceeded(e -> {
       //data visualization
-      visualization(searchChainPaths.getValue());
+
       Set<Integer> relevantIds = searchChainPaths.getValue().stream()
           .map(ChainPath::toList)
           .flatMap(Collection::stream)
@@ -153,6 +158,7 @@ public class ChainController implements Initializable, OnChainPathVertexClickLis
         Map<Integer, Module> modules = csvLoader
             .loadModules(line -> relevantIds.contains(Module.extractId(line)));
         setUpReadOnlyTableView(modules);
+        visualization(searchChainPaths.getValue(),modules);
       } catch (IOException e1) {
         e1.printStackTrace();
       }
@@ -169,7 +175,8 @@ public class ChainController implements Initializable, OnChainPathVertexClickLis
     setupTableCellValueFactory(symbolColumn, AfiTableViewModel::symbolProperty);
     setupTableCellValueFactory(nameColumn, AfiTableViewModel::nameProperty);
 
-    ObservableList<AfiTableViewModel> entities = TableViewFactory.collectAfiEntities().apply(modules);
+    ObservableList<AfiTableViewModel> entities = TableViewFactory.collectAfiEntities()
+        .apply(modules);
     System.out.println(entities.size());
 
     moduleTreeTableView
@@ -181,10 +188,11 @@ public class ChainController implements Initializable, OnChainPathVertexClickLis
 
   }
 
-  private void visualization(List<ChainPath> chainPaths) {
+  private void visualization(List<ChainPath> chainPaths,
+      Map<Integer, Module> modules) {
     visualizationPane.getChildren().clear();
     SwingNode swingNode = new SwingNode();
-    mxGraphComponent gComponent = chainPathLoader.chainVisualization(chainPaths);
+    mxGraphComponent gComponent = visualizationService.chainVisualization(chainPaths,modules);
     SwingUtilities
         .invokeLater(() -> swingNode.setContent(gComponent));
     visualizationPane.getChildren().add(swingNode);
@@ -207,7 +215,9 @@ public class ChainController implements Initializable, OnChainPathVertexClickLis
   }
 
   @Override
-  public void onChainPathVertexClick(String vertexName) {
-
+  public void onChainGraphClick(String vertexString) {
+    if (StringUtils.isNumeric(vertexString)) {
+      updateSelectedIndexInTable(moduleTreeTableView, Integer.parseInt(vertexString));
+    }
   }
 }

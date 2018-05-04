@@ -86,7 +86,7 @@ public class SlideMenuController implements Initializable {
   @FXML
   void onChainPathBtnClick(ActionEvent event) {
     System.out.println("start chainVisualizationPane");
-    setNode(getNodeMapping().get(ChainVisualizationController.class.getSimpleName()));
+    setNode(getNodeMapping().get(ChainController.class.getSimpleName()));
   }
 
   @FXML

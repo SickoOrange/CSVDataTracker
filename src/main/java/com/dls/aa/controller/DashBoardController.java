@@ -7,7 +7,7 @@ package com.dls.aa.controller;/*
 import com.dls.aa.Main;
 import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
-import com.dls.aa.service.ChainPathLoader;
+import com.dls.aa.loader.ChainPathLoader;
 import com.google.common.collect.ImmutableMap;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -60,7 +60,7 @@ public class DashBoardController implements Initializable {
 
         Node chainVisualizationPane = FXMLLoader
             .load(getClass().getResource("/fxml/ui/chain_layout.fxml"));
-        chainVisualizationPane.setId(ChainVisualizationController.class.getSimpleName());
+        chainVisualizationPane.setId(ChainController.class.getSimpleName());
         Node moduleStructurePane = FXMLLoader
             .load(getClass().getResource("/fxml/ui/module_structure_layout.fxml"));
         moduleStructurePane.setId(ModuleStructureController.class.getSimpleName());
@@ -79,7 +79,7 @@ public class DashBoardController implements Initializable {
 
         ImmutableMap<String, Node> nodeMapping = ImmutableMap.<String, Node>builder()
             .put(DefautContentController.class.getSimpleName(), defaultPane)
-            .put(ChainVisualizationController.class.getSimpleName(), chainVisualizationPane)
+            .put(ChainController.class.getSimpleName(), chainVisualizationPane)
             .put(ModuleStructureController.class.getSimpleName(), moduleStructurePane)
             .put(AfiTypeController.class.getSimpleName(), afiTypePane)
             .put(ConnectionsController.class.getSimpleName(), connectionsPane)

@@ -7,6 +7,7 @@ import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.AfiType;
 import com.dls.aa.tableview.AfiTypeTableViewModel;
+import com.dls.aa.tableview.TableUtils;
 import com.dls.aa.tableview.TableViewFactory;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
@@ -114,5 +116,9 @@ public class AfiTypeController implements Initializable {
         afiTypeTable.setRoot(new RecursiveTreeItem<>(afiTypeEntities,
                 RecursiveTreeObject::getChildren));
         afiTypeTable.setShowRoot(false);
+
+        afiTypeTable.getSelectionModel().setCellSelectionEnabled(true);
+        afiTypeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        TableUtils.installCopyPasteHandler(afiTypeTable);
     }
 }

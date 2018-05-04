@@ -18,6 +18,7 @@ import com.dls.aa.loader.ChainPathLoader;
 import com.dls.aa.service.OnGraphClickListener;
 import com.dls.aa.loader.VisualizationLoader;
 import com.dls.aa.tableview.AfiTableViewModel;
+import com.dls.aa.tableview.TableUtils;
 import com.dls.aa.tableview.TableViewFactory;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -44,6 +45,7 @@ import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
@@ -189,6 +191,10 @@ public class ChainController implements Initializable, OnGraphClickListener {
 
     moduleTreeTableView.setShowRoot(false);
     moduleTreeTableView.getSelectionModel().select(2);
+
+    moduleTreeTableView.getSelectionModel().setCellSelectionEnabled(true);
+    moduleTreeTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    TableUtils.installCopyPasteHandler(moduleTreeTableView);
 
 
   }

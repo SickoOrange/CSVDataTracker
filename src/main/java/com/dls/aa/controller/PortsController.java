@@ -14,10 +14,13 @@ import com.dls.aa.model.Module;
 import com.dls.aa.model.Port;
 import com.dls.aa.tableview.AfiTableViewModel;
 import com.dls.aa.tableview.PortTableViewModel;
+import com.dls.aa.tableview.TableUtils;
 import com.dls.aa.tableview.TableViewFactory;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
+import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import java.io.IOException;
@@ -30,7 +33,10 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableColumn.CellEditEvent;
 import javafx.scene.input.KeyCode;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -165,6 +171,7 @@ public class PortsController implements Initializable {
     setupTableCellValueFactory(column30, p -> p.alarmtypeid.asObject());
     setupTableCellValueFactory(column31, PortTableViewModel::abbrevProperty);
 
+
     ObservableList<PortTableViewModel> portEntities = TableViewFactory
         .collectPortEntities()
         .apply(ports);
@@ -172,6 +179,9 @@ public class PortsController implements Initializable {
     portsTableView.setRoot(new RecursiveTreeItem<>(portEntities,
         RecursiveTreeObject::getChildren));
     portsTableView.setShowRoot(false);
+    portsTableView.getSelectionModel().setCellSelectionEnabled(true);
+    portsTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    TableUtils.installCopyPasteHandler(portsTableView);
   }
 
 

@@ -12,6 +12,7 @@ import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.Module;
 import com.dls.aa.tableview.AfiTableViewModel;
+import com.dls.aa.tableview.TableUtils;
 import com.dls.aa.tableview.TableViewFactory;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -27,6 +28,7 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -167,6 +169,10 @@ public class AfiController implements Initializable {
         .setRoot(new RecursiveTreeItem<>(entities, RecursiveTreeObject::getChildren));
 
     AfiTableView.setShowRoot(false);
+
+    AfiTableView.getSelectionModel().setCellSelectionEnabled(true);
+    AfiTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    TableUtils.installCopyPasteHandler(AfiTableView);
 
 
   }

@@ -6,7 +6,7 @@ import static com.dls.aa.controller.DashBoardController.LOADER;
 import com.dls.aa.ServiceContainer;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.Connection;
-import com.dls.aa.service.VisualizationService;
+import com.dls.aa.loader.VisualizationLoader;
 import com.google.common.collect.Lists;
 import com.mxgraph.swing.mxGraphComponent;
 import java.io.IOException;
@@ -20,6 +20,7 @@ import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javax.swing.SwingUtilities;
@@ -37,6 +38,9 @@ public class ModuleStructureController implements Initializable {
 
   private CSVLoader csvLoader;
 
+  @FXML
+  private ImageView default_imageview;
+
 
   private final static int MAX_DEPTH = 7;
   private List<Connection> connections;
@@ -44,12 +48,13 @@ public class ModuleStructureController implements Initializable {
 
   private void moduleStructureVisualization(ArrayList<Connection> conns) {
     visualizationPane.getChildren().clear();
-    VisualizationService service = new VisualizationService();
+    VisualizationLoader service = new VisualizationLoader();
     SwingNode swingNode = new SwingNode();
     mxGraphComponent gComponent = service.moduleStructureVisualization(conns);
     SwingUtilities
         .invokeLater(() -> swingNode.setContent(gComponent));
     visualizationPane.getChildren().add(swingNode);
+    default_imageview.setVisible(false);
   }
 
   private long collectConnectionByAfiid(List<Connection> connections, ArrayList<Connection> conns,

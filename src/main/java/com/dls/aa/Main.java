@@ -7,12 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.apache.log4j.Logger;
 
 public class Main extends Application {
 
 
-    public static final Logger LOGGER = Logger.getLogger(Main.class);
     public static Stage stage;
     public static HostServices hostServices;
 

@@ -11,17 +11,13 @@ import com.dls.aa.parser.DlsCsvParser;
 import com.dls.aa.service.PropertiesService;
 import com.google.common.collect.ImmutableMap;
 import com.opencsv.bean.CsvToBeanFilter;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.nio.file.FileSystem;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import org.apache.log4j.Logger;
 
 public class CSVLoader {
 
@@ -40,7 +36,6 @@ public class CSVLoader {
                     BinaryTrend.class, BINARY_TREND_CSV
             );
 
-    public static final Logger LOGGER = Logger.getLogger(CSVLoader.class);
 
     private String getSourceDirectory() {
         return PropertiesService.readPropValue("path");

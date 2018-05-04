@@ -49,6 +49,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.StackPane;
 import javax.swing.SwingUtilities;
+import javax.swing.text.html.ImageView;
 import org.apache.commons.lang3.StringUtils;
 
 public class ChainController implements Initializable, OnGraphClickListener {
@@ -74,6 +75,9 @@ public class ChainController implements Initializable, OnGraphClickListener {
 
   @FXML
   private JFXRadioButton radio_2;
+
+  @FXML
+  private javafx.scene.image.ImageView default_imageview;
 
 
   //read only table view
@@ -158,7 +162,8 @@ public class ChainController implements Initializable, OnGraphClickListener {
         Map<Integer, Module> modules = csvLoader
             .loadModules(line -> relevantIds.contains(Module.extractId(line)));
         setUpReadOnlyTableView(modules);
-        visualization(searchChainPaths.getValue(),modules);
+        visualization(searchChainPaths.getValue(), modules);
+        default_imageview.setVisible(false);
       } catch (IOException e1) {
         e1.printStackTrace();
       }
@@ -192,7 +197,7 @@ public class ChainController implements Initializable, OnGraphClickListener {
       Map<Integer, Module> modules) {
     visualizationPane.getChildren().clear();
     SwingNode swingNode = new SwingNode();
-    mxGraphComponent gComponent = visualizationService.chainVisualization(chainPaths,modules);
+    mxGraphComponent gComponent = visualizationService.chainVisualization(chainPaths, modules);
     SwingUtilities
         .invokeLater(() -> swingNode.setContent(gComponent));
     visualizationPane.getChildren().add(swingNode);

@@ -77,32 +77,32 @@
         </Label>
       </children>
     </VBox>
-    <Label layoutX="55.0" layoutY="450.0" prefHeight="23.0" prefWidth="664.0" text="If the files are incomplete, some functions may not work!" textFill="#98a0a6">
+    <Label layoutX="55.0" layoutY="464.0" prefHeight="23.0" prefWidth="664.0" text="If the files are incomplete, some functions may not work!" textFill="#98a0a6">
       <font>
         <Font name="Century Gothic Bold" size="18.0" />
       </font>
     </Label>
-    <JFXButton fx:id="sdBtn" layoutX="435.0" layoutY="539.0" onAction="#onStBtnClick" prefHeight="46.0" prefWidth="203.0" styleClass="round_lbl" stylesheets="@../../css/stylesheet.css" text="Set source directory" textFill="#98a0a6">
+    <JFXButton fx:id="sdBtn" layoutX="435.0" layoutY="600.0" onAction="#onStBtnClick" prefHeight="46.0" prefWidth="203.0" styleClass="round_lbl" stylesheets="@../../css/stylesheet.css" text="Set source directory" textFill="#98a0a6">
       <font>
         <Font name="Century Gothic Bold" size="18.0" />
       </font>
     </JFXButton>
-    <Label fx:id="sourceDirectoryLabel" layoutX="55.0" layoutY="605.0" prefHeight="33.0" prefWidth="953.0" text="Source directory: D:\Project\DLS\DLS Dokumentation\raw\Producer" textFill="#98a0a6">
+    <Label fx:id="sourceDirectoryLabel" layoutX="55.0" layoutY="662.0" prefHeight="33.0" prefWidth="953.0" text="Source directory: D:\Project\DLS\DLS Dokumentation\raw\Producer" textFill="#98a0a6">
       <font>
         <Font name="Century Gothic Bold" size="18.0" />
       </font>
     </Label>
-      <Label layoutX="55.0" layoutY="473.0" prefHeight="23.0" prefWidth="585.0" text="Note that you need to convert AfiTye.xlsx to AfiType.csv yourself or " textFill="#98a0a6">
+      <Label layoutX="55.0" layoutY="499.0" prefHeight="23.0" prefWidth="585.0" text="Note that you need to convert AfiTye.xlsx to AfiType.csv yourself or " textFill="#98a0a6">
          <font>
             <Font name="Century Gothic Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="55.0" layoutY="496.0" prefHeight="23.0" prefWidth="664.0" text="Pay attention to the file separator, otherwise the parsing will fail!" textFill="#98a0a6">
+      <Label layoutX="55.0" layoutY="534.0" prefHeight="23.0" prefWidth="664.0" text="Pay attention to the file separator, otherwise the parsing will fail!" textFill="#98a0a6">
          <font>
             <Font name="Century Gothic Bold" size="18.0" />
          </font>
       </Label>
-      <Hyperlink fx:id="hyperLink" layoutX="638.0" layoutY="472.0" text="Download from Github :)" textFill="#98a0a6">
+      <Hyperlink fx:id="hyperLink" layoutX="638.0" layoutY="484.0" text="Download from Github :)" textFill="#98a0a6">
          <graphic>
             <FontAwesomeIconView glyphName="DOWNLOAD" size="16" />
          </graphic>

@@ -20,6 +20,7 @@ import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javax.swing.SwingUtilities;
@@ -37,6 +38,9 @@ public class ModuleStructureController implements Initializable {
 
   private CSVLoader csvLoader;
 
+  @FXML
+  private ImageView default_imageview;
+
 
   private final static int MAX_DEPTH = 7;
   private List<Connection> connections;
@@ -50,6 +54,7 @@ public class ModuleStructureController implements Initializable {
     SwingUtilities
         .invokeLater(() -> swingNode.setContent(gComponent));
     visualizationPane.getChildren().add(swingNode);
+    default_imageview.setVisible(false);
   }
 
   private long collectConnectionByAfiid(List<Connection> connections, ArrayList<Connection> conns,

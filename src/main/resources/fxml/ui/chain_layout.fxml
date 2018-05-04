@@ -2,21 +2,23 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<?import com.jfoenix.controls.JFXTreeTableView?>
-<?import com.jfoenix.controls.JFXTreeTableColumn?>
-<?import javafx.scene.layout.StackPane?>
-<AnchorPane prefHeight="800.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dls.aa.controller.ChainController">
+<AnchorPane prefHeight="800.0" prefWidth="1073.0" styleClass="center_container" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dls.aa.controller.ChainController">
   <children>
       <Pane prefHeight="200.0" prefWidth="897.0" styleClass="center_container_top" stylesheets="@../../css/stylesheet.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -61,7 +63,7 @@
            </Label>
          </children>
       </Pane>
-    <JFXTreeTableView fx:id="moduleTreeTableView" layoutX="17.0" layoutY="119.0" prefHeight="392.0" prefWidth="1040.0"  AnchorPane.leftAnchor="17" AnchorPane.rightAnchor="17" AnchorPane.topAnchor="200">
+    <JFXTreeTableView fx:id="moduleTreeTableView" layoutX="17.0" layoutY="119.0" prefHeight="392.0" prefWidth="1040.0" AnchorPane.leftAnchor="17" AnchorPane.rightAnchor="17" AnchorPane.topAnchor="200">
       <columns>
         <JFXTreeTableColumn fx:id="afiidColumn" minWidth="133" prefWidth="133" resizable="false" text="afi" />
         <JFXTreeTableColumn fx:id="nodeidColumn" minWidth="133" resizable="false" text="nodeid" />
@@ -71,7 +73,14 @@
       </columns>
     </JFXTreeTableView>
 
-    <StackPane fx:id="visualizationPane" layoutX="17.0" layoutY="551.0" prefHeight="220.0" prefWidth="1040.0" style="-fx-background-color: #CCD0D3;" AnchorPane.bottomAnchor="20" AnchorPane.topAnchor="600" AnchorPane.leftAnchor="17" AnchorPane.rightAnchor="17" />
+    <StackPane fx:id="visualizationPane" layoutX="17.0" layoutY="551.0" prefHeight="220.0" prefWidth="1040.0" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="17" AnchorPane.rightAnchor="17" AnchorPane.topAnchor="600">
+         <children>
+            <ImageView fx:id="default_imageview" fitHeight="368.0" fitWidth="304.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../cat.png" />
+               </image>
+            </ImageView>
+         </children></StackPane>
 
   </children>
 </AnchorPane>

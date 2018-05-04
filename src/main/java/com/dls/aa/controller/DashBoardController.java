@@ -59,7 +59,7 @@ public class DashBoardController implements Initializable {
         centerContainer.getChildren().add(defaultPane);
 
         Node chainVisualizationPane = FXMLLoader
-            .load(getClass().getResource("/fxml/ui/chain_visualization_layout.fxml"));
+            .load(getClass().getResource("/fxml/ui/chain_layout.fxml"));
         chainVisualizationPane.setId(ChainVisualizationController.class.getSimpleName());
         Node moduleStructurePane = FXMLLoader
             .load(getClass().getResource("/fxml/ui/module_structure_layout.fxml"));

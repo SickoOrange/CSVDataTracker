@@ -83,7 +83,6 @@ public class PortsController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     CSVLoader csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesMapping()
         .get(LOADER);
-
     uniqueNameTf.setOnKeyPressed(event -> {
       if (event.getCode() == KeyCode.ENTER) {
         if (NumberUtils.isParsable(uniqueNameTf.getText())) {

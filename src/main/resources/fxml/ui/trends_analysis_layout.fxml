@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dls.aa.controller.TrendsAnalysisController">
+    <children>
+        <Pane prefHeight="200.0" prefWidth="758.0" styleClass="center_container_top" stylesheets="@../../css/stylesheet.css" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <children>
+                <Label layoutX="358.0" layoutY="95.0" prefHeight="19.0" prefWidth="553.0" text="Please give the unique name of the output port you want to analysis！" textFill="#98a0a6">
+                    <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                    </font>
+                </Label>
+                <HBox alignment="CENTER_LEFT" layoutX="21.0" layoutY="87.0" prefHeight="35.0" prefWidth="317.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+                    <effect>
+                        <DropShadow color="#eee2e2" />
+                    </effect>
+                    <children>
+                        <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </FontAwesomeIconView>
+                        <TextField fx:id="portNameTf" prefHeight="25.0" prefWidth="220.0" promptText="port unique name" style="-fx-background-color: transparent;" />
+                    </children>
+                </HBox>
+                <Label layoutX="405.0" layoutY="34.0" prefHeight="23.0" prefWidth="220.0" text="Binary Trends  Analysis" textFill="#98a0a6">
+                    <font>
+                        <Font name="Century Gothic Bold" size="18.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Pane fx:id="chartContainer" layoutY="191.0" prefHeight="208.0" prefWidth="1073.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                <LineChart fx:id="trendsChart" prefHeight="206.0" prefWidth="1071.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                    <xAxis>
+                        <NumberAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" />
+                    </yAxis>
+                </LineChart>
+        </Pane>
+    </children>
+</AnchorPane>

@@ -106,4 +106,10 @@ public class SlideMenuController implements Initializable {
     System.out.println("Home");
     setNode(getNodeMapping().get(DefautContentController.class.getSimpleName()));
   }
+
+  @FXML
+  void onTrendsBtnClick(ActionEvent event) {
+    System.out.println("Trends Analysis Pane");
+    setNode(getNodeMapping().get(TrendsAnalysisController.class.getSimpleName()));
+  }
 }

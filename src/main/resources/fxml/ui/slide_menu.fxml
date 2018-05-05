@@ -121,7 +121,7 @@
                         <Insets left="10.0" top="10.0" />
                     </VBox.margin>
                 </JFXButton>
-            <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="BinaryTrends Analysis" textFill="#98a0a6">
+            <JFXButton fx:id="trendsBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onTrendsBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="BinaryTrends Analysis" textFill="#98a0a6">
                <graphic>
                   <FontAwesomeIconView glyphName="PIE_CHART" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                </graphic>

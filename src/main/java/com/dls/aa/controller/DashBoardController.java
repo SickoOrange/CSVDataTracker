@@ -77,6 +77,9 @@ public class DashBoardController implements Initializable {
         Node portsPane = FXMLLoader.load(getClass().getResource("/fxml/ui/ports_layout.fxml"));
         moduleStructurePane.setId(PortsController.class.getSimpleName());
 
+        Node trendsPane = FXMLLoader.load(getClass().getResource("/fxml/ui/trends_analysis_layout.fxml"));
+        moduleStructurePane.setId(TrendsAnalysisController.class.getSimpleName());
+
         ImmutableMap<String, Node> nodeMapping = ImmutableMap.<String, Node>builder()
             .put(DefautContentController.class.getSimpleName(), defaultPane)
             .put(ChainController.class.getSimpleName(), chainVisualizationPane)
@@ -85,6 +88,7 @@ public class DashBoardController implements Initializable {
             .put(ConnectionsController.class.getSimpleName(), connectionsPane)
             .put(AfiController.class.getSimpleName(), afiPane)
             .put(PortsController.class.getSimpleName(), portsPane)
+            .put(TrendsAnalysisController.class.getSimpleName(), trendsPane)
             .build();
         ServiceContainer.setNodeMapping(nodeMapping);
 

@@ -41,7 +41,7 @@ public class DashBoardController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     System.out.println("init Dashboard");
 
-    makeStageDrageable();
+    //makeStageDrageable();
 
     //init services
     if (ServiceContainer.getInstance().getServicesMapping().isEmpty()) {

@@ -7,6 +7,7 @@ import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.BinaryTrend;
 import com.dls.aa.model.Trend;
 import com.google.common.collect.ImmutableSet;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.Axis;
@@ -16,7 +17,11 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import org.gillius.jfxutils.chart.ChartPanManager;
+import org.gillius.jfxutils.chart.JFXChartUtil;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -44,6 +49,7 @@ public class TrendsAnalysisController implements Initializable {
         NumberAxis yAxis = (NumberAxis) trendsChart.getYAxis();
         yAxis.setUpperBound(1.0);
         yAxis.setLowerBound(0.0);
+
 
         CSVLoader csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesMapping().get(LOADER);
         portNameTf.setOnKeyPressed(event -> {
@@ -85,6 +91,38 @@ public class TrendsAnalysisController implements Initializable {
             }
         });
         trendsChart.getData().add(series);
+
+        trendsChart.setOnMouseMoved(mouseEvent -> {
+            double xStart = trendsChart.getXAxis().getLocalToParentTransform().getTx();
+            double axisXRelativeMousePosition = mouseEvent.getX() - xStart;
+            System.out.println("hello: info -> "+xStart+" "+axisXRelativeMousePosition);
+
+        });
+
+        //Panning works via either secondary (right) mouse or primary with ctrl held down
+        ChartPanManager panner = new ChartPanManager(trendsChart);
+        panner.setMouseFilter(mouseEvent -> {
+            if (mouseEvent.getButton() == MouseButton.SECONDARY ||
+                    (mouseEvent.getButton() == MouseButton.PRIMARY &&
+                            mouseEvent.isShortcutDown())) {
+                //let it through
+            } else {
+                mouseEvent.consume();
+            }
+        });
+        panner.start();
+
+        //Zooming works only via primary mouse button without ctrl held down
+        JFXChartUtil.setupZooming(trendsChart, mouseEvent -> {
+            if (mouseEvent.getButton() != MouseButton.PRIMARY ||
+                    mouseEvent.isShortcutDown())
+                mouseEvent.consume();
+        });
+
+        JFXChartUtil.addDoublePrimaryClickAutoRangeHandler(trendsChart);
+
+
     }
+
 
 }

@@ -5,12 +5,12 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dls.aa.controller.TrendsAnalysisController">
@@ -42,8 +42,8 @@
                 </Label>
             </children>
         </Pane>
-        <Pane fx:id="chartContainer" layoutY="191.0" prefHeight="208.0" prefWidth="1073.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-                <LineChart fx:id="trendsChart" prefHeight="206.0" prefWidth="1071.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <StackPane fx:id="chartContainer" layoutY="191.0" prefHeight="351.0" prefWidth="1073.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                <LineChart fx:id="trendsChart" prefHeight="321.0" prefWidth="1073.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
                     <xAxis>
                         <NumberAxis side="BOTTOM" />
                     </xAxis>
@@ -51,6 +51,6 @@
                         <NumberAxis side="LEFT" />
                     </yAxis>
                 </LineChart>
-        </Pane>
+        </StackPane>
     </children>
 </AnchorPane>

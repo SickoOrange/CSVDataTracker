@@ -1,36 +1,28 @@
 package com.dls.aa.controller;
 
 import com.dls.aa.AsyncTaskContainer;
+import com.dls.aa.CustomChartPanManager;
 import com.dls.aa.CustomJFXChartUtil;
 import com.dls.aa.ServiceContainer;
-import com.dls.aa.ZoomManager;
 import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.BinaryTrend;
 import com.dls.aa.model.Trend;
 import com.google.common.collect.ImmutableSet;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.Axis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.gillius.jfxutils.chart.AxisConstraint;
 import org.gillius.jfxutils.chart.AxisConstraintStrategy;
 import org.gillius.jfxutils.chart.ChartInputContext;
 import org.gillius.jfxutils.chart.ChartPanManager;
-import org.gillius.jfxutils.chart.JFXChartUtil;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.*;
 
@@ -42,7 +34,13 @@ public class TrendsAnalysisController implements Initializable {
   private TextField portNameTf;
 
   @FXML
+  private TextField portNameTf1;
+
+  @FXML
   private LineChart<Number, Number> trendsChart;
+
+  @FXML
+  private LineChart<Number, Number> trendsChart1;
 
 
   @FXML
@@ -56,8 +54,13 @@ public class TrendsAnalysisController implements Initializable {
     NumberAxis yAxis = (NumberAxis) trendsChart.getYAxis();
     yAxis.setUpperBound(2.0);
     yAxis.setLowerBound(0.0);
-    NumberAxis xAxis= (NumberAxis) trendsChart.getXAxis();
-    xAxis.setTickUnit(1);
+
+    //disable dots
+    trendsChart1.setCreateSymbols(false);
+    trendsChart1.getYAxis().setAutoRanging(false);
+    NumberAxis yAxis1 = (NumberAxis) trendsChart1.getYAxis();
+    yAxis1.setUpperBound(2.0);
+    yAxis1.setLowerBound(0.0);
 
     CSVLoader csvLoader = (CSVLoader) ServiceContainer.getInstance().getServicesMapping()
         .get(LOADER);
@@ -103,6 +106,19 @@ public class TrendsAnalysisController implements Initializable {
     });
     trendsChart.getData().add(series);
 
+    XYChart.Series<Number, Number> series1 = new XYChart.Series<>();
+    series1.setName(uniqueName);
+    trends.forEach(trend -> {
+      if (trend.getValue() == 1) {
+        series1.getData().add(new XYChart.Data<>(trend.getMillis(), 0));
+        series1.getData().add(new XYChart.Data<>(trend.getMillis(), 1));
+      } else {
+        series1.getData().add(new XYChart.Data<>(trend.getMillis(), 1));
+        series1.getData().add(new XYChart.Data<>(trend.getMillis(), 0));
+      }
+    });
+    trendsChart1.getData().add(series1);
+
     trendsChart.setOnMouseMoved(mouseEvent -> {
       double xStart = trendsChart.getXAxis().getLocalToParentTransform().getTx();
       double axisXRelativeMousePosition = mouseEvent.getX() - xStart;
@@ -111,7 +127,7 @@ public class TrendsAnalysisController implements Initializable {
     });
 
     //Panning works via either secondary (right) mouse or primary with ctrl held down
-    ChartPanManager panner = new ChartPanManager(trendsChart);
+    CustomChartPanManager panner = new CustomChartPanManager(trendsChart, trendsChart1);
     panner.setAxisConstraintStrategy(new AxisConstraintStrategy() {
       @Override
       public AxisConstraint getConstraint(ChartInputContext context) {

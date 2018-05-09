@@ -163,6 +163,7 @@ public class ChainController implements Initializable, OnGraphClickListener {
       try {
         Map<Integer, Module> modules = csvLoader
             .loadModules(line -> relevantIds.contains(Module.extractId(line)));
+        System.out.println("module find size: "+modules.size());
         setUpReadOnlyTableView(modules);
         visualization(searchChainPaths.getValue(), modules);
         default_imageview.setVisible(false);

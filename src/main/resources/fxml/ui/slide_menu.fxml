@@ -140,7 +140,7 @@
                   <Insets left="12.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <JFXButton alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Harmst URL" textFill="#98a0a6">
+            <JFXButton fx:id="hamsterBtn" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onHamsterBtnClick" prefHeight="35.0" prefWidth="190.0" ripplerFill="#ff788a" styleClass="buttons" text="Harmst URL" textFill="#98a0a6">
                <graphic>
                   <FontAwesomeIconView glyphName="FILES_ALT" glyphStyle="-fx-fill:#98A0A6;" size="1.5em" />
                </graphic>

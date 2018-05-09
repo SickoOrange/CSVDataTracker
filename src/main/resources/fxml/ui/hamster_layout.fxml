@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="center_container" stylesheets="@../../css/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dls.aa.controller.HamsterController">
+  <children>
+    <Pane layoutX="10.0" layoutY="180.0" prefHeight="189.0" prefWidth="1053.0" style="-fx-background-color: white; -fx-background-radius: 3; -fx-border-radius: 3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0,0.15), 6.0, 0.7, 0.0,1.5);">
+      <children>
+        <HBox alignment="CENTER_LEFT" layoutX="27.0" layoutY="98.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+          <effect>
+            <DropShadow color="#eee2e2" />
+          </effect>
+          <children>
+            <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+              <HBox.margin>
+                <Insets left="10.0" />
+              </HBox.margin>
+            </FontAwesomeIconView>
+            <TextField fx:id="branchTv" prefHeight="25.0" prefWidth="220.0" promptText="branch name" style="-fx-background-color: transparent;" />
+          </children>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" layoutX="311.0" layoutY="95.0" prefHeight="35.0" prefWidth="250.0" styleClass="search_tf" stylesheets="@../../css/stylesheet.css">
+          <effect>
+            <DropShadow color="#eee2e2" />
+          </effect>
+          <children>
+            <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:#F1F5F8" size="1.5em">
+              <HBox.margin>
+                <Insets left="10.0" />
+              </HBox.margin>
+            </FontAwesomeIconView>
+            <TextField fx:id="usercaseTv" prefHeight="25.0" prefWidth="220.0" promptText="user case" style="-fx-background-color: transparent;" />
+          </children>
+        </HBox>
+        <Label layoutX="439.0" layoutY="32.0" text="Hamster Paramater" textFill="#98a0a6">
+          <font>
+            <Font name="Century Gothic Bold Italic" size="14.0" />
+          </font>
+        </Label>
+        <JFXButton fx:id="creatBtn" layoutX="634.0" layoutY="95.0" onAction="#onCreatBtnClick" prefHeight="35.0" prefWidth="99.0" styleClass="round_lbl" stylesheets="@../../css/stylesheet.css" text="Creat" />
+      </children>
+      <effect>
+        <Glow />
+      </effect>
+    </Pane>
+      <Pane layoutX="10.0" layoutY="369.0" prefHeight="420.0" prefWidth="1053.0" style="-fx-background-color: white; -fx-background-radius: 3; -fx-border-radius: 3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0,0.15), 6.0, 0.7, 0.0,1.5);">
+         <children>
+            <Label layoutX="466.0" layoutY="27.0" text="Hamster URL" textFill="#98a0a6">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="14.0" />
+               </font>
+            </Label>
+            <VBox layoutX="11.0" layoutY="45.0" prefHeight="369.0" prefWidth="1031.0" spacing="15.0">
+               <children>
+                  <Label text="ppid=T0001" textFill="#98a0a6">
+                     <font>
+                        <Font name="Century Gothic Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink fx:id="hyperLink1" text="https://dls-dev.siemens.cloud" />
+                  <Label text="ppid=T0002" textFill="#98a0a6">
+                     <font>
+                        <Font name="Century Gothic Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink fx:id="hyperLink2" text="https://dls-dev.siemens.cloud" />
+                  <Label text="ppid=T0003" textFill="#98a0a6">
+                     <font>
+                        <Font name="Century Gothic Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink fx:id="hyperLink3" text="https://dls-dev.siemens.cloud" />
+                  <Label text="ppid=T00XP" textFill="#98a0a6">
+                     <font>
+                        <Font name="Century Gothic Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink fx:id="hyperLink4" text="https://dls-dev.siemens.cloud" />
+                  <Label text="ppid=T00ME" textFill="#98a0a6">
+                     <font>
+                        <Font name="Century Gothic Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink fx:id="hyperLink5" text="https://dls-dev.siemens.cloud" />
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </VBox>
+         </children>
+         <effect>
+            <Glow />
+         </effect>
+      </Pane>
+      <Pane AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" prefHeight="447.0" prefWidth="304.0" styleClass="center_container_top" stylesheets="@../../css/stylesheet.css">
+         <children>
+            <Label layoutX="430.0" layoutY="25.0" text="Hamster URLCreation" textFill="#98a0a6">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="48.0" text="The following power plant url will be created:" textFill="#98a0a6">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="75.0" text="T0001, start Date=2015-04-01, endDate=2015-04-30" textFill="#98a0a6">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="98.0" text="T0002, start Date=2016-12-06, endDate=2016-12-20" textFill="#98a0a6">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="121.0" text="T0003, start Date=2016-09-01, endDate=2016-10-19" textFill="#98a0a6">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="144.0" text="T000XP, start Date=2016-11-01, endDate=2016-12-13" textFill="#98a0a6">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="475.0" layoutY="75.0" text="T00ME, start Date=2017-05-01, endDate=2017-07-12" textFill="#98a0a6">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <Glow />
+         </effect>
+      </Pane>
+  </children>
+</AnchorPane>

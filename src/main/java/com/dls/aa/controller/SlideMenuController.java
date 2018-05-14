@@ -45,6 +45,9 @@ public class SlideMenuController implements Initializable {
   @FXML
   private JFXButton homeBtn;
 
+  @FXML
+  private JFXButton hamsterBtn;
+
 
   private void setNode(Node node) {
     StackPane centerContainerPane = ServiceContainer.getCenterContainerPane();
@@ -105,5 +108,17 @@ public class SlideMenuController implements Initializable {
   public void onHomeBtnClick(ActionEvent actionEvent) {
     System.out.println("Home");
     setNode(getNodeMapping().get(DefautContentController.class.getSimpleName()));
+  }
+
+  @FXML
+  void onTrendsBtnClick(ActionEvent event) {
+    System.out.println("Trends Analysis Pane");
+    setNode(getNodeMapping().get(TrendsAnalysisController.class.getSimpleName()));
+  }
+
+  @FXML
+  void onHamsterBtnClick(ActionEvent event) {
+    System.out.println("Hamster Pane");
+    setNode(getNodeMapping().get(HamsterController.class.getSimpleName()));
   }
 }

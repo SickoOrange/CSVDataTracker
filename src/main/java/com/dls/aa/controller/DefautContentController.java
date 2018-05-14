@@ -1,8 +1,10 @@
-package com.dls.aa.controller;/*
+/*
  * Copyright (c) Siemens AG 2017 ALL RIGHTS RESERVED.
  *
  * Digital Lifecycle Service (DLS)
  */
+
+package com.dls.aa.controller;
 
 import com.dls.aa.Main;
 import com.dls.aa.service.PropertiesService;

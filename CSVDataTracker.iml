@@ -22,5 +22,6 @@
     <orderEntry type="library" name="jgraphx" level="project" />
     <orderEntry type="library" name="jgraphx" level="project" />
     <orderEntry type="library" name="jfxutils-1.0" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

@@ -1,22 +1,11 @@
 package com.dls.aa.loader;
 
-import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.model.ChainPath;
 import com.dls.aa.model.Connection;
 import com.dls.aa.model.Port;
 import com.dls.aa.model.PortKey;
 import com.google.common.collect.ImmutableList;
-import com.mxgraph.layout.mxCompactTreeLayout;
-import com.mxgraph.layout.mxIGraphLayout;
-import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.swing.util.mxMorphing;
-import com.mxgraph.util.mxEvent;
-import com.mxgraph.view.mxGraph;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;

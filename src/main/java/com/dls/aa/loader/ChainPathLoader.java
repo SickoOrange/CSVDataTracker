@@ -25,6 +25,7 @@ public class ChainPathLoader {
   private static final int MAX_DEPTH = 7;
 
 
+
   public List<ChainPath> loadChainPaths(int sourceAfiId, int destinationAfiId,
       List<Connection> connections) {
     if (sourceAfiId == destinationAfiId) {

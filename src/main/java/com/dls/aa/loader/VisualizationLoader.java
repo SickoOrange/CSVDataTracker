@@ -11,6 +11,7 @@ import com.mxgraph.view.mxGraph;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class VisualizationLoader {
 
@@ -30,9 +31,8 @@ public class VisualizationLoader {
   }
 
 
-  public mxGraphComponent moduleStructureVisualization(List<Connection> conns) {
+  public mxGraphComponent moduleStructureVisualization(Set<Connection> conns) {
     mxGraph graph = initialGraph();
-
    return ModuleStructureVisualizationService.load(conns,graph,onGraphClickListener);
   }
 

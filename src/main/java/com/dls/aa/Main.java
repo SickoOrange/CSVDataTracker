@@ -19,6 +19,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Main.stage = primaryStage;
         hostServices = getHostServices();
+        System.out.println(getClass().getClassLoader().getResource("/fxml/ui/main_stage.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ui/main_stage.fxml"));
         primaryStage.setTitle("DLS Visualization");
         Scene scene = new Scene(root);

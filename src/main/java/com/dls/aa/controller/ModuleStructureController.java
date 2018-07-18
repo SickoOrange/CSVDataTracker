@@ -8,13 +8,11 @@ import com.dls.aa.loader.CSVLoader;
 import com.dls.aa.loader.VisualizationLoader;
 import com.dls.aa.model.Connection;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.mxgraph.swing.mxGraphComponent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
@@ -46,7 +44,7 @@ public class ModuleStructureController implements Initializable {
   private List<Connection> connections;
 
 
-  private void moduleStructureVisualization(ArrayList<Connection> conns) {
+  private void moduleStructureVisualization(Set<Connection> conns) {
     visualizationPane.getChildren().clear();
     VisualizationLoader service = new VisualizationLoader();
     SwingNode swingNode = new SwingNode();
@@ -58,7 +56,7 @@ public class ModuleStructureController implements Initializable {
 
   }
 
-  private long collectConnectionByAfiid(List<Connection> connections, ArrayList<Connection> conns,
+  private long collectConnectionByAfiid(List<Connection> connections, Set<Connection> conns,
       int afiid2, int i) {
     if (i <= MAX_DEPTH) {
       return connections.stream().filter(c -> c.getIn().getAfiId() == afiid2)
@@ -88,7 +86,7 @@ public class ModuleStructureController implements Initializable {
               e.printStackTrace();
             }
           }
-          ArrayList<Connection> conns = Lists.newArrayList();
+          Set<Connection> conns = Sets.newHashSet();
           collectConnectionByAfiid(connections, conns, afiid2, 0);
           moduleStructureVisualization(conns);
 
